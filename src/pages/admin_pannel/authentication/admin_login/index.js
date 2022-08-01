@@ -1,7 +1,9 @@
 import { Form } from "formik";
+import Cookie from "js-cookie";
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import Router from "next/router";
+import React, { useEffect } from "react";
 import Logo from "../../../../images/logo/logo_black.webp";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import {
@@ -13,6 +15,16 @@ import { AdminLoginFormValidator } from "../../../../utilities/Formik/Validators
 import toastConfig from "../../../../utilities/toastConfig";
 
 export default function AdminLogin() {
+  const userInfo =
+    Cookie.get("user_information") &&
+    JSON.parse(Cookie.get("user_information"));
+
+  useEffect(() => {
+    if (userInfo?.user_admin) {
+      Router.back();
+    }
+  });
+
   const {
     initialValues,
     validationSchema,
