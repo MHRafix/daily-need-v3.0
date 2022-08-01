@@ -86,11 +86,7 @@ const sendReq = async (reqDep) => {
   }
 
   try {
-    const { data } = await axios.post(
-      // `http://localhost:3000/api/${api_url}`,
-      `https://daily-need.vercel.app/api/${api_url}`,
-      user_info
-    );
+    const { data } = await axios.post(`/api/${api_url}`, user_info);
 
     if (data?.success) {
       setProcessing(false);

@@ -57,6 +57,7 @@ export default function AddProductsForm({
           setState={setThumbnail}
           type="file"
           name="thumbnail"
+          required={true}
         />
 
         <FormikFileField
@@ -64,6 +65,7 @@ export default function AddProductsForm({
           setState={setBigThumbnail}
           type="file"
           name="thumbnail_big"
+          required={true}
         />
       </FormFieldFlexLayout>
 

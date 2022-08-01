@@ -1,6 +1,4 @@
 import { Form } from "formik";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone } from "react-icons/md";
 import AlertToast from "../../utilities/alertToast/AlertToast";
 import {
   FormButton,
@@ -9,6 +7,7 @@ import {
 } from "../../utilities/Form/FormField";
 import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { RegistrationFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
+import toastConfig from "../../utilities/toastConfig";
 
 export default function SignupForm() {
   const {
@@ -23,27 +22,8 @@ export default function SignupForm() {
     setToastOn,
   } = RegistrationFormValidator();
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 5000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 5000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-
-    handleRemoveToast: handleRemoveToast,
-  };
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>
@@ -86,6 +66,7 @@ export default function SignupForm() {
             setState={setUserpic}
             type="file"
             name="user_pic"
+            required={true}
           />
 
           <p className="text-light text-black4 tracking-wide my-10">
@@ -96,7 +77,7 @@ export default function SignupForm() {
 
           <FormButton
             type="submit"
-            btn_name="Signin Now"
+            btn_name="Signup Now"
             processing={processing}
           />
         </Form>

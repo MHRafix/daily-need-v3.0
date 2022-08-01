@@ -36,13 +36,10 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
     canPreviousPage,
     pageOptions,
     state,
-    gotoPage,
-    pageCount,
     setPageSize,
   } = tableInstance;
 
   const { pageIndex, pageSize } = state;
-
   // filter function here
   const handleStatusFilter = (filter_name) => {
     const filtered_data = ORDERS_DATA.filter(
@@ -217,10 +214,9 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
       </table>
 
       {/* table data pagination here  */}
-      {canNextPage ||
-        (canPreviousPage && (
-          <TablePagination dependency={pagination_dependency} />
-        ))}
+      {pageOptions.length > 1 && (
+        <TablePagination dependency={pagination_dependency} />
+      )}
     </>
   );
 }

@@ -22,7 +22,9 @@ export const reqSender = async (
       resetForm({ values: "" });
       if (
         api_url === "my_account/signin_api" ||
-        api_url === "my_account/signup_api"
+        api_url === "my_account/signup_api" ||
+        api_url === "my_account/update_acc_details" ||
+        api_url === "admin_dashboard/authentication/admin_login"
       ) {
         Cookie.set("user_information", JSON.stringify(data), {
           expires: 30, // 30 days
@@ -39,11 +41,13 @@ export const reqSender = async (
       setToastType("error_toast");
       setToastOn(true);
       setToastText(data?.error);
+      resetForm({ values: "" });
     }
   } catch (err) {
     setProcessing(false);
     setToastType("error_toast");
     setToastOn(true);
     setToastText(err.message);
+    resetForm({ values: "" });
   }
 };

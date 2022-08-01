@@ -1,10 +1,9 @@
 import { Form } from "formik";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone } from "react-icons/md";
 import AlertToast from "../../utilities/alertToast/AlertToast";
 import { FormButton, FormikTextField } from "../../utilities/Form/FormField";
 import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { LoginFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
+import toastConfig from "../../utilities/toastConfig";
 
 export default function LoginForm() {
   const {
@@ -18,27 +17,8 @@ export default function LoginForm() {
     setToastOn,
   } = LoginFormValidator();
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 5000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 5000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-
-    handleRemoveToast: handleRemoveToast,
-  };
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>

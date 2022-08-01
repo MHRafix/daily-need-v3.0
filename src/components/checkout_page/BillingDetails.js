@@ -1,18 +1,13 @@
-import { Form } from "formik";
 import NextLink from "next/link";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone, MdShoppingCart } from "react-icons/md";
+import { MdShoppingCart } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { ErrorMessage } from "../../utilities/AlertMessage";
 import AlertToast from "../../utilities/alertToast/AlertToast";
-import {
-  FormButton,
-  FormikSelectField,
-  FormikTextField,
-} from "../../utilities/Form/FormField";
 import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
+import CheckoutForm from "../../utilities/Formik/Forms/CheckoutForm";
 import { CheckoutFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import StripePaymentForm from "../../utilities/StripePayment/StripePaymentForm";
+import toastConfig from "../../utilities/toastConfig";
 import OrderOverview from "./OrderOverview/OrderOverview";
 
 export default function BillingDetails() {
@@ -44,27 +39,8 @@ export default function BillingDetails() {
     orderid,
   } = CheckoutFormValidator(products_data, net_total);
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 5000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 5000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-
-    handleRemoveToast: handleRemoveToast,
-  };
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>
@@ -96,56 +72,7 @@ export default function BillingDetails() {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
               >
-                <Form>
-                  <FormikTextField
-                    form_label="your name"
-                    type="text"
-                    name="customer_name"
-                  />
-
-                  <FormikTextField
-                    form_label="your email"
-                    type="email"
-                    name="customer_email"
-                  />
-
-                  <FormikTextField
-                    form_label="your mobile"
-                    type="tel"
-                    name="customer_mobile"
-                  />
-
-                  <FormikTextField
-                    form_label="your country"
-                    type="text"
-                    name="customer_country"
-                  />
-                  <FormikTextField
-                    form_label="your district"
-                    type="text"
-                    name="customer_district"
-                  />
-                  <FormikTextField
-                    form_label="your street"
-                    type="text"
-                    name="customer_street"
-                  />
-
-                  <FormikSelectField
-                    form_label="payment method"
-                    options={[
-                      { id: 1, name: "cash-on" },
-                      { id: 2, name: "stripe card" },
-                    ]}
-                    name="payment_method"
-                  />
-
-                  <FormButton
-                    type="submit"
-                    btn_name="Signin Now"
-                    processing={processing}
-                  />
-                </Form>
+                <CheckoutForm processing={processing} />
               </FormikFormLayout>
             </div>
           ) : (

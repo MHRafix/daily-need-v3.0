@@ -104,7 +104,11 @@ export const SubNav = ({ sub_nav }) => {
   return (
     <>
       <NextLink
-        href={`/admin_pannel/${userInfo?.user_name}/${userInfo?.user_email}${sub_nav_link}`}
+        href={
+          sub_nav_name === "admin login"
+            ? "/admin_pannel/authentication/admin_login"
+            : `/admin_pannel/${userInfo?.user_name}/${userInfo?.user_email}${sub_nav_link}`
+        }
         passHref
       >
         <h3

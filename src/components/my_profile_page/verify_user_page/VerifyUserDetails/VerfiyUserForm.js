@@ -2,13 +2,12 @@ import axios from "axios";
 import Cookie from "js-cookie";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone } from "react-icons/md";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import {
   FormButton,
   FormTextField,
 } from "../../../../utilities/Form/FormField";
+import toastConfig from "../../../../utilities/toastConfig";
 
 export default function VerifyUserForm() {
   const router = useRouter();
@@ -37,26 +36,8 @@ export default function VerifyUserForm() {
   const [toastTextV, setToastTextV] = useState("");
   const [toastOn, setToastOn] = useState(false);
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 3000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 3000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastTypeV,
-    alertText: toastTextV,
-    toastIcon:
-      toastTypeV === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-    handleRemoveToast: handleRemoveToast,
-  };
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastTypeV, toastTextV);
 
   const handleVerifyUser = async (e) => {
     e.preventDefault();
@@ -69,18 +50,16 @@ export default function VerifyUserForm() {
         setToastTextV("Password must be 6 charecters!");
         setToastTypeV("error_toast");
       } else {
-        const { data } = await axios.post(
-          // `http://localhost:3000/api/my_account/verify_user`,
-          "https://daily-need.vercel.app/api/my_account/verify_user",
-          { verifypass, useremail }
-        );
+        const { data } = await axios.post("/api/my_account/verify_user", {
+          verifypass,
+          useremail,
+        });
 
         if (data?.success) {
           setToastOn(true);
           setVerifing(false);
           setToastTextV(data.success);
           setToastTypeV("success_toast");
-          // setUsername(userInfo?.user_name);
 
           // set verify status in browser cookie
           Cookie.set("user_verify", JSON.stringify({ verify: data?.verify }), {

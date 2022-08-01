@@ -1,8 +1,6 @@
 import Cookie from "js-cookie";
 import Image from "next/image";
 import { useState } from "react";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone } from "react-icons/md";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import avatarUploader from "../../../../utilities/Form/avatarUploader";
 import {
@@ -11,6 +9,7 @@ import {
   FormTextField,
 } from "../../../../utilities/Form/FormField";
 import handleForm from "../../../../utilities/Form/handleForm";
+import toastConfig from "../../../../utilities/toastConfig";
 
 export default function EditFormDetails() {
   const userInfo =
@@ -52,26 +51,7 @@ export default function EditFormDetails() {
     handleFormSubmit,
   } = handleForm(request_dependency);
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 3000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 3000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-    handleRemoveToast: handleRemoveToast,
-  };
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>
@@ -113,7 +93,7 @@ export default function EditFormDetails() {
           <span id="required_sign">*</span>
         </label>
         <div className="flex items-center">
-          <FormFileField required={true} setState={setUserpic} />
+          <FormFileField required={false} setState={setUserpic} />
           &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
           {/* preview */}
           {userpic && (

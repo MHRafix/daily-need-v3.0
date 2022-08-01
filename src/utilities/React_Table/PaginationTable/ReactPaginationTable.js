@@ -225,10 +225,9 @@ export default function ReactPaginationTable({
       </table>
 
       {/* table data pagination here  */}
-      {canNextPage ||
-        (canPreviousPage && (
-          <TablePagination dependency={pagination_dependency} />
-        ))}
+      {pageOptions.length > 1 && (
+        <TablePagination dependency={pagination_dependency} />
+      )}
     </>
   );
 }

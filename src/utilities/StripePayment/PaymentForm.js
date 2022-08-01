@@ -1,12 +1,11 @@
 import { CardElement, useStripe } from "@stripe/react-stripe-js";
 import { Form } from "formik";
 import { useEffect, useState } from "react";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone } from "react-icons/md";
 import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import AlertToast from "../alertToast/AlertToast";
 import { FormButton, FormikTextField } from "../Form/FormField";
 import { PaymentFormValidator } from "../Formik/Validators/AllFormValidators";
+import toastConfig from "../toastConfig";
 
 export default function PaymentForm({ payable_amount, order_id }) {
   const [clientSecret, setClientSecret] = useState("");
@@ -64,27 +63,8 @@ export default function PaymentForm({ payable_amount, order_id }) {
 
   // toast controll configuration here
   /****** */
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 5000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 5000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-
-    handleRemoveToast: handleRemoveToast,
-  };
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>

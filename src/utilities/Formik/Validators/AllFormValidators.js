@@ -340,6 +340,7 @@ export const CheckoutFormValidator = (products_data, net_total) => {
           setToastOn(true);
           setProcessing(false);
           resetForm({ values: "" });
+          resetForm({ values: "" });
           setToastText(data.success);
           setToastType("success_toast");
           Cookie.remove("cart_product_ids");
@@ -357,11 +358,13 @@ export const CheckoutFormValidator = (products_data, net_total) => {
           setToastOn(true);
           setProcessing(false);
           setToastText(data.error);
+          resetForm({ values: "" });
           setToastType("error_toast");
         }
       } catch (error) {
         setToastOn(true);
         setProcessing(false);
+        resetForm({ values: "" });
         setToastText(error.message);
         setToastType("error_toast");
       }
@@ -439,6 +442,7 @@ export const PaymentFormValidator = (clientSecret) => {
       setProcessing(false);
       setToastText(error.message);
       setToastType("error_toast");
+      resetForm({ values: "" });
     } else {
       setToastText("");
     }
@@ -456,6 +460,7 @@ export const PaymentFormValidator = (clientSecret) => {
       setProcessing(false);
       setToastType("error_toast");
       setToastText(intentError.message);
+      resetForm({ values: "" });
     } else {
       // Save to database
       const payment_info = {
@@ -495,6 +500,57 @@ export const PaymentFormValidator = (clientSecret) => {
       };
 
       setTimeout(redirect, 2000);
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
+// admin pannel validators
+// admin login validators here
+export const AdminLoginFormValidator = () => {
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  // initial vlaue of form
+  const initialValues = {
+    user_email: "",
+    user_password: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchema = Yup.object({
+    user_email: Yup.string()
+      .email("Invalid email format!")
+      .required("Required!"),
+    user_password: Yup.string().required("Required"),
+  });
+
+  // on submit function here
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    if (values) {
+      reqSender(
+        values,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "admin_dashboard/authentication/admin_login"
+      );
     }
   };
 

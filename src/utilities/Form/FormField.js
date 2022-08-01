@@ -74,7 +74,7 @@ export const FormTextArea = ({ form_label, cols, rows, required }) => {
 // form button
 export const FormButton = ({ type, btn_name, processing, disable }) => {
   return (
-    <div id="field_wrapper" className="!w-full">
+    <div id="field_wrapper" className="!w-full mt-2">
       {processing ? (
         <button
           type={type}
@@ -100,7 +100,7 @@ export const FormButton = ({ type, btn_name, processing, disable }) => {
 };
 
 // formik form text field
-export const FormikTextField = ({ form_label, type, name, as }) => {
+export const FormikTextField = ({ form_label, type, name }) => {
   const style = {
     padding: "8px",
     border: "1px solid #564d4d24",
@@ -120,7 +120,7 @@ export const FormikTextField = ({ form_label, type, name, as }) => {
         <span id="required_sign">*</span>
       </label>
       <br />
-      <Field as={as} type={type} name={name} id={name} style={style} />
+      <Field type={type} name={name} id={name} style={style} />
       &nbsp;
       <span className="text-red-500 text-light">
         <ErrorMessage name={name} />
@@ -164,7 +164,13 @@ export const FormikSelectField = ({ form_label, options, name }) => {
 };
 
 // formik file field
-export const FormikFileField = ({ form_label, setState, type, name }) => {
+export const FormikFileField = ({
+  form_label,
+  setState,
+  type,
+  name,
+  required,
+}) => {
   const style = {
     padding: "8px",
     border: "1px solid #564d4d24",
@@ -188,15 +194,11 @@ export const FormikFileField = ({ form_label, setState, type, name }) => {
         type={type}
         accept="image/*"
         onChange={(e) => setState(e.target.files[0])}
+        required={required}
         name={name}
         id={name}
-        required
         style={style}
       />
-      &nbsp;
-      <span className="text-red-500 text-light">
-        <ErrorMessage name={name} />
-      </span>
     </div>
   );
 };
