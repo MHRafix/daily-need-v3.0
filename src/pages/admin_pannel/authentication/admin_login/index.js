@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import Logo from "../../../../images/logo/logo_black.webp";
-import AlertToast from "../../../../utilities/AlertToast/AlertToast";
+import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import {
   FormButton,
   FormikTextField,
