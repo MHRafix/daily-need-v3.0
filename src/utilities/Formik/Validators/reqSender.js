@@ -24,7 +24,7 @@ export const reqSender = async (
         api_url === "my_account/signin_api" ||
         api_url === "my_account/signup_api" ||
         api_url === "my_account/update_acc_details" ||
-        api_url === "admin_dashboard/authentication/admin_login"
+        api_url === "admin_pannel_api/authentication/admin_login"
       ) {
         Cookie.set("user_information", JSON.stringify(data), {
           expires: 30, // 30 days

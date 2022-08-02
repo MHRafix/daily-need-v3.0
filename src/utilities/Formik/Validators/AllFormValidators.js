@@ -515,8 +515,13 @@ export const PaymentFormValidator = (clientSecret) => {
   };
 };
 
-// admin pannel validators
-// admin login validators here
+/**
+ *
+ * admin pannel validators
+ * admin login validators here
+ *
+ */
+
 export const AdminLoginFormValidator = () => {
   const [processing, setProcessing] = useState(false);
   const [toastText, setToastText] = useState("");
@@ -549,7 +554,57 @@ export const AdminLoginFormValidator = () => {
         setToastText,
         setToastType,
         setToastOn,
-        "admin_dashboard/authentication/admin_login"
+        "admin_pannel_api/authentication/admin_login"
+      );
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
+// create admin and moderators validators here
+export const CreateAdminFormValidator = () => {
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  // initial vlaue of form
+  const initialValues = {
+    user_name: "",
+    user_email: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchema = Yup.object({
+    user_name: Yup.string().required("Required"),
+    user_email: Yup.string()
+      .email("Invalid email format!")
+      .required("Required!"),
+  });
+
+  // on submit function here
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    if (values) {
+      reqSender(
+        values,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "admin_pannel_api/authentication/create_admin"
       );
     }
   };

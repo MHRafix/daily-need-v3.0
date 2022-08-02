@@ -47,9 +47,9 @@ export default function AdminLogin() {
       </Head>
       <main>
         <div className="bg-gradient-to-r from-orangee to-orangee_red w-screen h-screen flex items-center justify-center">
-          <div className="bg-white py-5 px-3 rounded-md lg:!w-2/5 xs:w-full shadow-xl">
+          <div className="bg-white lg:!p-2.4 xs:p-1.5 rounded-md md:!w-2/5 xs:w-11/12 shadow-xl">
             {toastOn && <AlertToast toast_config={toast_config} />}
-            <div className="text-center my-5">
+            <div className="text-center mb-7">
               <Image src={Logo} alt="Logo" />
             </div>
             <FormikFormLayout

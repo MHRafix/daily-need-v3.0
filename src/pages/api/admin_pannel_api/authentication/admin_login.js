@@ -35,7 +35,7 @@ handler.post(async (req, res) => {
         res.send({ error: "Opps, incorrect password!" });
       }
     } else {
-      res.send({ error: "Opps, incorrect email!" });
+      res.send({ error: "Opps, not an admin email!" });
     }
   } else {
     res.send({ error: "Invalid email and password!" });

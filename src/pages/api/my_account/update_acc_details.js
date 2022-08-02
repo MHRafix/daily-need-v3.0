@@ -38,7 +38,7 @@ handler.post(async (req, res) => {
 
       // make the jwt token with new details of user
       const token = signToken(user);
-      res.send({
+      res.status(202).send({
         token,
         _id: user._id,
         user_name: user.user_name,
