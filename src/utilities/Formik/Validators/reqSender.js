@@ -33,8 +33,31 @@ export const reqSender = async (
           path: "/",
         });
 
+        if (data?.user_admin) {
+          Cookie.set("lock_screen", JSON.stringify(false), {
+            expires: 30, // 30 days
+            secure: true,
+            sameSite: "strict",
+            path: "/",
+          });
+        }
+
         // redirect to aspected page
-        Router.back();
+        setTimeout(() => {
+          Router.back();
+        }, 2000);
+      } else if (api_url === "admin_pannel_api/authentication/unlock_screen") {
+        Cookie.set("lock_screen", JSON.stringify(false), {
+          expires: 30, // 30 days
+          secure: true,
+          sameSite: "strict",
+          path: "/",
+        });
+
+        // redirect to aspected page
+        setTimeout(() => {
+          Router.back();
+        }, 2000);
       }
     } else {
       setProcessing(false);

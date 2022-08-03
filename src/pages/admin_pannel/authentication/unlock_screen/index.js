@@ -2,37 +2,23 @@ import { Form } from "formik";
 import Cookie from "js-cookie";
 import Head from "next/head";
 import Image from "next/image";
-import Router, { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import Logo from "../../../../images/logo/logo_black.webp";
+import React from "react";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import {
   FormButton,
   FormikTextField,
 } from "../../../../utilities/Form/FormField";
 import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
-import { AdminLoginFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
+import { UnlockFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../../../utilities/toastConfig";
 
-export default function AdminLogin() {
-  const router = useRouter();
-
+export default function UnlockScreen() {
   const userInfo =
     Cookie.get("user_information") &&
     JSON.parse(Cookie.get("user_information"));
 
-  const isLockScreen =
-    Cookie.get("lock_screen") && JSON.parse(Cookie.get("lock_screen"));
-
-  useEffect(() => {
-    if (userInfo?.user_admin) {
-      if (!isLockScreen) {
-        router.push("/admin_pannel/authentication/unlock_screen");
-      } else {
-        Router.back();
-      }
-    }
-  });
+  //   const isLockScreen =
+  //     Cookie.get("lock_screen") && JSON.parse(Cookie.get("lock_screen"));
 
   const {
     initialValues,
@@ -43,23 +29,35 @@ export default function AdminLogin() {
     toastType,
     toastOn,
     setToastOn,
-  } = AdminLoginFormValidator();
+  } = UnlockFormValidator();
 
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <div className="page_main_wrapper">
       <Head>
-        <title>Daily Needs - Admin Login</title>
+        <title>Daily Needs - Unlock Screen</title>
         <meta name="description" content="Admin login page." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         <div className="bg-gradient-to-r from-orangee to-orangee_red w-screen h-screen flex items-center justify-center">
           {toastOn && <AlertToast toast_config={toast_config} />}
-          <div className="bg-white lg:!p-2.4 xs:p-1.5 rounded-md md:!w-2/5 xs:w-11/12 shadow-xl">
+          <div className="bg-white lg:!p-2 xs:p-1.5 rounded-md md:!w-3/12 xs:w-11/12 shadow-xl">
             <div className="text-center mb-7">
-              <Image src={Logo} alt="Logo" />
+              {userInfo?.user_pic && (
+                <Image
+                  src={userInfo?.user_pic}
+                  alt="profile"
+                  width={80}
+                  height={80}
+                  className="rounded-full"
+                />
+              )}
+
+              <h3 className="text-black2 tracking-wide my-2 text-normal">
+                {userInfo?.user_name}
+              </h3>
             </div>
             <FormikFormLayout
               initialValues={initialValues}
@@ -68,18 +66,13 @@ export default function AdminLogin() {
             >
               <Form>
                 <FormikTextField
-                  form_label="your email"
-                  type="email"
-                  name="user_email"
-                />
-                <FormikTextField
                   form_label="your password"
                   type="password"
                   name="user_password"
                 />
                 <FormButton
                   type="submit"
-                  btn_name="Admin Login"
+                  btn_name="Unlock Now"
                   processing={processing}
                 />
               </Form>

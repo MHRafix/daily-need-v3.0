@@ -1,4 +1,4 @@
-import { BiHomeAlt, BiSlider } from "react-icons/bi";
+import { BiDuplicate, BiHomeAlt, BiSlider } from "react-icons/bi";
 import { BsCartCheck } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FiUsers } from "react-icons/fi";
@@ -12,6 +12,12 @@ export const admin_pannel_navigation = [
     main_nav: "Dashboard",
     main_nav_icon: <BiHomeAlt />,
     main_nav_link: "/admin_dashboard",
+  },
+  {
+    _id: 451,
+    main_nav: "Manage Category",
+    main_nav_icon: <BiDuplicate />,
+    main_nav_link: "/manage_category_products",
   },
   {
     _id: 2,
@@ -65,17 +71,7 @@ export const admin_pannel_navigation = [
       {
         _id: 3,
         sub_nav_name: "forgot password",
-        sub_nav_link: "/authentication/forgot_password",
-      },
-      {
-        _id: 4,
-        sub_nav_name: "lock screen",
-        sub_nav_link: "/authentication/unlock_screen",
-      },
-      {
-        _id: 5,
-        sub_nav_name: "unlock screen",
-        sub_nav_link: "/authentication/lock_screen",
+        sub_nav_link: "forgot_password",
       },
     ],
   },
