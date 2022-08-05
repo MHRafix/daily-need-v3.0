@@ -22,35 +22,11 @@ export default function LayoutContainer({ children, title, description }) {
         <div className="container_wrapper">{children}</div>
 
         {/* messenger chat icon here */}
-        <div
-          className="messenger_chat"
-          style={{
-            display: "flex",
-            width: "300px",
-            height: "150px",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            className="name_chat"
-            style={{
-              fontSize: "22px",
-              textTransform: "capitalize",
-              letterSpacing: "1px",
-            }}
-          >
-            customer support
-          </div>
-          <div
-            className="messenger_icon"
-            style={{ fontSize: "22px", color: "red" }}
-          >
-            <MessengerCustomerChat
-              pageId="110944118380097"
-              appId="588889365150764"
-            />
-          </div>
-        </div>
+
+        <MessengerCustomerChat
+          pageId="110944118380097"
+          appId="588889365150764"
+        />
       </main>
 
       {/* app footer is here */}
