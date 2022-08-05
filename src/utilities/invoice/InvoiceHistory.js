@@ -1,3 +1,4 @@
+import Cookie from "js-cookie";
 import Image from "next/image";
 import React from "react";
 import Logo from "../../images/logo/logo_black.webp";
@@ -6,6 +7,10 @@ import { PRODUCTS_TABLE_COLUMNS } from "../React_Table/TableColumns";
 
 export default function InvoiceHistory({ modal_data }) {
   console.log(modal_data);
+  const userInfo =
+    Cookie.get("user_information") &&
+    JSON.parse(Cookie.get("user_information"));
+
   return (
     <div className="invoice_wrapper">
       <div className="download_btns">

@@ -11,7 +11,7 @@ export default function HistoryDownloadContent({ my_orders }) {
   // handle modal and modal data
   const handleModal = (dep, id) => {
     const modal_data = my_orders.find((order) => order._id === id);
-    setModalData(modal_data.products_data);
+    setModalData(modal_data);
     setModal(dep);
   };
 
