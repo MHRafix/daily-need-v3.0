@@ -33,13 +33,12 @@ export default function InvoiceHistory({ modal_data }) {
             <div>Payment Type: {modal_data?.payment_info?.payment_method}</div>
             <div>Payment Date: {modal_data?.updatedAt}</div>
           </div>
-
-          <div className="ordered_products_table">
-            <ReactPaginationTable
-              PRODUCTS_DATA={modal_data?.products_data}
-              PRODUCTS_TABLE_COLUMNS={PRODUCTS_TABLE_COLUMNS}
-            />
-          </div>
+        </div>
+        <div className="ordered_products_table">
+          <ReactPaginationTable
+            PRODUCTS_DATA={modal_data?.products_data}
+            PRODUCTS_TABLE_COLUMNS={PRODUCTS_TABLE_COLUMNS}
+          />
         </div>
       </div>
     </div>
