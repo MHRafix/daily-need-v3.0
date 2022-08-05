@@ -92,12 +92,27 @@ export const ORDERED_PRODUCT_TABLE_COLUMNS = [
   },
 ];
 
+// orders table column header
 export const ORDERS_TABLE_COLUMN = [
   { Header: "CM Name", accessor: "customer_info.customer_name" },
   { Header: "CM Mobile", accessor: "customer_info.customer_mobile" },
   {
     Header: "Order Date",
-    accessor: "createdAt",
+    accessor: "updatedAt",
+  },
+  { Header: "Total Amount", accessor: "order_overview.total_amount" },
+  { Header: "Payment Mode", accessor: "payment_info.payment_method" },
+  { Header: "Status", accessor: "order_overview.order_status" },
+  { Header: "Action", accessor: "_id" },
+];
+
+// shipped orders and history orders table column here
+export const SHIPPED_ORDERS_TABLE_COLUMN = [
+  { Header: "CM Name", accessor: "customer_info.customer_name" },
+  { Header: "CM Mobile", accessor: "customer_info.customer_mobile" },
+  {
+    Header: "Order Date",
+    accessor: "updatedAt",
   },
   { Header: "Total Amount", accessor: "order_overview.total_amount" },
   { Header: "Payment Mode", accessor: "payment_info.payment_method" },

@@ -21,12 +21,9 @@ export default function MyAllOrdersContent({ my_orders }) {
       <ProfileContentLayout content_title="manage all orders">
         {/* orders show on table */}
         <div className="dashboard_row_wrapper">
-          <DashboardContentLayout item_name="my all orders">
-            <ReactOrdersTable
-              ORDERS_DATA={my_orders}
-              handleModal={handleModal}
-            />
-          </DashboardContentLayout>
+          {/* <DashboardContentLayout item_name="my all orders"> */}
+          <ReactOrdersTable ORDERS_DATA={my_orders} handleModal={handleModal} />
+          {/* </DashboardContentLayout> */}
           {modal && (
             <ReactModal
               setModal={setModal}

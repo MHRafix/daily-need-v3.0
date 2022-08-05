@@ -1,8 +1,6 @@
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
-import { FiBookOpen, FiEdit } from "react-icons/fi";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
 import uuid from "uuid";
@@ -11,7 +9,7 @@ import CashOn from "../../../images/card_images/cash.png";
 import { ORDERS_TABLE_COLUMN } from "../TableColumns";
 import { TableDataSorter, TablePagination } from "../TableParts";
 
-export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
+export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
   const columns = useMemo(() => ORDERS_TABLE_COLUMN, []);
   const [data, setData] = useState(ORDERS_DATA);
 
@@ -186,22 +184,11 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>
-                        <span className="flex justify-center items-center">
-                          <FiEdit
-                            data-tip="Edit"
-                            className="text-light_purple cursor-pointer text-normal outline-none"
-                          />
-                          &nbsp;&nbsp;
-                          <RiDeleteBinLine
-                            data-tip="Delete"
-                            className="text-red-500 cursor-pointer text-normal outline-none"
-                          />
-                          &nbsp;&nbsp;
-                          <FiBookOpen
-                            onClick={() => handleModal(true, cell.value)}
-                            data-tip="Details"
-                            className="text-green cursor-pointer text-normal outline-none"
-                          />
+                        <span
+                          onClick={() => handleModal(true, cell.value)}
+                          id="green_signal_status"
+                        >
+                          Invoice
                         </span>
                       </td>
                     );

@@ -20,6 +20,7 @@
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
+    "jspdf": "^2.5.1",
     "mongoose": "^6.3.1",
     "next": "12.1.5",
     "next-connect": "^0.12.2",
@@ -42,6 +43,7 @@
     "redux-devtools-extension": "^2.13.9",
     "slick-carousel": "^1.8.1",
     "stripe": "^8.76.0",
+    "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {

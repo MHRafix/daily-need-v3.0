@@ -37,12 +37,3 @@ export async function getServerSideProps() {
     },
   };
 }
-
-// export async function getServerSideProps() {
-//   const res = await fetch(
-//     `${process.env.ROOT_URI}/api/manage_orders/my_orders`
-//   );
-//   const all_orders = await res.json();
-//   console.log(all_orders);
-//   return { props: { all_orders } };
-// }

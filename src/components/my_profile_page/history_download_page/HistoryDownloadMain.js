@@ -4,7 +4,7 @@ import Breadcrumb from "../../commons/Breadcrumb/Breadcrumb";
 import ProfileContentContainer from "../my_profile_dashboard/ProfileContentContainer";
 import HistoryDownloadContent from "./HistoryDownloadContent";
 
-export default function HistoryDownloadMain() {
+export default function HistoryDownloadMain({ my_orders }) {
   // breadcrunb navigation
   const userInfo =
     Cookie.get("user_information") &&
@@ -28,7 +28,7 @@ export default function HistoryDownloadMain() {
     <>
       <Breadcrumb bread_nav={bread_string} />
       <ProfileContentContainer>
-        <HistoryDownloadContent />
+        <HistoryDownloadContent my_orders={my_orders} />
       </ProfileContentContainer>
     </>
   );
