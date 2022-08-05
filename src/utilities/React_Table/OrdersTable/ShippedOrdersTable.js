@@ -181,13 +181,12 @@ export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>
-                        <span
-                          className="cursor-pointer !text-light"
+                        <button
                           onClick={() => handleModal(true, cell.value)}
-                          id="green_signal_status"
+                          id="cart_btn"
                         >
-                          <button>Invoice</button>
-                        </span>
+                          Invoice
+                        </button>
                       </td>
                     );
                   } else {
