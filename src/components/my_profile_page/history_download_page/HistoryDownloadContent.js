@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InvoiceHistory from "../../../utilities/invoice/InvoiceHistory";
 import ReactModal from "../../../utilities/Modal/ReactModal";
 import ProfileContentLayout from "../../../utilities/ProfileContentLayout";
 import ShippedOrdersTable from "../../../utilities/React_Table/OrdersTable/ShippedOrdersTable";
@@ -26,11 +27,9 @@ export default function HistoryDownloadContent({ my_orders }) {
           />
           {/* </DashboardContentLayout> */}
           {modal && (
-            <ReactModal
-              setModal={setModal}
-              modal_data={modalData}
-              modal_title="History Invoice"
-            ></ReactModal>
+            <ReactModal setModal={setModal} modal_title="History Invoice">
+              <InvoiceHistory modal_data={modalData} />
+            </ReactModal>
           )}
         </div>
       </ProfileContentLayout>
