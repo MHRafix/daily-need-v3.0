@@ -7,7 +7,7 @@ import { uuid } from "uuidv4";
 import Card from "../../../images/card_images/card.png";
 import CashOn from "../../../images/card_images/cash.png";
 import { ORDERS_TABLE_COLUMN } from "../TableColumns";
-import { TableDataSorter, TablePagination } from "../TableParts";
+import { TablePagination } from "../TableParts";
 
 export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
   const columns = useMemo(() => ORDERS_TABLE_COLUMN, []);
@@ -73,9 +73,6 @@ export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
 
   return (
     <>
-      {/* data sorter  */}
-      <TableDataSorter dependency={sorting_dependency} />
-
       {/* react table here */}
       <ReactTooltip place="left" type="dark" effect="solid" />
       <table {...getTableProps()}>
@@ -185,10 +182,11 @@ export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
                     return (
                       <td>
                         <span
+                          className="cursor-pointer !text-light"
                           onClick={() => handleModal(true, cell.value)}
                           id="green_signal_status"
                         >
-                          Invoice
+                          <button>Invoice</button>
                         </span>
                       </td>
                     );

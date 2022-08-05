@@ -1,23 +1,21 @@
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
+import { uuid } from "uuidv4";
 import { TableDataSorter, TablePagination } from "../TableParts";
-
 export default function ReactPaginationTable({
   PRODUCTS_DATA,
   PRODUCTS_TABLE_COLUMNS,
 }) {
-  const columns = useMemo(() => PRODUCTS_TABLE_COLUMNS, []);
-  // const data = useMemo(() => PRODUCTS_DATA);
   const [data, setData] = useState(PRODUCTS_DATA);
 
   const tableInstance = useTable(
     {
-      columns,
+      PRODUCTS_TABLE_COLUMNS,
       data,
       initialState: { pageIndex: 0 },
     },
@@ -93,9 +91,12 @@ export default function ReactPaginationTable({
       <table id="products_table" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getFooterGroupProps()}>
+            <tr key={uuid()} {...headerGroup.getFooterGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <th
+                  key={uuid()}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
                   <span
                     style={{
                       width: "100%",
@@ -134,7 +135,7 @@ export default function ReactPaginationTable({
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr key={uuid()} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   if (cell.column.id === "thumbnail") {
                     return (
