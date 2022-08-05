@@ -43,7 +43,7 @@
     "redux-devtools-extension": "^2.13.9",
     "slick-carousel": "^1.8.1",
     "stripe": "^8.76.0",
-    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
   },
   "devDependencies": {

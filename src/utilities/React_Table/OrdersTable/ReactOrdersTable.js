@@ -5,7 +5,7 @@ import { FiBookOpen, FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
-import uuid from "uuid/v4";
+import { uuid } from "uuidv4";
 import Card from "../../../images/card_images/card.png";
 import CashOn from "../../../images/card_images/cash.png";
 import { ORDERS_TABLE_COLUMN } from "../TableColumns";
