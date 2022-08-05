@@ -1,6 +1,7 @@
 import Cookie from "js-cookie";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import ReactToPrint from "react-to-print";
 import Logo from "../../images/logo/logo_black.webp";
 import OrderedProductsTable from "../React_Table/PaginationTable/OrderedProductsTable";
 import { ORDERED_PRODUCTS_TABLE_COLUMNS } from "../React_Table/TableColumns";
@@ -11,15 +12,22 @@ export default function InvoiceHistory({ modal_data }) {
     Cookie.get("user_information") &&
     JSON.parse(Cookie.get("user_information"));
 
+  const componentRef = useRef();
+
   return (
     <div className="invoice_wrapper">
-      <div className="download_btns">
-        <button id="cart_btn" className="!text-normal">
-          Print Invoice
-        </button>
-      </div>
+      <ReactToPrint
+        trigger={() => (
+          <div className="download_btns">
+            <button id="cart_btn" className="!text-normal">
+              Print Invoice
+            </button>
+          </div>
+        )}
+        content={() => componentRef.current}
+      />
 
-      <div className="invoice_document_area">
+      <div ref={componentRef} className="invoice_document_area">
         <div className="customer_document flex justify-between">
           <div className="brand_wrapper">
             <Image src={Logo} alt="site logo" width={127} height={38} />
@@ -65,7 +73,7 @@ export default function InvoiceHistory({ modal_data }) {
             </div>
           </div>
         </div>
-        <div className="ordered_products_table">
+        <div className="ordered_products_table mt-8">
           <OrderedProductsTable
             PRODUCTS_DATA={modal_data?.products_data}
             PRODUCTS_TABLE_COLUMNS={ORDERED_PRODUCTS_TABLE_COLUMNS}
