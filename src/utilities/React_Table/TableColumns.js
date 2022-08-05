@@ -119,3 +119,30 @@ export const SHIPPED_ORDERS_TABLE_COLUMN = [
   { Header: "Status", accessor: "order_overview.order_status" },
   { Header: "Action", accessor: "_id" },
 ];
+
+export const ORDERED_PRODUCTS_TABLE_COLUMNS = [
+  {
+    Header: "Product",
+    accessor: "title",
+  },
+  {
+    Header: "Image",
+    accessor: "thumbnail",
+  },
+  {
+    Header: "Category",
+    accessor: "category",
+  },
+  {
+    Header: "Reg Price",
+    accessor: "prices.regular_price",
+  },
+  {
+    Header: "Sale Price",
+    accessor: "prices.sale_price",
+  },
+  {
+    Header: "Type",
+    accessor: "product_type",
+  },
+];
