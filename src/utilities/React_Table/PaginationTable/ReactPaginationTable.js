@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -11,11 +11,12 @@ export default function ReactPaginationTable({
   PRODUCTS_DATA,
   PRODUCTS_TABLE_COLUMNS,
 }) {
+  const columns = useMemo(() => PRODUCTS_TABLE_COLUMNS, []);
   const [data, setData] = useState(PRODUCTS_DATA);
 
   const tableInstance = useTable(
     {
-      PRODUCTS_TABLE_COLUMNS,
+      columns,
       data,
       initialState: { pageIndex: 0 },
     },
