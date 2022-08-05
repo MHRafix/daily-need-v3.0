@@ -27,7 +27,7 @@ export default function InvoiceHistory({ modal_data }) {
         content={() => componentRef.current}
       />
 
-      <div ref={componentRef} className="invoice_document_area">
+      <div ref={componentRef} className="invoice_document_area p-2">
         <div className="customer_document flex justify-between">
           <div className="brand_wrapper">
             <Image src={Logo} alt="site logo" width={127} height={38} />
@@ -62,7 +62,7 @@ export default function InvoiceHistory({ modal_data }) {
               {modal_data?.order_overview?.total_amount}
             </div>
             <div className="my-4 tracking-wider">
-              Order Date : &nbsp;&nbsp; ৳ {modal_data?.createdAt}
+              Order Date : &nbsp;&nbsp; {modal_data?.createdAt}
             </div>
             <div className="my-4 tracking-wider">
               Payment Type : &nbsp;&nbsp;
@@ -73,7 +73,7 @@ export default function InvoiceHistory({ modal_data }) {
             </div>
           </div>
         </div>
-        <div className="ordered_products_table mt-8">
+        <div className="ordered_products_table" style={{ marginTop: "20px" }}>
           <OrderedProductsTable
             PRODUCTS_DATA={modal_data?.products_data}
             PRODUCTS_TABLE_COLUMNS={ORDERED_PRODUCTS_TABLE_COLUMNS}
