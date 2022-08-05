@@ -1,4 +1,5 @@
 import Head from "next/head";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 import FooterCopyrightArea from "../Footer/FooterCopyrightArea";
 import FooterFeaturesCard from "../Footer/FooterFeaturesCard";
 import FooterMain from "../Footer/FooterMain";
@@ -19,6 +20,11 @@ export default function LayoutContainer({ children, title, description }) {
       {/* app body is here */}
       <main>
         <div className="container_wrapper">{children}</div>
+        <MessengerCustomerChat
+          pageId="110944118380097"
+          appId="588889365150764"
+          // htmlRef="<REF_STRING>"
+        />
       </main>
 
       {/* app footer is here */}
