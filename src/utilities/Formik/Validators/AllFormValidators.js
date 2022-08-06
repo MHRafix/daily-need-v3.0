@@ -707,6 +707,7 @@ export const AddCategoryFormValidator = () => {
 
     // make user data obj
     const cat_data = {
+      category: cat_name,
       cat_name,
       cat_image,
     };
@@ -721,6 +722,7 @@ export const AddCategoryFormValidator = () => {
         setToastOn,
         "admin_pannel_api/manage_category/add_category"
       );
+      setCatImg("");
     }
   };
 

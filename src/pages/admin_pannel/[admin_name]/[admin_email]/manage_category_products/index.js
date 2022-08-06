@@ -1,10 +1,10 @@
 import Cookie from "js-cookie";
 import React from "react";
-import Order from "../../../../../../models/AllOrders";
-import Category from "../../../../../../models/Category";
+// import Order from "../../../../../../models/AllOrders";
+// import Category from "../../../../../../models/Category";
 import AdminPannelLayoutContainer from "../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
 import ManageCategoryMain from "../../../../../components/admin_pannel_components/components/manage_category/ManageCategoryMain";
-import db from "../../../../../utilities/database";
+// import db from "../../../../../utilities/database";
 import ErrorPage from "../../../../404";
 
 export default function ManagCategoryProducts({
@@ -40,24 +40,26 @@ export default function ManagCategoryProducts({
   );
 }
 
-export async function getServerSideProps() {
-  await db.connect();
-  const all_orders = await Order.find({});
-  const all_categories = await Category.find({});
-  await db.disconnect();
-
-  return {
-    props: {
-      all_orders,
-      all_categories,
-    },
-  };
-}
-
 // export async function getServerSideProps() {
-//   // all orders
-//   const products = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
-//   const all_products = await products.json();
+//   await db.connect();
+//   const all_orders = await Order.find({});
+//   const all_categories = await Category.find({});
+//   await db.disconnect();
 
-//   return { props: { all_products } };
+//   return {
+//     props: {
+//       all_orders,
+//       all_categories,
+//     },
+//   };
 // }
+
+export async function getServerSideProps() {
+  // all orders
+  const products = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
+  const categories = await fetch(`${process.env.ROOT_URI}/api/allcategories`);
+  const all_products = await products.json();
+  const all_categories = await categories.json();
+
+  return { props: { all_products, all_categories } };
+}

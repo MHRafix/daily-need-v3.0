@@ -123,3 +123,27 @@ export const TableDataSorter = ({ dependency }) => {
     </div>
   );
 };
+
+export const TableDataSorterInput = ({ dependency }) => {
+  const { setPageSize, pageSize } = dependency;
+
+  return (
+    <div id="table_sorter_wrapper">
+      <div id="sorter_input_wrapper">
+        Show
+        <select
+          className="sorting_input"
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[5, 10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              {pageSize}
+            </option>
+          ))}
+        </select>
+        entries
+      </div>
+    </div>
+  );
+};

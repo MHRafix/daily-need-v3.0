@@ -158,7 +158,7 @@ export const CATEGORY_PRODUCTS_TABLE_COLUMNS = [
   },
   {
     Header: "Products Quantity",
-    accessor: "cat_name",
+    accessor: "category",
   },
   {
     Header: "Action",

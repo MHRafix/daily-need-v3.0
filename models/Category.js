@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema(
   {
-    cat_name: { type: String, required: true },
-    cat_image: { type: String, required: true },
+    category: { type: String, required: true, default: "uncategorized" },
+    cat_name: { type: String, required: true, default: "uncategorized" },
+    cat_image: { type: String, required: true, default: "" },
   },
   { timestamps: true }
 );

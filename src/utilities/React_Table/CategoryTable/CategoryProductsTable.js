@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
-import { FiEdit } from "react-icons/fi";
+import { FiBookOpen, FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
 import { uuid } from "uuidv4";
-import { TableDataSorter, TablePagination } from "../TableParts";
+import { TableDataSorterInput, TablePagination } from "../TableParts";
 
 export default function CategoryProductsTable({
   all_products,
@@ -38,32 +38,10 @@ export default function CategoryProductsTable({
     canPreviousPage,
     pageOptions,
     state,
-    gotoPage,
-    pageCount,
     setPageSize,
   } = tableInstance;
 
   const { pageIndex, pageSize } = state;
-
-  // filter functions here
-  const handleTypeFilter = (filter_name) => {
-    const filtered_data = PRODUCTS_DATA.filter(
-      (data) => data.product_type === filter_name
-    );
-    setData(filtered_data);
-  };
-
-  const handleStatusFilter = (filter_name) => {
-    const filtered_data = PRODUCTS_DATA.filter(
-      (data) => data.product_status === filter_name
-    );
-    setData(filtered_data);
-  };
-
-  // reset filter
-  const handleResetFilter = () => {
-    setData(PRODUCTS_DATA);
-  };
 
   // pagination dependency
   const pagination_dependency = {
@@ -79,16 +57,12 @@ export default function CategoryProductsTable({
   const sorting_dependency = {
     setPageSize,
     pageSize,
-    handleTypeFilter,
-    handleStatusFilter,
-    handleResetFilter,
-    show: true,
   };
 
   return (
     <>
       {/* data sorter  */}
-      <TableDataSorter dependency={sorting_dependency} />
+      <TableDataSorterInput dependency={sorting_dependency} />
       {/* react table here */}
       <ReactTooltip place="left" type="dark" effect="solid" />
       <table id="products_table" {...getTableProps()}>
@@ -183,6 +157,12 @@ export default function CategoryProductsTable({
                           <RiDeleteBinLine
                             data-tip="Delete"
                             className="text-red-500 cursor-pointer text-normal outline-none"
+                          />
+                          &nbsp;&nbsp;
+                          <FiBookOpen
+                            // onClick={() => handleModal(true, cell.value)}
+                            data-tip="Details"
+                            className="text-green cursor-pointer text-normal outline-none"
                           />
                         </span>
                       </td>
