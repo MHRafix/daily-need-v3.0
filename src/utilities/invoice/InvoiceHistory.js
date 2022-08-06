@@ -2,7 +2,6 @@ import Cookie from "js-cookie";
 import Image from "next/image";
 import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
-import Logo from "../../images/logo/logo_black.webp";
 import OrderedProductsTable from "../React_Table/PaginationTable/OrderedProductsTable";
 import { ORDERED_PRODUCTS_TABLE_COLUMNS } from "../React_Table/TableColumns";
 
@@ -27,26 +26,27 @@ export default function InvoiceHistory({ modal_data }) {
         content={() => componentRef.current}
       />
 
-      <div ref={componentRef} className="invoice_document_area p-2">
+      <div
+        ref={componentRef}
+        className="invoice_document_area"
+        style={{ margin: "20px" }}
+      >
         <div className="customer_document flex justify-between">
-          <div className="brand_wrapper">
-            <Image src={Logo} alt="site logo" width={127} height={38} />
+          <div className="my-7">
+            {userInfo?.user_pic && (
+              <Image
+                src={userInfo?.user_pic}
+                alt="profile pic"
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            )}
+          </div>
+          <div className="my-4 tracking-wider text-medium font-bold">
+            Name : &nbsp;&nbsp; {userInfo?.user_name}
           </div>
           <div className="customers_info mb-5 text-left text-black2 text-normal">
-            <div className="my-7">
-              {userInfo?.user_pic && (
-                <Image
-                  src={userInfo?.user_pic}
-                  alt="profile pic"
-                  width={150}
-                  height={150}
-                  className="rounded-full"
-                />
-              )}
-            </div>
-            <div className="my-4 tracking-wider">
-              Name : &nbsp;&nbsp; {userInfo?.user_name}
-            </div>
             <div className="my-4 tracking-wider">
               Email : &nbsp;&nbsp; {userInfo?.user_email}
             </div>
@@ -73,7 +73,7 @@ export default function InvoiceHistory({ modal_data }) {
             </div>
           </div>
         </div>
-        <div className="ordered_products_table" style={{ marginTop: "20px" }}>
+        <div className="ordered_products_table" style={{ marginTop: "30px" }}>
           <OrderedProductsTable
             PRODUCTS_DATA={modal_data?.products_data}
             PRODUCTS_TABLE_COLUMNS={ORDERED_PRODUCTS_TABLE_COLUMNS}
