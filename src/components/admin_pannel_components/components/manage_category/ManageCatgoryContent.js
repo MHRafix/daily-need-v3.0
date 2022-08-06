@@ -10,9 +10,11 @@ import {
 } from "../../../../utilities/Form/FormField";
 import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { AddCategoryFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
+import CategoryProductsTable from "../../../../utilities/React_Table/CategoryTable/CategoryProductsTable";
+import { CATEGORY_PRODUCTS_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
-export default function ManageCatgoryContent() {
+export default function ManageCatgoryContent({ all_products, all_categories }) {
   const {
     initialValues,
     validationSchema,
@@ -80,6 +82,15 @@ export default function ManageCatgoryContent() {
               />
             </Form>
           </FormikFormLayout>
+        </DashboardContentLayout>
+      </div>
+      <div className="dashboard_row_wrapper">
+        <DashboardContentLayout item_name="category products">
+          <CategoryProductsTable
+            all_products={all_products}
+            CATEGORY_DATA={all_categories}
+            TABLE_COLUMNS={CATEGORY_PRODUCTS_TABLE_COLUMNS}
+          />
         </DashboardContentLayout>
       </div>
     </>

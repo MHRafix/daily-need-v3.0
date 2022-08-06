@@ -146,3 +146,22 @@ export const ORDERED_PRODUCTS_TABLE_COLUMNS = [
     accessor: "product_type",
   },
 ];
+
+export const CATEGORY_PRODUCTS_TABLE_COLUMNS = [
+  {
+    Header: "Category Name",
+    accessor: "cat_name",
+  },
+  {
+    Header: "Category Image",
+    accessor: "cat_image",
+  },
+  {
+    Header: "Products Quantity",
+    accessor: "cat_name",
+  },
+  {
+    Header: "Action",
+    accessor: "_id",
+  },
+];

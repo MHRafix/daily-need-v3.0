@@ -1,10 +1,16 @@
 import Cookie from "js-cookie";
 import React from "react";
+import Order from "../../../../../../models/AllOrders";
+import Category from "../../../../../../models/Category";
 import AdminPannelLayoutContainer from "../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
 import ManageCategoryMain from "../../../../../components/admin_pannel_components/components/manage_category/ManageCategoryMain";
+import db from "../../../../../utilities/database";
 import ErrorPage from "../../../../404";
 
-export default function ManagCategoryProducts({ all_products }) {
+export default function ManagCategoryProducts({
+  all_products,
+  all_categories,
+}) {
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -25,28 +31,33 @@ export default function ManagCategoryProducts({ all_products }) {
         title="Manage Category"
         description="This is manage category of 'Daily Needs Grocery' web application admin pannel."
       >
-        <ManageCategoryMain all_products={all_products} />
+        <ManageCategoryMain
+          all_products={all_products}
+          all_categories={all_categories}
+        />
       </AdminPannelLayoutContainer>
     </>
   );
 }
 
-// export async function getServerSideProps() {
-//     await db.connect();
-//     const all_orders = await Order.find({});
-//     await db.disconnect();
-
-//     return {
-//       props: {
-//         all_orders,
-//       },
-//     };
-//   }
-
 export async function getServerSideProps() {
-  // all orders
-  const products = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
-  const all_products = await products.json();
+  await db.connect();
+  const all_orders = await Order.find({});
+  const all_categories = await Category.find({});
+  await db.disconnect();
 
-  return { props: { all_products } };
+  return {
+    props: {
+      all_orders,
+      all_categories,
+    },
+  };
 }
+
+// export async function getServerSideProps() {
+//   // all orders
+//   const products = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
+//   const all_products = await products.json();
+
+//   return { props: { all_products } };
+// }
