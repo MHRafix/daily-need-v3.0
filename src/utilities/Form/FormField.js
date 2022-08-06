@@ -1,6 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import Image from "next/image";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { uuid } from "uuidv4";
 import Loader from "../../images/loader/loader.gif";
 
 export const FormTextField = ({
@@ -152,7 +153,9 @@ export const FormikSelectField = ({ form_label, options, name }) => {
       <br />
       <Field as="select" name={name} id={name} style={style}>
         {options.map((option) => (
-          <option value={option.name}>{option.name}</option>
+          <option key={uuid()} value={option.name}>
+            {option.name}
+          </option>
         ))}
       </Field>
       &nbsp;

@@ -620,6 +620,7 @@ export const CreateAdminFormValidator = () => {
     setToastOn,
   };
 };
+
 // create admin and moderators validators here
 export const UnlockFormValidator = () => {
   const [processing, setProcessing] = useState(false);
@@ -663,6 +664,71 @@ export const UnlockFormValidator = () => {
     initialValues,
     validationSchema,
     onSubmit,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
+/**
+ * category form validator here
+ * cat image upload
+ */
+
+// add category form validator
+export const AddCategoryFormValidator = () => {
+  const [catImg, setCatImg] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("false");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  // initial vlaue of form
+  const initialValues = {
+    cat_name: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchema = Yup.object({
+    cat_name: Yup.string().required("Required!"),
+  });
+
+  // on submit function here
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    const { cat_name } = values;
+
+    // upload user avatarto cloudinary
+    const { avatar_upload_cloudinary } = avatarUploader(catImg);
+    const cat_image = await avatar_upload_cloudinary();
+
+    // make user data obj
+    const cat_data = {
+      cat_name,
+      cat_image,
+    };
+
+    if (cat_data) {
+      reqSender(
+        cat_data,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "admin_pannel_api/manage_category/add_category"
+      );
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    setCatImg,
     processing,
     toastText,
     toastType,
