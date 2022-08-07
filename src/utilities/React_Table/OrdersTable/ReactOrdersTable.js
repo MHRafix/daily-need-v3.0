@@ -198,7 +198,7 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
                           />
                           &nbsp;&nbsp;
                           <FiBookOpen
-                            onClick={() => handleModal(true, cell.value)}
+                            onClick={() => handleModal(cell.value)}
                             data-tip="Details"
                             className="text-green cursor-pointer text-normal outline-none"
                           />

@@ -9,6 +9,7 @@ import { uuid } from "uuidv4";
 import { TableDataSorterInput, TablePagination } from "../TableParts";
 
 export default function CategoryProductsTable({
+  handleModal,
   CategoryProducts,
   CATEGORY_DATA,
   TABLE_COLUMNS,
@@ -156,7 +157,7 @@ export default function CategoryProductsTable({
                           />
                           &nbsp;&nbsp;
                           <FiBookOpen
-                            // onClick={() => handleModal(true, cell.value)}
+                            onClick={() => handleModal(cell.value)}
                             data-tip="Details"
                             className="text-green cursor-pointer text-normal outline-none"
                           />

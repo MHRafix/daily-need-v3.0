@@ -1,5 +1,5 @@
 import { Form } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { BiErrorCircle } from "react-icons/bi";
 import { MdCloudDone } from "react-icons/md";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
@@ -10,8 +10,13 @@ import {
 } from "../../../../utilities/Form/FormField";
 import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { AddCategoryFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
+import ReactModal from "../../../../utilities/Modal/ReactModal";
 import CategoryProductsTable from "../../../../utilities/React_Table/CategoryTable/CategoryProductsTable";
-import { CATEGORY_PRODUCTS_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
+import ReactPaginationTable from "../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
+import {
+  CATEGORY_PRODUCTS_TABLE_COLUMNS,
+  PRODUCTS_TABLE_COLUMNS,
+} from "../../../../utilities/React_Table/TableColumns";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageCatgoryContent({ all_products, all_categories }) {
@@ -49,6 +54,7 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
     handleRemoveToast: handleRemoveToast,
   };
 
+  // handle category product quantity
   const CategoryProducts = (cat) => {
     const matched_products = all_products.filter(
       (product) => product.category === cat
@@ -60,6 +66,17 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
       </td>
     );
   };
+
+  // handle modal and modal data
+  const [modal, setModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
+
+  const handleModal = (id) => {
+    const modal_data = all_orders.find((order) => order._id === id);
+    setModalData(modal_data.products_data);
+    setModal(true);
+  };
+
   return (
     <>
       {/* alert toast here  */}
@@ -99,11 +116,24 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="category products">
           <CategoryProductsTable
+            handleModal={handleModal}
             CategoryProducts={CategoryProducts}
             CATEGORY_DATA={all_categories}
             TABLE_COLUMNS={CATEGORY_PRODUCTS_TABLE_COLUMNS}
           />
         </DashboardContentLayout>
+        {modal && (
+          <ReactModal
+            setModal={setModal}
+            modal_data={modalData}
+            modal_title="Category Products"
+          >
+            <ReactPaginationTable
+              PRODUCTS_DATA={modalData}
+              PRODUCTS_TABLE_COLUMNS={PRODUCTS_TABLE_COLUMNS}
+            />
+          </ReactModal>
+        )}
       </div>
     </>
   );

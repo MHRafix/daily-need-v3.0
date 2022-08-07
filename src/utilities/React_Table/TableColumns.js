@@ -1,4 +1,5 @@
 // import { format } from 'date-fns';
+// mini users table header column
 export const MINI_USER_TABLE_COLUMNS = [
   {
     Header: "User pic",
@@ -15,6 +16,7 @@ export const MINI_USER_TABLE_COLUMNS = [
   },
 ];
 
+// products table header column
 export const PRODUCTS_TABLE_COLUMNS = [
   {
     Header: "Product",
@@ -120,6 +122,7 @@ export const SHIPPED_ORDERS_TABLE_COLUMN = [
   { Header: "Action", accessor: "_id" },
 ];
 
+// ordered products table header column
 export const ORDERED_PRODUCTS_TABLE_COLUMNS = [
   {
     Header: "Product",
@@ -147,6 +150,7 @@ export const ORDERED_PRODUCTS_TABLE_COLUMNS = [
   },
 ];
 
+// category products table header column
 export const CATEGORY_PRODUCTS_TABLE_COLUMNS = [
   {
     Header: "Category Name",
