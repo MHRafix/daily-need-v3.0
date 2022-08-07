@@ -9,7 +9,7 @@ import { uuid } from "uuidv4";
 import { TableDataSorterInput, TablePagination } from "../TableParts";
 
 export default function CategoryProductsTable({
-  all_products,
+  CategoryProducts,
   CATEGORY_DATA,
   TABLE_COLUMNS,
 }) {
@@ -140,14 +140,7 @@ export default function CategoryProductsTable({
                       </div>
                     );
                   } else if (cell.column.Header === "Products Quantity") {
-                    const matched_products = all_products?.filter(
-                      (product) => product.category === cell.value
-                    );
-                    return (
-                      <td>
-                        <div>{matched_products?.length}</div>
-                      </td>
-                    );
+                    CategoryProducts(cell.value);
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>

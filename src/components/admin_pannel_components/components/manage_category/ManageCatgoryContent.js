@@ -48,6 +48,18 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
 
     handleRemoveToast: handleRemoveToast,
   };
+
+  const CategoryProducts = (cat) => {
+    const matched_products = all_products.filter(
+      (product) => product.category === cat
+    );
+
+    return (
+      <td>
+        <div>{matched_products.length}</div>
+      </td>
+    );
+  };
   return (
     <>
       {/* alert toast here  */}
@@ -87,7 +99,7 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="category products">
           <CategoryProductsTable
-            all_products={all_products}
+            CategoryProducts={CategoryProducts}
             CATEGORY_DATA={all_categories}
             TABLE_COLUMNS={CATEGORY_PRODUCTS_TABLE_COLUMNS}
           />
