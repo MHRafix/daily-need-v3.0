@@ -132,7 +132,6 @@ export default function CategoryProductsTable({
                           <Image
                             src={cell.value}
                             alt="img"
-                            // layout="fill"
                             width={100}
                             height={100}
                             className="rounded-full"
@@ -140,11 +139,15 @@ export default function CategoryProductsTable({
                         </span>
                       </div>
                     );
-                  } else if (cell?.column?.Header === "Products Quantity") {
+                  } else if (cell.column.Header === "Products Quantity") {
                     const matched_products = all_products?.filter(
-                      (product) => product?.category === cell?.value
+                      (product) => product.category === cell.value
                     );
-                    return <td>{matched_products?.length}</td>;
+                    return (
+                      <td>
+                        <div>{matched_products.length}</div>
+                      </td>
+                    );
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>
