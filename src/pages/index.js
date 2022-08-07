@@ -1,4 +1,5 @@
 import AllProducts from "../../models/AllProducts";
+import Category from "../../models/Category";
 import LayoutContainer from "../components/commons/layout/LayoutContainer";
 import HomeMain from "../components/home_page/HomeMain";
 import db from "../utilities/database";
@@ -25,10 +26,12 @@ export default function Home({ products, all_categories }) {
 export async function getServerSideProps() {
   await db.connect();
   const products = await AllProducts.find({}).limit(8);
+  const all_categories = await Category.find({});
   await db.disconnect();
   return {
     props: {
       products: products.map(db.convertDocToObj),
+      all_categories,
     },
   };
 }
