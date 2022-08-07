@@ -140,11 +140,11 @@ export default function CategoryProductsTable({
                         </span>
                       </div>
                     );
-                  } else if (cell.column.Header === "Products Quantity") {
-                    const matched_products = all_products.filter(
-                      (product) => product.category === cell.value
+                  } else if (cell?.column?.Header === "Products Quantity") {
+                    const matched_products = all_products?.filter(
+                      (product) => product?.category === cell?.value
                     );
-                    return <td>{matched_products.length}</td>;
+                    return <td>{matched_products?.length}</td>;
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>
