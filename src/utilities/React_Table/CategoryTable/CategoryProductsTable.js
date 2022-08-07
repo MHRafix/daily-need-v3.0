@@ -10,7 +10,7 @@ import { TableDataSorterInput, TablePagination } from "../TableParts";
 
 export default function CategoryProductsTable({
   handleModal,
-  CategoryProducts,
+  all_products,
   CATEGORY_DATA,
   TABLE_COLUMNS,
 }) {
@@ -141,7 +141,20 @@ export default function CategoryProductsTable({
                       </div>
                     );
                   } else if (cell.column.Header === "Products Quantity") {
-                    CategoryProducts(cell.value);
+                    // const matched_products = ;
+                    // console.log(matched_products);
+
+                    return (
+                      <td>
+                        <div>
+                          {
+                            all_products?.filter(
+                              (product) => product?.category === cell?.value
+                            )?.length
+                          }
+                        </div>
+                      </td>
+                    );
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>

@@ -54,19 +54,6 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
     handleRemoveToast: handleRemoveToast,
   };
 
-  // handle category product quantity
-  const CategoryProducts = (cat) => {
-    const matched_products = all_products.filter(
-      (product) => product.category === cat
-    );
-
-    return (
-      <td>
-        <div>{matched_products.length}</div>
-      </td>
-    );
-  };
-
   // handle modal and modal data
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -81,7 +68,6 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
     <>
       {/* alert toast here  */}
       {toastOn && <AlertToast toast_config={toast_config} />}
-
       {/* orders show on table */}
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="add category">
@@ -117,7 +103,7 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
         <DashboardContentLayout item_name="category products">
           <CategoryProductsTable
             handleModal={handleModal}
-            CategoryProducts={CategoryProducts}
+            all_products={all_products}
             CATEGORY_DATA={all_categories}
             TABLE_COLUMNS={CATEGORY_PRODUCTS_TABLE_COLUMNS}
           />
