@@ -1,6 +1,7 @@
 import Cookie from "js-cookie";
 import React from "react";
 import Product from "../../../../../../models/AllProducts";
+import Category from "../../../../../../models/Category";
 import AdminPannelLayoutContainer from "../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
 import ManageCategoryMain from "../../../../../components/admin_pannel_components/components/manage_category/ManageCategoryMain";
 import db from "../../../../../utilities/database";
