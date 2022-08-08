@@ -153,8 +153,8 @@ export const FormikSelectField = ({ form_label, options, name }) => {
       <br />
       <Field as="select" name={name} id={name} style={style}>
         {options.map((option) => (
-          <option key={uuid()} value={option.name}>
-            {option.name}
+          <option key={uuid()} value={option.category}>
+            {option.category.toUpperCase()}
           </option>
         ))}
       </Field>
@@ -202,6 +202,7 @@ export const FormikFileField = ({
         id={name}
         style={style}
       />
+      &nbsp;
     </div>
   );
 };

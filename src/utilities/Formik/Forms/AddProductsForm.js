@@ -12,6 +12,7 @@ export default function AddProductsForm({
   setThumbnail,
   setBigThumbnail,
   processing,
+  all_categories,
 }) {
   return (
     <Form>
@@ -37,11 +38,7 @@ export default function AddProductsForm({
       <FormFieldFlexLayout>
         <FormikSelectField
           form_label="product category"
-          options={[
-            { id: 1, name: "fruits" },
-            { id: 2, name: "vegetable" },
-            { id: 3, name: "groci" },
-          ]}
+          options={all_categories}
           name="category"
         />
         <FormikTextField

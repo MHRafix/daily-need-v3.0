@@ -8,7 +8,7 @@ import { PRODUCTS_TABLE_COLUMNS } from "../../../../../utilities/React_Table/Tab
 import toastConfig from "../../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
-export default function AllProductsContent({ all_products }) {
+export default function AllProductsContent({ all_products, all_categories }) {
   const {
     initialValues,
     validationSchema,
@@ -43,6 +43,7 @@ export default function AllProductsContent({ all_products }) {
                 setThumbnail={setThumbnail}
                 setBigThumbnail={setBigThumbnail}
                 processing={processing}
+                all_categories={all_categories}
               />
             </FormikFormLayout>
           </DashboardContentLayout>

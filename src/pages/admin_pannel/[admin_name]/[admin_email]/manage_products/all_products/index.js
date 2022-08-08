@@ -2,12 +2,13 @@ import Cookie from "js-cookie";
 import React from "react";
 import { useDispatch } from "react-redux";
 import AllProducts from "../../../../../../../models/AllProducts";
+import Category from "../../../../../../../models/Category";
 import AdminPannelLayoutContainer from "../../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
 import AllProductsMain from "../../../../../../components/admin_pannel_components/components/manage_products/all_products/AllProductsMain";
 import db from "../../../../../../utilities/database";
 import ErrorPage from "../../../../../404";
 
-export default function AllProductsPage({ all_products }) {
+export default function AllProductsPage({ all_products, all_categories }) {
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -28,7 +29,10 @@ export default function AllProductsPage({ all_products }) {
         title="Manage Products"
         description="This is manage products of 'Daily Needs Grocery' web application admin pannel."
       >
-        <AllProductsMain all_products={all_products} />
+        <AllProductsMain
+          all_products={all_products}
+          all_categories={all_categories}
+        />
       </AdminPannelLayoutContainer>
     </>
   );
@@ -37,11 +41,13 @@ export default function AllProductsPage({ all_products }) {
 export async function getServerSideProps() {
   await db.connect();
   const all_products = await AllProducts.find({});
+  const all_categories = await Category.find({});
   await db.disconnect();
 
   return {
     props: {
       all_products,
+      all_categories,
     },
   };
 }
@@ -49,7 +55,9 @@ export async function getServerSideProps() {
 // export async function getServerSideProps() {
 //   // all products
 //   const products = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
+//   const categories = await fetch(`${process.env.ROOT_URI}/api/allcategories`);
 //   const all_products = await products.json();
+//   const all_categories = await categories.json();
 
-//   return { props: { all_products } };
+//   return { props: { all_products, all_categories } };
 // }

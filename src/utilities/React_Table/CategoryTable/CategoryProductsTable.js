@@ -147,9 +147,7 @@ export default function CategoryProductsTable({
 
                     return (
                       <td>
-                        {/* {category_products?.length && ( */}
                         <div>{category_products?.length}</div>
-                        {/* )} */}
                       </td>
                     );
                   } else if (cell.column.Header === "Action") {
