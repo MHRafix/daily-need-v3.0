@@ -13,7 +13,7 @@ export default function ReactPaginationTable({
 }) {
   const columns = useMemo(() => PRODUCTS_TABLE_COLUMNS, []);
   const [data, setData] = useState(PRODUCTS_DATA);
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("reset");
 
   const tableInstance = useTable(
     {

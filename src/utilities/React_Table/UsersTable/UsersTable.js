@@ -14,7 +14,7 @@ import { TablePagination, UserSorter } from "../TableParts";
 export default function UsersTable({ USERS_DATA }) {
   const columns = useMemo(() => ALL_USERS_TABLE_COLUMNS, []);
   const [data, setData] = useState(USERS_DATA);
-  const [active, setActive] = useState("all_users");
+  const [active, setActive] = useState("reset");
 
   const tableInstance = useTable(
     {
