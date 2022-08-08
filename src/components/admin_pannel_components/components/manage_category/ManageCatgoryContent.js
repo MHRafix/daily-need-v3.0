@@ -58,9 +58,11 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
 
-  const handleModal = (id) => {
-    const modal_data = all_products.find((order) => order._id === id);
-    setModalData(modal_data.products_data);
+  const handleModal = (cat) => {
+    const modal_data = all_products?.filter(
+      (product) => product.category === cat
+    );
+    setModalData(modal_data);
     setModal(true);
   };
 

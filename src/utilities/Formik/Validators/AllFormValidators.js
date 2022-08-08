@@ -708,6 +708,7 @@ export const AddCategoryFormValidator = () => {
     // make user data obj
     const cat_data = {
       category: cat_name,
+      cat_name2: cat_name,
       cat_name,
       cat_image,
     };

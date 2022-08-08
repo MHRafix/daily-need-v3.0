@@ -166,6 +166,6 @@ export const CATEGORY_PRODUCTS_TABLE_COLUMNS = [
   },
   {
     Header: "Action",
-    accessor: "_id",
+    accessor: "cat_name2",
   },
 ];

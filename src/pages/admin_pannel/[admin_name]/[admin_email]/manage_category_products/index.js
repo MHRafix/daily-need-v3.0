@@ -1,7 +1,6 @@
 import Cookie from "js-cookie";
 import React from "react";
-import Order from "../../../../../../models/AllOrders";
-import Category from "../../../../../../models/Category";
+import Product from "../../../../../../models/AllProducts";
 import AdminPannelLayoutContainer from "../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
 import ManageCategoryMain from "../../../../../components/admin_pannel_components/components/manage_category/ManageCategoryMain";
 import db from "../../../../../utilities/database";
@@ -42,13 +41,13 @@ export default function ManagCategoryProducts({
 
 export async function getServerSideProps() {
   await db.connect();
-  const all_orders = await Order.find({});
+  const all_products = await Product.find({});
   const all_categories = await Category.find({});
   await db.disconnect();
 
   return {
     props: {
-      all_orders,
+      all_products,
       all_categories,
     },
   };

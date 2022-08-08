@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
-import { FiBookOpen, FiEdit } from "react-icons/fi";
+import { FiBookOpen } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
@@ -141,28 +141,21 @@ export default function CategoryProductsTable({
                       </div>
                     );
                   } else if (cell.column.Header === "Products Quantity") {
-                    // const matched_products = ;
-                    // console.log(matched_products);
+                    const category_products = all_products?.filter(
+                      (product) => product.category === cell.value
+                    );
 
                     return (
                       <td>
-                        <div>
-                          {
-                            all_products?.filter(
-                              (product) => product?.category === cell?.value
-                            )?.length
-                          }
-                        </div>
+                        {/* {category_products?.length && ( */}
+                        <div>{category_products?.length}</div>
+                        {/* )} */}
                       </td>
                     );
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>
                         <span className="flex justify-center items-center">
-                          <FiEdit
-                            data-tip="Edit"
-                            className="text-light_purple cursor-pointer text-normal outline-none"
-                          />
                           &nbsp;&nbsp;
                           <RiDeleteBinLine
                             data-tip="Delete"
@@ -171,7 +164,7 @@ export default function CategoryProductsTable({
                           &nbsp;&nbsp;
                           <FiBookOpen
                             onClick={() => handleModal(cell.value)}
-                            data-tip="Details"
+                            data-tip="Products"
                             className="text-green cursor-pointer text-normal outline-none"
                           />
                         </span>

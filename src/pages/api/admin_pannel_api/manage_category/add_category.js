@@ -16,6 +16,7 @@ handler.post(async (req, res) => {
     // create new category
     const newCat = new Category({
       category: req.body.cat_name,
+      cat_name2: req.body.cat_name,
       cat_name: req.body.cat_name,
       cat_image: req.body.cat_image,
     });
