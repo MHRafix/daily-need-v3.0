@@ -169,3 +169,27 @@ export const CATEGORY_PRODUCTS_TABLE_COLUMNS = [
     accessor: "cat_name2",
   },
 ];
+
+// all users table column here
+export const ALL_USERS_TABLE_COLUMNS = [
+  {
+    Header: "User Name",
+    accessor: "user_name",
+  },
+  {
+    Header: "User Photo",
+    accessor: "user_pic",
+  },
+  {
+    Header: "User Email",
+    accessor: "user_email",
+  },
+  {
+    Header: "User Role",
+    accessor: "user_admin",
+  },
+  {
+    Header: "Action",
+    accessor: "_id",
+  },
+];

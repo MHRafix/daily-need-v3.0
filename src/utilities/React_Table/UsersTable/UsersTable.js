@@ -6,14 +6,15 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
 import { uuid } from "uuidv4";
-import { TableDataSorter, TablePagination } from "../TableParts";
-export default function ReactPaginationTable({
-  PRODUCTS_DATA,
-  PRODUCTS_TABLE_COLUMNS,
-}) {
-  const columns = useMemo(() => PRODUCTS_TABLE_COLUMNS, []);
-  const [data, setData] = useState(PRODUCTS_DATA);
-  const [active, setActive] = useState("");
+import Admin from "../../../images/users/admin.png";
+import Customer from "../../../images/users/customer.png";
+import { ALL_USERS_TABLE_COLUMNS } from "../TableColumns";
+import { TablePagination, UserSorter } from "../TableParts";
+
+export default function UsersTable({ USERS_DATA }) {
+  const columns = useMemo(() => ALL_USERS_TABLE_COLUMNS, []);
+  const [data, setData] = useState(USERS_DATA);
+  const [active, setActive] = useState("all_users");
 
   const tableInstance = useTable(
     {
@@ -41,29 +42,17 @@ export default function ReactPaginationTable({
   } = tableInstance;
 
   const { pageIndex, pageSize } = state;
-
-  // filter functions here
-  const handleTypeFilter = (filter_name, activer) => {
-    const filtered_data = PRODUCTS_DATA.filter(
-      (data) => data.product_type === filter_name
-    );
-
+  // filter function here
+  const handleUserFilter = (role, activer) => {
+    const filtered_user = USERS_DATA.filter((user) => user.user_admin === role);
     setActive(activer);
-    setData(filtered_data);
-  };
-
-  const handleStatusFilter = (filter_name, activer) => {
-    const filtered_data = PRODUCTS_DATA.filter(
-      (data) => data.product_status === filter_name
-    );
-    setActive(activer);
-    setData(filtered_data);
+    setData(filtered_user);
   };
 
   // reset filter
   const handleResetFilter = (activer) => {
     setActive(activer);
-    setData(PRODUCTS_DATA);
+    setData(USERS_DATA);
   };
 
   // pagination dependency
@@ -80,20 +69,19 @@ export default function ReactPaginationTable({
   const sorting_dependency = {
     setPageSize,
     pageSize,
-    handleTypeFilter,
-    handleStatusFilter,
+    handleUserFilter,
     handleResetFilter,
-    show: true,
     active,
   };
 
   return (
     <>
       {/* data sorter  */}
-      <TableDataSorter dependency={sorting_dependency} />
+      <UserSorter dependency={sorting_dependency} />
+
       {/* react table here */}
       <ReactTooltip place="left" type="dark" effect="solid" />
-      <table id="products_table" {...getTableProps()}>
+      <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr key={uuid()} {...headerGroup.getFooterGroupProps()}>
@@ -142,66 +130,43 @@ export default function ReactPaginationTable({
             return (
               <tr key={uuid()} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  if (cell.column.id === "thumbnail") {
+                  if (cell.column.Header === "User Photo") {
                     return (
-                      <div
-                        className="!p-extra_padding4"
-                        style={{
-                          borderBottom: "1px solid #ddd",
-                          textAlign: "center",
-                        }}
-                      >
-                        <span
-                          style={{
-                            display: "inline-table",
-                            width: "50px",
-                          }}
-                        >
+                      <td className="py-1">
+                        <Image
+                          src={cell.value}
+                          alt="user pic"
+                          width={50}
+                          height={50}
+                          className="rounded-full"
+                        />
+                      </td>
+                    );
+                  } else if (cell.column.Header === "User Role") {
+                    if (cell.value === true) {
+                      return (
+                        <td data-tip="Admin">
                           <Image
-                            src={cell.value}
-                            alt="img"
-                            // layout="fill"
-                            width={100}
-                            height={100}
-                            className="rounded-full"
+                            src={Admin}
+                            alt="roleImg"
+                            width={50}
+                            height={50}
                           />
-                        </span>
-                      </div>
-                    );
-                  } else if (cell.column.Header === "Reg Price") {
-                    return <td className="font-semibold">৳ {cell.value}</td>;
-                  } else if (cell.column.Header === "Sale Price") {
-                    return <td className="font-semibold">৳ {cell.value}</td>;
-                  } else if (cell.column.Header === "Available") {
-                    return (
-                      <td>
-                        {cell.value === 0 ? (
-                          <span id="red_signal_status">✖</span>
-                        ) : (
-                          <span id="green_signal_status">{cell.value} kg</span>
-                        )}
-                      </td>
-                    );
-                  } else if (cell.column.Header === "Status") {
-                    return (
-                      <td>
-                        {cell.value === "stock-out" ? (
-                          <span id="red_signal_status">{cell.value}</span>
-                        ) : (
-                          <span id="green_signal_status">{cell.value}</span>
-                        )}
-                      </td>
-                    );
-                  } else if (cell.column.Header === "Type") {
-                    return (
-                      <td>
-                        {cell.value === "fixed-sale" ? (
-                          <span id="warning_signal_status">{cell.value}</span>
-                        ) : (
-                          <span id="info_signal_status">{cell.value}</span>
-                        )}
-                      </td>
-                    );
+                        </td>
+                      );
+                    } else {
+                      return (
+                        <td data-tip="Customer">
+                          <Image
+                            data-tip="Customer"
+                            src={Customer}
+                            alt="roleImg"
+                            width={50}
+                            height={50}
+                          />
+                        </td>
+                      );
+                    }
                   } else if (cell.column.Header === "Action") {
                     return (
                       <td>

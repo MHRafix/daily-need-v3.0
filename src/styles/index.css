@@ -724,7 +724,11 @@
   }
 
   #filter_btn {
-    @apply text-black3 tracking-wider lg:!text-light xs:text-thin cursor-pointer mx-4 hover:text-green;
+    @apply text-black3 tracking-wider lg:!text-light xs:text-thin cursor-pointer mx-3 p-1 duration-500;
+  }
+
+  #filter_btn_active {
+    @apply bg-green rounded-sm font-medium text-light duration-200 p-1;
   }
 
   #pagination_content {

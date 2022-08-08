@@ -35,22 +35,9 @@ export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
     canPreviousPage,
     pageOptions,
     state,
-    setPageSize,
   } = tableInstance;
 
-  const { pageIndex, pageSize } = state;
-  // filter function here
-  const handleStatusFilter = (filter_name) => {
-    const filtered_data = ORDERS_DATA.filter(
-      (data) => data.order_overview.order_status === filter_name
-    );
-    setData(filtered_data);
-  };
-
-  // reset filter
-  const handleResetFilter = () => {
-    setData(ORDERS_DATA);
-  };
+  const { pageIndex } = state;
 
   // pagination dependency
   const pagination_dependency = {
@@ -60,15 +47,6 @@ export default function ShippedOrdersTable({ ORDERS_DATA, handleModal }) {
     canPreviousPage,
     pageOptions,
     pageIndex,
-  };
-
-  // sorting dependency
-  const sorting_dependency = {
-    setPageSize,
-    pageSize,
-    handleStatusFilter,
-    handleResetFilter,
-    show: false,
   };
 
   return (

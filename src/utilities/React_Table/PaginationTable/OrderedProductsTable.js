@@ -34,30 +34,9 @@ export default function OrderedProductsTable({
     canPreviousPage,
     pageOptions,
     state,
-    setPageSize,
   } = tableInstance;
 
-  const { pageIndex, pageSize } = state;
-
-  // filter functions here
-  const handleTypeFilter = (filter_name) => {
-    const filtered_data = PRODUCTS_DATA.filter(
-      (data) => data.product_type === filter_name
-    );
-    setData(filtered_data);
-  };
-
-  const handleStatusFilter = (filter_name) => {
-    const filtered_data = PRODUCTS_DATA.filter(
-      (data) => data.product_status === filter_name
-    );
-    setData(filtered_data);
-  };
-
-  // reset filter
-  const handleResetFilter = () => {
-    setData(PRODUCTS_DATA);
-  };
+  const { pageIndex } = state;
 
   // pagination dependency
   const pagination_dependency = {
@@ -67,16 +46,6 @@ export default function OrderedProductsTable({
     canPreviousPage,
     pageOptions,
     pageIndex,
-  };
-
-  // sorting dependency
-  const sorting_dependency = {
-    setPageSize,
-    pageSize,
-    handleTypeFilter,
-    handleStatusFilter,
-    handleResetFilter,
-    show: true,
   };
 
   return (

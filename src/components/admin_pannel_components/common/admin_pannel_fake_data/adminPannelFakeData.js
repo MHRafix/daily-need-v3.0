@@ -123,28 +123,18 @@ export const admin_pannel_navigation = [
   },
   {
     _id: 7,
-    main_nav: "Users",
+    main_nav: "Manage Users",
     main_nav_icon: <FiUsers />,
     sub_navs: [
       {
         _id: 1,
         sub_nav_name: "all users",
-        sub_nav_link: "/users/all_users",
+        sub_nav_link: "/manage_users/all_users",
       },
       {
         _id: 2,
-        sub_nav_name: "all customers",
-        sub_nav_link: "/users/all_customers",
-      },
-      {
-        _id: 3,
-        sub_nav_name: "all admin",
-        sub_nav_link: "/users/all_admin",
-      },
-      {
-        _id: 4,
-        sub_nav_name: "all moderator",
-        sub_nav_link: "/users/all_moderator",
+        sub_nav_name: "create admin",
+        sub_nav_link: "/manage_users/create_admin",
       },
     ],
   },

@@ -14,6 +14,7 @@ import { TableDataSorter, TablePagination } from "../TableParts";
 export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
   const columns = useMemo(() => ORDERS_TABLE_COLUMN, []);
   const [data, setData] = useState(ORDERS_DATA);
+  const [active, setActive] = useState("");
 
   const tableInstance = useTable(
     {
@@ -42,15 +43,18 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
 
   const { pageIndex, pageSize } = state;
   // filter function here
-  const handleStatusFilter = (filter_name) => {
+  const handleStatusFilter = (filter_name, activer) => {
     const filtered_data = ORDERS_DATA.filter(
       (data) => data.order_overview.order_status === filter_name
     );
+
+    setActive(activer);
     setData(filtered_data);
   };
 
   // reset filter
-  const handleResetFilter = () => {
+  const handleResetFilter = (activer) => {
+    setActive(activer);
     setData(ORDERS_DATA);
   };
 
@@ -71,6 +75,7 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
     handleStatusFilter,
     handleResetFilter,
     show: false,
+    active,
   };
 
   return (
