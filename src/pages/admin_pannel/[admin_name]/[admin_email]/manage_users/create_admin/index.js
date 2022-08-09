@@ -2,17 +2,17 @@ import { Form } from "formik";
 import Cookie from "js-cookie";
 import { useRouter } from "next/router";
 import React from "react";
-import AdminPannelBreadcrumb from "../../../../components/admin_pannel_components/common/admin_pannel_breadcrumb/AdminPannelBreadcrumb";
-import AdminPannelLayoutContainer from "../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
-import AlertToast from "../../../../utilities/alertToast/AlertToast";
+import AdminPannelBreadcrumb from "../../../../../../components/admin_pannel_components/common/admin_pannel_breadcrumb/AdminPannelBreadcrumb";
+import AdminPannelLayoutContainer from "../../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
+import AlertToast from "../../../../../../utilities/alertToast/AlertToast";
 import {
   FormButton,
   FormikTextField,
-} from "../../../../utilities/Form/FormField";
-import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
-import { CreateAdminFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
-import toastConfig from "../../../../utilities/toastConfig";
-import ErrorPage from "../../../404";
+} from "../../../../../../utilities/Form/FormField";
+import FormikFormLayout from "../../../../../../utilities/Formik/FormikLayout/FormikFormLayout";
+import { CreateAdminFormValidator } from "../../../../../../utilities/Formik/Validators/AllFormValidators";
+import toastConfig from "../../../../../../utilities/toastConfig";
+import ErrorPage from "../../../../../404";
 
 export default function CreateAdmin() {
   const router = useRouter();

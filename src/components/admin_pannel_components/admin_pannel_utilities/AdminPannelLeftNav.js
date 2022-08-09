@@ -105,9 +105,7 @@ export const SubNav = ({ sub_nav }) => {
     <>
       <NextLink
         href={
-          sub_nav_name === "admin login" ||
-          sub_nav_name === "create admin" ||
-          sub_nav_name === "forgot password"
+          sub_nav_name === "admin login" || sub_nav_name === "forgot password"
             ? `/admin_pannel/authentication/${sub_nav_link}`
             : `/admin_pannel/${userInfo?.user_name}/${userInfo?.user_email}${sub_nav_link}`
         }
