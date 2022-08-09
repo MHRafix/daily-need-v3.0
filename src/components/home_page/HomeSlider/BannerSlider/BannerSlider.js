@@ -3,11 +3,9 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import Banner1 from "../../../../images/banners/slider1.webp";
-import Banner2 from "../../../../images/banners/slider2.webp";
 import SliderArrow from "../../../../utilities/SliderArrow";
 
-export default function BannerSlider() {
+export default function BannerSlider({ all_sliders }) {
   // slider arrows are import from utilities
   const { SampleNextArrow, SamplePrevArrow } = SliderArrow();
 
@@ -62,12 +60,17 @@ export default function BannerSlider() {
   return (
     <div className="banner_slider_wrapper">
       <Slider {...settings}>
-        <div className="slider_banner_wrapper">
-          <Image src={Banner1} alt="first banner" />
-        </div>
-        <div className="slider_banner_wrapper">
-          <Image src={Banner2} alt="first banner" />
-        </div>
+        {all_sliders?.map((slider) => (
+          <div key={slider._id} className="slider_banner_wrapper">
+            {slider?.slider_image && (
+              <Image
+                src={slider?.slider_image}
+                alt="first banner"
+                layout="fill"
+              />
+            )}
+          </div>
+        ))}
       </Slider>
     </div>
   );

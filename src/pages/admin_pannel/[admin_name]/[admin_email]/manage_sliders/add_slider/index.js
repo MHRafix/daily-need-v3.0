@@ -1,12 +1,10 @@
 import Cookie from "js-cookie";
 import React from "react";
-import User from "../../../../../../../models/Users";
 import AdminPannelLayoutContainer from "../../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
-import ManageAllUsersMain from "../../../../../../components/admin_pannel_components/components/manage_users/ManageAllUsersMain";
+import ManageSliderMain from "../../../../../../components/admin_pannel_components/components/manage_sliders/ManageSliderMain";
 import ErrorPage from "../../../../../../pages/404";
-import db from "../../../../../../utilities/database";
 
-export default function ManageAllUsers({ all_users }) {
+export default function AddSliders() {
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -21,29 +19,30 @@ export default function ManageAllUsers({ all_users }) {
   if (!userInfo?.user_admin) {
     return <ErrorPage />;
   }
+
   return (
     <>
       <AdminPannelLayoutContainer
-        title="Manage Users"
-        description="This is manage users of 'Daily Needs Grocery' web application admin pannel."
+        title="Manage Sliders"
+        description="This is manage sliders of 'Daily Needs Grocery' web application admin pannel."
       >
-        <ManageAllUsersMain all_users={all_users} />
+        <ManageSliderMain />
       </AdminPannelLayoutContainer>
     </>
   );
 }
 
-export async function getServerSideProps() {
-  await db.connect();
-  const all_users = await User.find({});
-  await db.disconnect();
+// export async function getServerSideProps() {
+//   await db.connect();
+//   const all_users = await User.find({});
+//   await db.disconnect();
 
-  return {
-    props: {
-      all_users,
-    },
-  };
-}
+//   return {
+//     props: {
+//       all_users,
+//     },
+//   };
+// }
 
 // export async function getServerSideProps() {
 //   // all users

@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { reduceCookie } from "../../../redux/cart_products/action";
 import avatarUploader from "../../Form/avatarUploader";
 import imageUploader from "../imageUploader";
+import sliderImageUploader from "../sliderImageUploader";
 import { reqSender } from "./reqSender";
 
 // add products form validator
@@ -723,7 +724,6 @@ export const AddCategoryFormValidator = () => {
         setToastOn,
         "admin_pannel_api/manage_category/add_category"
       );
-      setCatImg("");
     }
   };
 
@@ -732,6 +732,66 @@ export const AddCategoryFormValidator = () => {
     validationSchema,
     onSubmit,
     setCatImg,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
+// add slider form validator
+export const AddHomeSliderFormValidator = () => {
+  const [sliderImg, setSliderImg] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  // initial vlaue of form
+  const initialValues = {
+    image_name: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchema = Yup.object({
+    image_name: Yup.string().required("Required!"),
+  });
+
+  // on submit function here
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    const { image_name } = values;
+
+    // upload user avatarto cloudinary
+    const { slider_upload_cloudinary } = sliderImageUploader(sliderImg);
+    const slider_image = await slider_upload_cloudinary();
+
+    // make user data obj
+    const slider_data = {
+      image_name,
+      slider_image,
+    };
+
+    if (slider_data) {
+      reqSender(
+        slider_data,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "admin_pannel_api/manage_slider/add_home_slider"
+      );
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    setSliderImg,
     processing,
     toastText,
     toastType,
