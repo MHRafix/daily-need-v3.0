@@ -111,6 +111,8 @@ export const FormikTextField = ({ form_label, type, name }) => {
     margin: "4px 0px",
     fontSize: "15px",
     color: "#333",
+    textDecoration: "none",
+    fontWeight: 400,
   };
 
   return (
