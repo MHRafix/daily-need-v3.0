@@ -45,10 +45,7 @@ export default function CheckoutForm({ processing }) {
 
       <FormikSelectField
         form_label="payment method"
-        options={[
-          { id: 1, name: "cash-on" },
-          { id: 2, name: "stripe card" },
-        ]}
+        options={[{ category: "cash-on" }, { category: "stripe card" }]}
         name="payment_method"
       />
 
