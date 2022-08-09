@@ -57,18 +57,22 @@ export default function BannerSlider({ all_sliders }) {
       },
     ],
   };
+
+  console.log(all_sliders);
   return (
     <div className="banner_slider_wrapper">
       <Slider {...settings}>
-        {all_sliders?.map((slider) => (
-          <div key={slider._id} className="slider_banner_wrapper">
-            {slider?.slider_image && (
-              <Image
-                src={slider?.slider_image}
-                alt="first banner"
-                layout="fill"
-              />
-            )}
+        {all_sliders.map((slider) => (
+          <div key={slider._id} className="slider_banner_wrapper h-96 w-full">
+            {/* {slider.slider_image && ( */}
+            <Image
+              priority
+              src={slider?.slider_image}
+              alt={slider?.image_name}
+              layout="fill"
+              objectFit="contain"
+            />
+            {/* )} */}
           </div>
         ))}
       </Slider>
