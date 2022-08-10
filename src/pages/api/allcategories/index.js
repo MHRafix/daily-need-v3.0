@@ -9,7 +9,12 @@ handler.get(async (req, res) => {
   await db.connect();
   const categories = await Category.find({});
   await db.disconnect();
-  res.send(categories);
+
+  if (categories.length) {
+    res.status(200).send(categories);
+  } else {
+    res.send({ error: "Opps, something went wrong!" });
+  }
 });
 
 // function export here

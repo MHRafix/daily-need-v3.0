@@ -21,8 +21,9 @@ export default function ListProductCard({ product_data }) {
   } = product_data;
 
   const dispatch = useDispatch();
-  const { regular_price, sale_price } = prices;
   const [qty, setQty] = useState(1);
+  const { description, weight } = additional_info;
+  const { regular_price, sale_price } = prices;
 
   // toast state here
   const [toastOn, setToastOn] = useState(false);
@@ -89,7 +90,9 @@ export default function ListProductCard({ product_data }) {
           <h5 id="stock_status_list">
             <BsCheckCircleFill />
             &nbsp;&nbsp;<strong id="stronger">{product_status}</strong>&nbsp;
-            <span style={{ color: "#666" }}> - 1 kg</span>
+            <span style={{ color: "#666" }}>
+              {weight > 0 ? `- ${weight} kg` : null}
+            </span>
           </h5>
           <div id="product_price">
             <span id={sale_price !== 0 ? "regular_price" : "sale_price"}>
@@ -98,9 +101,7 @@ export default function ListProductCard({ product_data }) {
 
             {sale_price !== 0 && <span id="sale_price">৳ {sale_price}</span>}
           </div>
-          <div className="!my-2 text-black3">
-            {additional_info?.description.slice(0, 170)}
-          </div>
+          <div className="!my-2 text-black3">{description.slice(0, 170)}</div>
           <div id="add_to_cart_area_list">
             <button
               id="qty_controller"

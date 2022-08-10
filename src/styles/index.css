@@ -130,6 +130,10 @@
     @apply text-center cursor-pointer;
   }
 
+  .brand_card_wrapper {
+    @apply text-center cursor-pointer;
+  }
+
   .catImg {
     @apply !mb-1.5 bg-white shadow-md p-1 rounded-full m-5;
   }
@@ -203,7 +207,7 @@
   }
 
   #product_title {
-    @apply text-sm my-1 cursor-pointer font-bold text-info_color tracking-wide capitalize;
+    @apply text-sm my-1 cursor-pointer font-bold text-info_color tracking-wide !capitalize;
   }
 
   #stock_status {
@@ -288,7 +292,7 @@
   }
 
   .product_title {
-    @apply text-medium my-5;
+    @apply text-medium my-5 !capitalize;
   }
 
   #add_to_cart_action {
@@ -1236,5 +1240,9 @@
     width: 40px;
     height: 40px;
     border-radius: 100px;
+  }
+
+  .brand_image {
+    filter: grayscale(80%);
   }
 }

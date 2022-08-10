@@ -9,7 +9,11 @@ handler.get(async (req, res) => {
   await db.connect();
   const sliders = await HomeSlider.find({});
   await db.disconnect();
-  res.send(sliders);
+  if (sliders.length) {
+    res.status(200).send(sliders);
+  } else {
+    res.send({ error: "Opps, something went wrong!" });
+  }
 });
 
 // function export here

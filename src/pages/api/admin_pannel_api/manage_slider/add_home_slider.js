@@ -16,7 +16,11 @@ handler.post(async (req, res) => {
   await db.disconnect();
 
   if (slider) {
-    res.status(201).send({ success: "Image successfully added to slider!" });
+    res
+      .status(201)
+      .send({ success: "Image successfully added to home slider!" });
+  } else {
+    res.send({ error: "Opps, something went wrong!" });
   }
 });
 

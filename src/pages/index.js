@@ -1,11 +1,17 @@
 import AllProducts from "../../models/AllProducts";
+import BrandSlider from "../../models/BrandSlider";
 import Category from "../../models/Category";
 import HomeSlider from "../../models/HomeSlider";
 import LayoutContainer from "../components/commons/layout/LayoutContainer";
 import HomeMain from "../components/home_page/HomeMain";
 import db from "../utilities/database";
 
-export default function Home({ products, all_categories, all_sliders }) {
+export default function Home({
+  products,
+  all_categories,
+  all_sliders,
+  all_brands,
+}) {
   return (
     <>
       <LayoutContainer
@@ -16,6 +22,7 @@ export default function Home({ products, all_categories, all_sliders }) {
           sale_products={products}
           all_categories={all_categories}
           all_sliders={all_sliders}
+          all_brands={all_brands}
         />
       </LayoutContainer>
     </>
@@ -33,12 +40,14 @@ export async function getServerSideProps() {
   const products = await AllProducts.find({}).limit(8);
   const all_categories = await Category.find({});
   const all_sliders = await HomeSlider.find({});
+  const all_brands = await BrandSlider.find({});
   await db.disconnect();
   return {
     props: {
       products: products.map(db.convertDocToObj),
       all_categories,
       all_sliders,
+      all_brands,
     },
   };
 }
@@ -47,9 +56,11 @@ export async function getServerSideProps() {
 //   const res = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
 //   const categroies = await fetch(`${process.env.ROOT_URI}/api/allcategories`);
 //   const sliders = await fetch(`${process.env.ROOT_URI}/api/allsliders`);
+//   const brands = await fetch(`${process.env.ROOT_URI}/api/allbrands`);
 //   const products = await res.json();
 //   const all_categories = await categroies.json();
 //   const all_sliders = await sliders.json();
+//   const all_brands = await brands.json();
 
-//   return { props: { products, all_categories, all_sliders } };
+//   return { props: { products, all_categories, all_sliders, all_brands } };
 // }

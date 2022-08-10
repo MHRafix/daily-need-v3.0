@@ -799,3 +799,61 @@ export const AddHomeSliderFormValidator = () => {
     setToastOn,
   };
 };
+export const AddBrandSliderFormValidator = () => {
+  const [brandImg, setBrandImg] = useState("");
+  const [processingBrand, setProcessingBrand] = useState(false);
+  const [toastTextBrand, setToastTextBrand] = useState("");
+  const [toastTypeBrand, setToastTypeBrand] = useState("");
+  const [toastOnBrand, setToastOnBrand] = useState(false);
+
+  // initial vlaue of form
+  const initialValuesBrand = {
+    brand_name: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchemaBrand = Yup.object({
+    brand_name: Yup.string().required("Required!"),
+  });
+
+  // on submit function here
+  const onSubmitBrand = async (values, { resetForm }) => {
+    setProcessingBrand(true);
+
+    const { brand_name } = values;
+
+    // upload user avatarto cloudinary
+    const { slider_upload_cloudinary } = sliderImageUploader(brandImg);
+    const brand_image = await slider_upload_cloudinary();
+
+    // make user data obj
+    const brand_data = {
+      brand_name,
+      brand_image,
+    };
+
+    if (brand_data) {
+      reqSender(
+        brand_data,
+        resetForm,
+        setProcessingBrand,
+        setToastTextBrand,
+        setToastTypeBrand,
+        setToastOnBrand,
+        "admin_pannel_api/manage_slider/add_brand_slider"
+      );
+    }
+  };
+
+  return {
+    initialValuesBrand,
+    validationSchemaBrand,
+    onSubmitBrand,
+    setBrandImg,
+    processingBrand,
+    toastTextBrand,
+    toastTypeBrand,
+    toastOnBrand,
+    setToastOnBrand,
+  };
+};

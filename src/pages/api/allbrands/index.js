@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import AllProducts from "../../../../models/AllProducts";
+import BrandSlider from "../../../../models/BrandSlider";
 import db from "../../../utilities/database";
 
 // products getting function here
@@ -7,11 +7,10 @@ const handler = nc();
 
 handler.get(async (req, res) => {
   await db.connect();
-  const products = await AllProducts.find({});
+  const brands = await BrandSlider.find({});
   await db.disconnect();
-
-  if (products.length) {
-    res.status(200).send(products);
+  if (brands.length) {
+    res.status(200).send(brands);
   } else {
     res.send({ error: "Opps, something went wrong!" });
   }

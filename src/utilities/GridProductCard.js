@@ -18,9 +18,12 @@ export default function GridProductCard({ product_data }) {
     prices,
     stock_available,
     product_status,
+    additional_info,
   } = product_data;
+
   const dispatch = useDispatch();
   const { regular_price, sale_price } = prices;
+  const { weight } = additional_info;
 
   const [qty, setQty] = useState(1);
 
@@ -90,7 +93,9 @@ export default function GridProductCard({ product_data }) {
             <h5 id="stock_status">
               <BsCheckCircleFill />
               &nbsp;&nbsp;<strong id="stronger">{product_status}</strong>&nbsp;
-              <span style={{ color: "#666" }}> - 1 kg</span>
+              <span style={{ color: "#666" }}>
+                {weight > 0 ? `- ${weight} kg` : null}
+              </span>
             </h5>
           ) : (
             <h5 id="stock_status_out" className="!text-red">

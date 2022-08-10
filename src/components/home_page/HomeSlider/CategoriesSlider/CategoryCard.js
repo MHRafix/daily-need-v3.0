@@ -6,7 +6,7 @@ export default function CategoryCard({ category_data, all_products }) {
   const { cat_name, cat_image } = category_data;
 
   const matched_products = all_products.filter(
-    (product) => product.category === cat_name
+    (product) => product.category == cat_name
   );
 
   return (

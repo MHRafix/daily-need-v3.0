@@ -9,7 +9,10 @@ import {
   FormikTextField,
 } from "../../../../utilities/Form/FormField";
 import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
-import { AddHomeSliderFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
+import {
+  AddBrandSliderFormValidator,
+  AddHomeSliderFormValidator,
+} from "../../../../utilities/Formik/Validators/AllFormValidators";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageSliderContent() {
@@ -25,24 +28,45 @@ export default function ManageSliderContent() {
     setToastOn,
   } = AddHomeSliderFormValidator();
 
+  const {
+    initialValuesBrand,
+    validationSchemaBrand,
+    onSubmitBrand,
+    setBrandImg,
+    processingBrand,
+    toastTextBrand,
+    toastTypeBrand,
+    toastOnBrand,
+    setToastOnBrand,
+  } = AddBrandSliderFormValidator();
+
   // handle close toast here
   const handleRemoveToast = () => {
     setToastOn(false);
+    setToastOnBrand(false);
   };
 
   // auto close toast after ther 5000ms delay
   if (toastOn) {
     setTimeout(() => {
-      setToastOn(false);
+      if (toastOn) {
+        setToastOn(false);
+      } else {
+        setToastOnBrand(false);
+      }
     }, 5000);
   }
 
   // toast setting configuration here
   const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
+    toastStyle: toastType || toastTypeBrand,
+    alertText: toastText || toastTextBrand,
     toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
+      toastType || toastTypeBrand === "error_toast" ? (
+        <BiErrorCircle />
+      ) : (
+        <MdCloudDone />
+      ),
 
     handleRemoveToast: handleRemoveToast,
   };
@@ -51,9 +75,10 @@ export default function ManageSliderContent() {
     <>
       {/* alert toast here  */}
       {toastOn && <AlertToast toast_config={toast_config} />}
-      {/* orders show on table */}
+      {toastOnBrand && <AlertToast toast_config={toast_config} />}
+      {/* add home slider image  */}
       <div className="dashboard_row_wrapper">
-        <DashboardContentLayout item_name="add slider image">
+        <DashboardContentLayout item_name="add home slider image">
           <FormikFormLayout
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -75,8 +100,39 @@ export default function ManageSliderContent() {
               <br />
               <FormButton
                 type="submit"
-                btn_name="Add Image"
+                btn_name="Add Slider Image"
                 processing={processing}
+              />
+            </Form>
+          </FormikFormLayout>
+        </DashboardContentLayout>
+      </div>
+      {/* add brand slider image  */}
+      <div className="dashboard_row_wrapper">
+        <DashboardContentLayout item_name="add brand image">
+          <FormikFormLayout
+            initialValues={initialValuesBrand}
+            validationSchema={validationSchemaBrand}
+            onSubmit={onSubmitBrand}
+          >
+            <Form>
+              <FormikTextField
+                form_label="brand name"
+                type="text"
+                name="brand_name"
+              />
+              <FormikFileField
+                form_label="brand image"
+                setState={setBrandImg}
+                type="file"
+                name="brand_image"
+                required={true}
+              />
+              <br />
+              <FormButton
+                type="submit"
+                btn_name="Add Brand Image"
+                processing={processingBrand}
               />
             </Form>
           </FormikFormLayout>
