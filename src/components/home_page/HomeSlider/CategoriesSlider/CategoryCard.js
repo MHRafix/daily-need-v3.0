@@ -3,9 +3,9 @@ import NextLink from "next/link";
 import React from "react";
 
 export default function CategoryCard({ category_data, all_products }) {
-  const matched_products = all_products?.filter((product) => {
-    product?.category === category_data?.category;
-  });
+  const matched_products = all_products?.filter(
+    (product) => product?.category === category_data?.category
+  );
 
   return (
     <NextLink href={`/categories/${category_data?.category}`} passHref>
