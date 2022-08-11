@@ -2,7 +2,7 @@ import { useState } from "react";
 import ShopProductArea from "./ShopProductArea";
 import ShopSidebar from "./ShopSidebar";
 
-export default function ShopArea({ products_data }) {
+export default function ShopArea({ all_products }) {
   const filtered_price = {
     minPrice: 5,
     maxPrice: 10000,
@@ -14,7 +14,7 @@ export default function ShopArea({ products_data }) {
   const [maxRange, setMaxRange] = useState(filtered_price?.maxPrice);
   const priceRangeData = { setMinRange, setMaxRange };
 
-  const filtered_data = products_data.filter(
+  const filtered_data = all_products?.filter(
     (product) =>
       product?.prices?.regular_price >= minRange &&
       product?.prices?.regular_price <= maxRange

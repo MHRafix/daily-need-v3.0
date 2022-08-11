@@ -56,7 +56,7 @@ export default function AdditonalInfo({ additionalInfo }) {
               <div className="border-r-1 border-slate-300 h-15 px-1 flex items-center">
                 Weight
               </div>
-              <div className="h-15 px-1 flex items-center">{weight}</div>
+              <div className="h-15 px-1 flex items-center">{weight} kg</div>
             </div>
           </div>
         )}

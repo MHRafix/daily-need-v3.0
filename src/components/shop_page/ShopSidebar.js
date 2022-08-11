@@ -1,38 +1,30 @@
-import {
-  categories_data,
-  stock_data,
-  type_data,
-} from "../../fake_data/all_fakedata";
+import { useSelector } from "react-redux";
+import { stock_data, type_data } from "../../fake_data/all_fakedata";
 import FilterCard from "../../utilities/FilterCard";
+import FilterCategoryCard from "../../utilities/FilterCategoryCard";
 import MultiRangeSlider from "../../utilities/MultiRangeSlider";
 import SidebarPartContainer from "../commons/layout/SidebarPartContainer";
 
 export default function ShopSidebar({ priceRangeData }) {
   const { setMinRange, setMaxRange } = priceRangeData;
+  const all_categories = useSelector((state) => state.products.all_categories);
 
   return (
     <div className="sidebar_wrapper">
       <SidebarPartContainer filterer_name="filter by price">
         <MultiRangeSlider
-          min={5}
+          min={1}
           max={10000}
           onChange={({ min, max }) => {
             setMinRange(min);
             setMaxRange(max);
           }}
         />
-        {/* <button
-          onClick={handleSetCookie}
-          id="cart_btn"
-          className="!mx-0 !p-extra_padding4 !rounded-sm !text-light"
-        >
-          Filter Now
-        </button> */}
       </SidebarPartContainer>
 
       <SidebarPartContainer filterer_name="product categories">
-        {categories_data.map((category) => (
-          <FilterCard
+        {all_categories?.map((category) => (
+          <FilterCategoryCard
             key={category._id}
             filter_type="categories"
             data={category}
