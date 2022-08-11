@@ -5,11 +5,11 @@ import React from "react";
 export default function CategoryCard({ category_data, all_products }) {
   const { cat_name, cat_image } = category_data;
 
-  const matched_products = all_products.filter(
-    (product) => product.category === cat_name
+  const matched_products = all_products?.filter(
+    (product) => product?.category.toLowerCase() === cat_name.toLowerCase()
   );
 
-  console.log(cat_name, matched_products);
+  console.log(matched_products);
 
   return (
     <NextLink href={`/categories/${cat_name}`} passHref>
