@@ -14,8 +14,8 @@ export default function ShopSidebar({ priceRangeData }) {
     <div className="sidebar_wrapper">
       <SidebarPartContainer filterer_name="filter by price">
         <MultiRangeSlider
-          min={0}
-          max={1000}
+          min={5}
+          max={10000}
           onChange={({ min, max }) => {
             setMinRange(min);
             setMaxRange(max);

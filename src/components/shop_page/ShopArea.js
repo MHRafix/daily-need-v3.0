@@ -1,11 +1,12 @@
-import Cookie from "js-cookie";
 import { useState } from "react";
 import ShopProductArea from "./ShopProductArea";
 import ShopSidebar from "./ShopSidebar";
 
 export default function ShopArea({ products_data }) {
-  const filtered_price =
-    Cookie.get("price_range") && JSON.parse(Cookie.get("price_range"));
+  const filtered_price = {
+    minPrice: 5,
+    maxPrice: 10000,
+  };
 
   const [sidebaron, setSidebaron] = useState(false);
 
