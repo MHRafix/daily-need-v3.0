@@ -22,7 +22,7 @@ export default function CategoryCard({ category_data, all_products }) {
         <div className="cat_det">
           <h1 className="cat_name capitalize">{category_data?.category}</h1>
           <p className="cat_items_qty">
-            {matched_products?.length} &nbsp; Items &nbsp; Items
+            {matched_products?.length} &nbsp; Items
           </p>
         </div>
       </div>
