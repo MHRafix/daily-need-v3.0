@@ -58,8 +58,6 @@ export default function CategorySlider({ all_categories, all_products }) {
     ],
   };
 
-  console.log("all products here", all_products);
-
   return (
     <div
       className="category_slider_wrapper"

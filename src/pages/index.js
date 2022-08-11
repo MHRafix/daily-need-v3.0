@@ -19,7 +19,7 @@ export default function Home({
         description="This is home page of 'Daily Needs Grocery'"
       >
         <HomeMain
-          sale_products={products}
+          all_products={products}
           all_categories={all_categories}
           all_sliders={all_sliders}
           all_brands={all_brands}
@@ -37,7 +37,7 @@ export default function Home({
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await AllProducts.find({}).limit(8);
+  const products = await AllProducts.find({});
   const all_categories = await Category.find({});
   const all_sliders = await HomeSlider.find({});
   const all_brands = await BrandSlider.find({});
