@@ -4,11 +4,13 @@ import React from "react";
 
 export default function CategoryCard({ category_data, all_products }) {
   const matched_products = all_products?.filter(
-    (product) => product?.category === category_data?.cat_name
+    (product) => product?.category === category_data?.category
   );
 
+  console.log(all_products);
+
   return (
-    <NextLink href={`/categories/${category_data?.cat_name}`} passHref>
+    <NextLink href={`/categories/${category_data?.category}`} passHref>
       <div className="category_card_wrapper">
         <div className="category_image">
           <Image
@@ -20,9 +22,15 @@ export default function CategoryCard({ category_data, all_products }) {
           />
         </div>
         <div className="cat_det">
-          <h1 className="cat_name capitalize">{category_data?.cat_name}</h1>
+          <h1 className="cat_name capitalize">{category_data?.category}</h1>
           <p className="cat_items_qty">
             {matched_products?.length} &nbsp; Items
+            {
+              all_products?.filter(
+                (product) => product?.category === category_data?.category
+              )?.length
+            }{" "}
+            &nbsp; Items
           </p>
         </div>
       </div>

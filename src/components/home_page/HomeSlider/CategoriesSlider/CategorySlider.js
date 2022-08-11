@@ -2,10 +2,11 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import { uuid } from "uuidv4";
 import SliderArrow from "../../../../utilities/SliderArrow";
 import CategoryCard from "./CategoryCard";
 
-export default function CategorySlider({ all_categories, sale_products }) {
+export default function CategorySlider({ all_categories, all_products }) {
   // slider arrows are import from utilities
   const { SampleNextArrow, SamplePrevArrow } = SliderArrow();
   const settings = {
@@ -56,6 +57,7 @@ export default function CategorySlider({ all_categories, sale_products }) {
       },
     ],
   };
+
   return (
     <div
       className="category_slider_wrapper"
@@ -64,9 +66,9 @@ export default function CategorySlider({ all_categories, sale_products }) {
       <Slider {...settings}>
         {all_categories.map((category) => (
           <CategoryCard
-            key={category._id}
+            key={uuid()}
             category_data={category}
-            all_products={sale_products}
+            all_products={all_products}
           />
         ))}
       </Slider>

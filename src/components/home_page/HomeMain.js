@@ -16,7 +16,7 @@ export default function HomeMain({
     <>
       <CategorySlider
         all_categories={all_categories}
-        sale_products={sale_products}
+        all_products={sale_products}
       />
       <BannerSlider all_sliders={all_sliders} />
       <SaleProductsMain sale_products_data={sale_products} />
