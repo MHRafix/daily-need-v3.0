@@ -207,7 +207,7 @@
   }
 
   #product_title {
-    @apply text-sm my-1 cursor-pointer font-bold text-info_color tracking-wide !capitalize;
+    @apply text-sm mb-1 mt-4 cursor-pointer font-bold text-info_color tracking-wide !capitalize;
   }
 
   #stock_status {

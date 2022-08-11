@@ -1,11 +1,20 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import AllProducts from "../../../models/AllProducts";
+import Category from "../../../models/Category";
 import LayoutContainer from "../../components/commons/layout/LayoutContainer";
 import FilteredShopMain from "../../components/filter_shop/FilteredShopMain";
+import { storeAllCategories } from "../../redux/all_data/action";
 import db from "../../utilities/database";
 
-export default function CategoryShop({ matched_products }) {
+export default function CategoryShop({ matched_products, all_categories }) {
+  // categories add to redux
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(storeAllCategories(all_categories));
+  });
+
   const router = useRouter();
   const { filter_slug } = router.query;
   const bread_string = `shop / categories / ${filter_slug}`;
@@ -33,13 +42,15 @@ export default function CategoryShop({ matched_products }) {
 //   // req for all prodcuts
 //   const res = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
 //   const products = await res.json();
+//   const categories = await fetch(`${process.env.ROOT_URI}/api/allcategories`);
+//   const all_categories = await categories.json();
 
 //   // filter category products which is selected
 //   const matched_products = products.filter(
 //     (product) => product.category === filter_slug
 //   );
 //   // return the filtered products here
-//   return { props: { matched_products } };
+//   return { props: { matched_products, all_categories } };
 // }
 
 export async function getServerSideProps(context) {
@@ -50,10 +61,12 @@ export async function getServerSideProps(context) {
   const matched_products = await AllProducts.find({
     category: filter_slug,
   }).lean();
+  const all_categories = await Category.find({});
   await db.disconnect();
   return {
     props: {
-      matched_products: matched_products.map(db.convertDocToObj),
+      matched_products,
+      all_categories,
     },
   };
 }

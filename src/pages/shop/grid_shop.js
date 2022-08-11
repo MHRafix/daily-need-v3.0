@@ -8,8 +8,8 @@ import { storeAllCategories } from "../../redux/all_data/action";
 import db from "../../utilities/database";
 
 export default function GridShopPage({ all_products, all_categories }) {
+  // categories add to redux
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(storeAllCategories(all_categories));
   });

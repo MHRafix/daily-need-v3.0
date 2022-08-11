@@ -98,3 +98,7 @@ table th {
   justify-content: center;
   align-items: center;
 }
+
+.image_wrapper {
+  padding: 20px;
+}

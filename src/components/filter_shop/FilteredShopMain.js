@@ -6,7 +6,7 @@ export default function FilteredShopMain({ bread_string, filtered_products }) {
   return (
     <>
       <Breadcrumb bread_nav={bread_string} />
-      <ShopArea products_data={filtered_products} />
+      <ShopArea all_products={filtered_products} />
     </>
   );
 }

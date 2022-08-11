@@ -1,11 +1,20 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import AllProducts from "../../../models/AllProducts";
+import Category from "../../../models/Category";
 import LayoutContainer from "../../components/commons/layout/LayoutContainer";
 import SearchShopMain from "../../components/search_shop/SearchShopMain";
+import { storeAllCategories } from "../../redux/all_data/action";
 import db from "../../utilities/database";
 
-export default function SearchProduct({ matched_products }) {
+export default function SearchProduct({ matched_products, all_categories }) {
+  // categories add to redux
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(storeAllCategories(all_categories));
+  });
+
   const router = useRouter();
   const { search_slug } = router.query;
   const bread_string = `Categories / ${search_slug}`;
@@ -52,10 +61,14 @@ export async function getServerSideProps(context) {
   const matched_products = products.filter((product) =>
     product.title.toLowerCase().includes(search_slug.toLowerCase())
   );
+
+  const all_categories = await Category.find({});
+
   await db.disconnect();
   return {
     props: {
-      matched_products: matched_products.map(db.convertDocToObj),
+      matched_products,
+      all_categories,
     },
   };
 }

@@ -9,7 +9,9 @@ export default function LayoutContainer({ children, title, description }) {
   return (
     <div className="page_main_wrapper">
       <Head>
-        <title>{title ? `Daily Needs - ${title}` : "Daily Needs"}</title>
+        <title className="capitalize">
+          {title ? `Daily Needs - ${title}` : "Daily Needs"}
+        </title>
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
