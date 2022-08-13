@@ -38,10 +38,14 @@ export default function CartItemCard({ product }) {
               {product?.title}
             </h3>
           </NextLink>
-          <span className="text-thin font-light tracking-wider">
-            - {product?.additional_info?.weight} kg
-          </span>
-          <br />
+          {product?.additional_info?.weight > 0 && (
+            <>
+              <span className="text-thin font-light tracking-wider">
+                - {product?.additional_info?.weight} kg
+              </span>
+              <br />
+            </>
+          )}
           <span className="font-semibold text-black my-2 tracking-wider text-sm">
             {product?.quantity} x ৳
             {product?.prices?.sale_price !== 0

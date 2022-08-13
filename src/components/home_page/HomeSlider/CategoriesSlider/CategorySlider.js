@@ -2,7 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { uuid } from "uuidv4";
 import SliderArrow from "../../../../utilities/SliderArrow";
 import CategoryCard from "./CategoryCard";
 
@@ -66,7 +65,7 @@ export default function CategorySlider({ all_categories, all_products }) {
       <Slider {...settings}>
         {all_categories.map((category) => (
           <CategoryCard
-            key={uuid()}
+            key={category._id}
             category_data={category}
             all_products={all_products}
           />

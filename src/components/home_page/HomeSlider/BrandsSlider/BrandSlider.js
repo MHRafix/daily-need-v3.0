@@ -2,7 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { uuid } from "uuidv4";
 import SliderArrow from "../../../../utilities/SliderArrow";
 import BrandCard from "./BrandCard";
 
@@ -61,7 +60,7 @@ export default function BrandSlider({ all_brands }) {
     <div className="category_slider_wrapper mt-16">
       <Slider {...settings}>
         {all_brands.map((brand) => (
-          <BrandCard key={uuid()} brand_data={brand} />
+          <BrandCard key={brand._id} brand_data={brand} />
         ))}
       </Slider>
     </div>

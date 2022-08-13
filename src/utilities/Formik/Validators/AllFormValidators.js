@@ -109,6 +109,55 @@ export const AddProductsFormValidator = () => {
   };
 };
 
+// add review and rating form validator
+export const AddReviewRatingFormValidator = () => {
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  const userInfo =
+    Cookie.get("user_information") &&
+    JSON.parse(Cookie.get("user_information"));
+
+  const initialValues = {
+    customer_name: userInfo?.user_name,
+    rating: 4.5,
+    review: "",
+  };
+
+  const validationSchema = Yup.object({
+    customer_name: Yup.string().required("Required!"),
+    rating: Yup.number().required("Required!"),
+    review: Yup.string().required("Required!"),
+  });
+
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    reqSender(
+      values,
+      resetForm,
+      setProcessing,
+      setToastText,
+      setToastType,
+      setToastOn,
+      "manage_reviews/add_reviews"
+    );
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
 // login form validator
 export const LoginFormValidator = () => {
   const [processing, setProcessing] = useState(false);
@@ -799,6 +848,8 @@ export const AddHomeSliderFormValidator = () => {
     setToastOn,
   };
 };
+
+// add brand slider image form validator
 export const AddBrandSliderFormValidator = () => {
   const [brandImg, setBrandImg] = useState("");
   const [processingBrand, setProcessingBrand] = useState(false);

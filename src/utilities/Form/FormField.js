@@ -123,7 +123,7 @@ export const FormikTextField = ({ form_label, type, name }) => {
         <span id="required_sign">*</span>
       </label>
       <br />
-      <Field type={type} name={name} id={name} style={style} />
+      <Field as={type} type={type} name={name} id={name} style={style} />
       &nbsp;
       <span className="text-red-500 text-light">
         <ErrorMessage name={name} />

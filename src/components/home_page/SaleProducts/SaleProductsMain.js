@@ -6,7 +6,7 @@ export default function SaleProductsMain({ sale_products_data }) {
     <div className="sale_products_wrapper">
       <div className="section_title_wrapper">
         <SectionTitle
-          section_title="top savers today"
+          section_title="latest products"
           percentage="20%"
           link_href="/product_type/on-sale"
         />
