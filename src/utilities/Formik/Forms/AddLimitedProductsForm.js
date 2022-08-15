@@ -8,7 +8,7 @@ import {
 } from "../../Form/FormField";
 import FormFieldFlexLayout from "../FormikLayout/FormFieldFlexLayout";
 
-export default function AddProductsForm({
+export default function AddLimitedProductsForm({
   setThumbnail,
   setBigThumbnail,
   processing,
@@ -16,9 +16,14 @@ export default function AddProductsForm({
 }) {
   return (
     <Form>
+      <FormikTextField form_label="product title" type="text" name="title" />
       <FormFieldFlexLayout>
-        <FormikTextField form_label="product title" type="text" name="title" />
         <FormikTextField form_label="product slug" type="text" name="slug" />
+        <FormikTextField
+          form_label="offer end time"
+          type="date"
+          name="offer_end"
+        />
       </FormFieldFlexLayout>
 
       <FormFieldFlexLayout>

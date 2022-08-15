@@ -53,7 +53,7 @@ export const PRODUCTS_TABLE_COLUMNS = [
   },
   {
     Header: "Action",
-    // accessor: "product_type",
+    accessor: "_id",
   },
 ];
 
@@ -187,6 +187,47 @@ export const ALL_USERS_TABLE_COLUMNS = [
   {
     Header: "User Role",
     accessor: "user_admin",
+  },
+  {
+    Header: "Action",
+    accessor: "_id",
+  },
+];
+
+// limited products table header column
+export const LIMITED_PRODUCTS_TABLE_COLUMNS = [
+  {
+    Header: "Product",
+    accessor: "title",
+  },
+  {
+    Header: "Image",
+    accessor: "thumbnail",
+  },
+  {
+    Header: "Category",
+    accessor: "category",
+  },
+  {
+    Header: "Rest Time",
+    accessor: "offer_end",
+  },
+  {
+    Header: "Sale Price",
+    accessor: "prices.sale_price",
+  },
+  {
+    Header: "Available",
+    accessor: "stock_available",
+  },
+  {
+    Header: "Status",
+    accessor: "product_status",
+  },
+
+  {
+    Header: "Type",
+    accessor: "product_type",
   },
   {
     Header: "Action",

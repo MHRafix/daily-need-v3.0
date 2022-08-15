@@ -1,7 +1,5 @@
 import { Form } from "formik";
 import React, { useState } from "react";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdCloudDone } from "react-icons/md";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import {
   FormButton,
@@ -17,6 +15,7 @@ import {
   CATEGORY_PRODUCTS_TABLE_COLUMNS,
   PRODUCTS_TABLE_COLUMNS,
 } from "../../../../utilities/React_Table/TableColumns";
+import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageCatgoryContent({ all_products, all_categories }) {
@@ -32,27 +31,8 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
     setToastOn,
   } = AddCategoryFormValidator();
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 5000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 5000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon:
-      toastType === "error_toast" ? <BiErrorCircle /> : <MdCloudDone />,
-
-    handleRemoveToast: handleRemoveToast,
-  };
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   // handle modal and modal data
   const [modal, setModal] = useState(false);

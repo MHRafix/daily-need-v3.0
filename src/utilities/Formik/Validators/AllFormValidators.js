@@ -11,153 +11,6 @@ import imageUploader from "../imageUploader";
 import sliderImageUploader from "../sliderImageUploader";
 import { reqSender } from "./reqSender";
 
-// add products form validator
-export const AddProductsFormValidator = () => {
-  const [thumbnail, setThumbnail] = useState("");
-  const [bigThumbnail, setBigThumbnail] = useState("");
-  const [processing, setProcessing] = useState(false);
-  const [toastText, setToastText] = useState("false");
-  const [toastType, setToastType] = useState("");
-  const [toastOn, setToastOn] = useState(false);
-
-  // initial vlaue of form
-  const initialValues = {
-    title: "",
-    slug: "",
-    category: "fruits",
-    regular_price: 10,
-    sale_price: 0,
-    stock_available: 5,
-    description: "",
-    weight: 1,
-    tags: "",
-  };
-
-  // validation schema using formik yup
-  const validationSchema = Yup.object({
-    title: Yup.string().required("Required! "),
-    slug: Yup.string().required("Required! "),
-    regular_price: Yup.number().required("Required!"),
-    sale_price: Yup.number().required("Required!"),
-    stock_available: Yup.string().required("Required!"),
-    description: Yup.string().required("Required!"),
-    weight: Yup.string().required("Required!"),
-    tags: Yup.string().required("Required!"),
-  });
-
-  // on submit function here
-  const onSubmit = async (values, { resetForm }) => {
-    setProcessing(true);
-
-    // destreucture values here
-    const {
-      title,
-      slug,
-      regular_price,
-      sale_price,
-      description,
-      weight,
-      tags,
-      stock_available,
-      category,
-    } = values;
-
-    // avatar uploader hook import here
-    const { image_upload_cloudinary } = imageUploader(thumbnail, bigThumbnail);
-    const { small_thumbnail, big_thumbnail } = await image_upload_cloudinary();
-
-    // make product data here
-    const products_data = {
-      title,
-      slug,
-      thumbnail: small_thumbnail,
-      thumbnail_big: big_thumbnail,
-      category,
-      prices: { regular_price, sale_price },
-      reviews_ratings: [{ rating: 5, review: "Recomended for every one" }],
-      stock_available,
-      sold_quantity: 0,
-      additional_info: { description, weight, tags },
-      product_status: stock_available > 0 ? "in-stock" : "stock-out",
-      product_type: sale_price > 0 ? "on-sale" : "fixed-sale",
-    };
-
-    if (products_data) {
-      reqSender(
-        products_data,
-        resetForm,
-        setProcessing,
-        setToastText,
-        setToastType,
-        setToastOn,
-        "add_products"
-      );
-    }
-  };
-
-  return {
-    initialValues,
-    validationSchema,
-    onSubmit,
-    setThumbnail,
-    setBigThumbnail,
-    processing,
-    toastText,
-    toastType,
-    toastOn,
-    setToastOn,
-  };
-};
-
-// add review and rating form validator
-export const AddReviewRatingFormValidator = () => {
-  const [processing, setProcessing] = useState(false);
-  const [toastText, setToastText] = useState("");
-  const [toastType, setToastType] = useState("");
-  const [toastOn, setToastOn] = useState(false);
-
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
-
-  const initialValues = {
-    customer_name: userInfo?.user_name,
-    rating: 4.5,
-    review: "",
-  };
-
-  const validationSchema = Yup.object({
-    customer_name: Yup.string().required("Required!"),
-    rating: Yup.number().required("Required!"),
-    review: Yup.string().required("Required!"),
-  });
-
-  const onSubmit = async (values, { resetForm }) => {
-    setProcessing(true);
-
-    reqSender(
-      values,
-      resetForm,
-      setProcessing,
-      setToastText,
-      setToastType,
-      setToastOn,
-      "manage_reviews/add_reviews"
-    );
-  };
-
-  return {
-    initialValues,
-    validationSchema,
-    onSubmit,
-    processing,
-    toastText,
-    toastType,
-    toastOn,
-    setToastOn,
-  };
-};
-
 // login form validator
 export const LoginFormValidator = () => {
   const [processing, setProcessing] = useState(false);
@@ -571,6 +424,285 @@ export const PaymentFormValidator = (clientSecret) => {
  * admin login validators here
  *
  */
+
+// add products form validator
+export const AddProductsFormValidator = () => {
+  const [thumbnail, setThumbnail] = useState("");
+  const [bigThumbnail, setBigThumbnail] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("false");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  // initial vlaue of form
+  const initialValues = {
+    title: "",
+    slug: "",
+    category: "fruits",
+    regular_price: 10,
+    sale_price: 0,
+    stock_available: 5,
+    description: "",
+    weight: 1,
+    tags: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchema = Yup.object({
+    title: Yup.string().required("Required! "),
+    slug: Yup.string().required("Required! "),
+    regular_price: Yup.number().min(2).required("Required!"),
+    sale_price: Yup.number().required("Required!"),
+    stock_available: Yup.string().required("Required!"),
+    description: Yup.string().required("Required!"),
+    weight: Yup.string().min(1).required("Required!"),
+    tags: Yup.number().required("Required!"),
+  });
+
+  // on submit function here
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    // destreucture values here
+    const {
+      title,
+      slug,
+      regular_price,
+      sale_price,
+      description,
+      weight,
+      tags,
+      stock_available,
+      category,
+    } = values;
+
+    // price validation here
+    if (sale_price > regular_price) {
+      setProcessing(false);
+      setToastType("error_toast");
+      setToastOn(true);
+      setToastText("Sale price should be less than regulat price!");
+    }
+
+    // avatar uploader hook import here
+    const { image_upload_cloudinary } = imageUploader(thumbnail, bigThumbnail);
+    const { small_thumbnail, big_thumbnail } = await image_upload_cloudinary();
+
+    // make product data here
+    const products_data = {
+      title,
+      slug,
+      thumbnail: small_thumbnail,
+      thumbnail_big: big_thumbnail,
+      category,
+      prices: { regular_price, sale_price },
+      reviews_ratings: [{ rating: 5, review: "Recomended for every one" }],
+      stock_available,
+      sold_quantity: 0,
+      additional_info: { description, weight, tags },
+      product_status: stock_available > 0 ? "in-stock" : "stock-out",
+      product_type: sale_price > 0 ? "on-sale" : "fixed-sale",
+    };
+
+    if (products_data) {
+      reqSender(
+        products_data,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "add_products"
+      );
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    setThumbnail,
+    setBigThumbnail,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
+// add products form validator
+export const AddLimitedProductsFormValidator = () => {
+  const [thumbnail, setThumbnail] = useState("");
+  const [bigThumbnail, setBigThumbnail] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("false");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  // initial vlaue of form
+  const initialValues = {
+    title: "",
+    slug: "",
+    category: "fruits",
+    offer_end: "",
+    regular_price: 10,
+    sale_price: 0,
+    stock_available: 5,
+    description: "",
+    weight: 1,
+    tags: "",
+  };
+
+  // validation schema using formik yup
+  const validationSchema = Yup.object({
+    title: Yup.string().required("Required! "),
+    slug: Yup.string().required("Required! "),
+    category: Yup.string().required("Required! "),
+    offer_end: Yup.date().min(new Date()).required("Required! "),
+    regular_price: Yup.number().min(2).required("Required!"),
+    sale_price: Yup.number().required("Required!"),
+    stock_available: Yup.string().required("Required!"),
+    description: Yup.string().required("Required!"),
+    weight: Yup.number().min(1).required("Required!"),
+    tags: Yup.string().required("Required!"),
+  });
+
+  // on submit function here
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    // destreucture values here
+    const {
+      title,
+      slug,
+      category,
+      offer_end,
+      regular_price,
+      sale_price,
+      description,
+      weight,
+      tags,
+      stock_available,
+    } = values;
+
+    // price validation here
+    if (sale_price > regular_price) {
+      setProcessing(false);
+      setToastType("error_toast");
+      setToastOn(true);
+      setToastText("Sale price should be less than regulat price!");
+    }
+
+    // offer days calculation here
+    const current_date = new Date().getDate();
+    const offer_end_date = offer_end.slice(8, 10);
+    const offer_days = offer_end_date - current_date;
+    const end_time = 86400000000 * offer_days;
+
+    // avatar uploader hook import here
+    const { image_upload_cloudinary } = imageUploader(thumbnail, bigThumbnail);
+    const { small_thumbnail, big_thumbnail } = await image_upload_cloudinary();
+
+    // make product data here
+    const products_data = {
+      title,
+      slug,
+      thumbnail: small_thumbnail,
+      thumbnail_big: big_thumbnail,
+      category,
+      offer_end: end_time,
+      prices: { regular_price, sale_price },
+      reviews_ratings: [
+        {
+          customer_name: "null",
+          customer_email: "null",
+          rating: 0,
+          review: "null",
+        },
+      ],
+      stock_available,
+      sold_quantity: 0,
+      additional_info: { description, weight, tags },
+      product_status: stock_available > 0 ? "in-stock" : "stock-out",
+      product_type: "flash-sale",
+    };
+
+    if (products_data) {
+      reqSender(
+        products_data,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "add_limited_products"
+      );
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    setThumbnail,
+    setBigThumbnail,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
+
+// add review and rating form validator
+export const AddReviewRatingFormValidator = () => {
+  const [processing, setProcessing] = useState(false);
+  const [toastText, setToastText] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [toastOn, setToastOn] = useState(false);
+
+  const userInfo =
+    Cookie.get("user_information") &&
+    JSON.parse(Cookie.get("user_information"));
+
+  const initialValues = {
+    customer_name: userInfo?.user_name,
+    rating: 4.5,
+    review: "",
+  };
+
+  const validationSchema = Yup.object({
+    customer_name: Yup.string().required("Required!"),
+    rating: Yup.number().required("Required!"),
+    review: Yup.string().required("Required!"),
+  });
+
+  const onSubmit = async (values, { resetForm }) => {
+    setProcessing(true);
+
+    reqSender(
+      values,
+      resetForm,
+      setProcessing,
+      setToastText,
+      setToastType,
+      setToastOn,
+      "manage_reviews/add_reviews"
+    );
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    onSubmit,
+    processing,
+    toastText,
+    toastType,
+    toastOn,
+    setToastOn,
+  };
+};
 
 export const AdminLoginFormValidator = () => {
   const [processing, setProcessing] = useState(false);

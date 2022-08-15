@@ -21,7 +21,7 @@ export default function ReviewForm({ processing }) {
 
       <FormButton
         type="submit"
-        btn_name="place order"
+        btn_name="Leave Review"
         processing={processing}
       />
     </Form>

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import NextLink from "next/link";
 import { useState } from "react";
-import { AiFillWarning } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import AlertToast from "./alertToast/AlertToast";
 import { handleAddToCart } from "./handleCart";
+import toastConfig from "./toastConfig";
 
 export default function ListProductCard({ product_data }) {
   const {
@@ -30,26 +30,7 @@ export default function ListProductCard({ product_data }) {
   const [toastType, setToastType] = useState("");
   const [toastText, setToastText] = useState("");
 
-  // handle close toast here
-  const handleRemoveToast = () => {
-    // setToastText("");
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 3000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 3000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon: <AiFillWarning />,
-    handleRemoveToast: handleRemoveToast,
-  };
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>

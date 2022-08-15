@@ -739,6 +739,16 @@
     @apply bg-red-100 py-1 px-1 font-light;
   }
 
+  /* countdown timer css here */
+
+  .rest_times {
+    @apply font-semibold text-3xl text-green-700 mb-2;
+  }
+
+  .rest_times_name {
+    @apply uppercase text-sm font-semibold text-green-700;
+  }
+
   /* all btn css here */
   .btn {
     @apply bg-gradient-to-r from-orangee to-orangee_red;
@@ -1244,5 +1254,25 @@
 
   .brand_image {
     filter: grayscale(80%);
+  }
+
+  .rest_time_wrapper {
+    background: #f3e0e082;
+    padding: 12px 15px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .rest_time_wrapper {
+    display: grid;
+    grid-template-columns: 22% 3% 22% 3% 22% 3% 22%;
+  }
+
+  .timer_devider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #eab308;
   }
 }

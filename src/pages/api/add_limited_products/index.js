@@ -1,13 +1,14 @@
 import nc from "next-connect";
-import AllProducts from "../../../../models/AllProducts";
+import LimitedProducts from "../../../../models/LimitedProducts";
 import db from "../../../utilities/database";
 const handler = nc();
 
 handler.post(async (req, res) => {
   await db.connect();
   if (req.body) {
+    console.log(req.body);
     // create product
-    const newProduct = new AllProducts(req.body);
+    const newProduct = new LimitedProducts(req.body);
     const added = await newProduct.save();
     await db.disconnect();
 

@@ -1,9 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
 
 export default function OrderProduct({ product }) {
-  const dispatch = useDispatch();
   return (
     <div className="flex items-center shadow-sm">
       <div className="cart_item_wrapper w-4/6">
