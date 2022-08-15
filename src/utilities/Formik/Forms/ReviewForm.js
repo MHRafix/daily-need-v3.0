@@ -16,7 +16,7 @@ export default function ReviewForm({ processing }) {
       <FormikTextField
         form_label="review comment"
         type="textarea"
-        name="review_name"
+        name="review"
       />
 
       <FormButton
