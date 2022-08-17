@@ -3,13 +3,9 @@ import LayoutContainer from "../../../components/commons/layout/LayoutContainer"
 import SignleProductMain from "../../../components/single_product/SignleProductMain";
 import db from "../../../utilities/database";
 
-export default function SingleProduct(props) {
-  // single product destructure from the props
-  const { single_product } = props;
-
+export default function SingleProduct({ single_product }) {
   // bread cruimb navigation making here
   const bread_string = `${single_product?.category} / ${single_product?.title}`;
-
   return (
     <>
       <LayoutContainer
@@ -37,7 +33,7 @@ export default function SingleProduct(props) {
 
 //   // find single one which is selected
 //   const single_product = products.find((product) => product.slug === slug);
-
+//   console.log(single_product);
 //   // return the selected product here
 //   return { props: { single_product } };
 // }

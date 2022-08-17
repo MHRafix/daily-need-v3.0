@@ -4,6 +4,7 @@ import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayo
 import ReviewForm from "../../utilities/Formik/Forms/ReviewForm";
 import { AddReviewRatingFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../utilities/toastConfig";
+import AverageReview from "./AverageReview";
 
 export default function AdditonalInfo({ additionalInfo }) {
   const { description, weight, tags } = additionalInfo;
@@ -83,15 +84,24 @@ export default function AdditonalInfo({ additionalInfo }) {
         {tab === "review" && (
           <div className="additional_info_content_wrapper">
             <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
-              Reviews and Rattings
+              Add Reviews and Ratings
             </h3>
-            <FormikFormLayout
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              <ReviewForm processing={processing} />
-            </FormikFormLayout>
+            <div className="review_form my-10">
+              <FormikFormLayout
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                <ReviewForm processing={processing} />
+              </FormikFormLayout>
+            </div>
+
+            <div className="average_review_section my-15">
+              <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
+                Average Review of Product
+              </h3>
+              <AverageReview />
+            </div>
           </div>
         )}
       </div>

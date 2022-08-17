@@ -8,11 +8,12 @@ export default function SignleProductMain({ bread_string, single_product }) {
   if (!single_product) {
     return (
       <>
-        <Breadcrumb bread_nav={bread_string} />
+        <Breadcrumb bread_nav="not found" />
         <ErrorMessage message="Product not found!" />
       </>
     );
   }
+
   return (
     <div className="document_body">
       <Breadcrumb bread_nav={bread_string} />
