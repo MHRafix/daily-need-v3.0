@@ -4,7 +4,6 @@ import ProfileContentLayout from "../../../utilities/ProfileContentLayout";
 import ReactOrdersTable from "../../../utilities/React_Table/OrdersTable/ReactOrdersTable";
 import ReactPaginationTable from "../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
 import { ORDERED_PRODUCT_TABLE_COLUMNS } from "../../../utilities/React_Table/TableColumns";
-import DashboardContentLayout from "../../admin_pannel_components/admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function MyAllOrdersContent({ my_orders }) {
   const [modal, setModal] = useState(false);
@@ -13,6 +12,7 @@ export default function MyAllOrdersContent({ my_orders }) {
   // handle modal and modal data
   const handleModal = (dep, id) => {
     const modal_data = my_orders.find((order) => order._id === id);
+    console.log(id);
     setModalData(modal_data.products_data);
     setModal(dep);
   };
@@ -21,9 +21,7 @@ export default function MyAllOrdersContent({ my_orders }) {
       <ProfileContentLayout content_title="manage all orders">
         {/* orders show on table */}
         <div className="dashboard_row_wrapper">
-          {/* <DashboardContentLayout item_name="my all orders"> */}
           <ReactOrdersTable ORDERS_DATA={my_orders} handleModal={handleModal} />
-          {/* </DashboardContentLayout> */}
           {modal && (
             <ReactModal
               setModal={setModal}

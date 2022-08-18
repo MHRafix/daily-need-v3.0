@@ -20,6 +20,7 @@ export default function SingleProduct({
 }) {
   const Router = useRouter();
   const { slug } = Router.query;
+  let access = false;
 
   const userInfo =
     Cookie.get("user_information") &&
@@ -28,15 +29,20 @@ export default function SingleProduct({
     (order) => order?.user_email === userInfo?.user_email
   );
 
-  const ordered = user_orders?.products_data?.find(
-    (product) => product.slug === slug
-  );
+  user_orders.map((order) => {
+    const isExist = order.products_data.find(
+      (product) => product.slug === slug
+    );
+    if (isExist) {
+      access = true;
+    }
+  });
 
   // set reviews to redux store
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(storeAllReviews(all_reviews));
-    if (ordered) {
+    if (access) {
       dispatch(addCutomerAccess(true));
     } else {
       dispatch(addCutomerAccess(false));
