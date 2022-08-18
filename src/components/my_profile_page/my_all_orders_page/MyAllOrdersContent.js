@@ -10,11 +10,11 @@ export default function MyAllOrdersContent({ my_orders }) {
   const [modalData, setModalData] = useState([]);
 
   // handle modal and modal data
-  const handleModal = (dep, id) => {
+  const handleModal = (id) => {
     const modal_data = my_orders.find((order) => order._id === id);
     console.log(id);
     setModalData(modal_data.products_data);
-    setModal(dep);
+    setModal(true);
   };
   return (
     <>
