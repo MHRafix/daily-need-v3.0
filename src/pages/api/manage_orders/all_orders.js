@@ -8,11 +8,10 @@ const handler = nc();
 handler.get(async (req, res) => {
   await db.connect(); // database connect here
   const all_orders = await Order.find({});
-
+  await db.disconnect(); // database disconnect here
   // conditionaly send data
   if (all_orders.length) {
-    await db.disconnect(); // database disconnect here
-    res.send(all_orders); // send all orders data
+    res.status(200).send(all_orders); // send all orders data
   }
 });
 

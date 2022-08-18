@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { addSingleReview } from "../../../redux/all_data/action";
 import { reduceCookie } from "../../../redux/cart_products/action";
 import avatarUploader from "../../Form/avatarUploader";
 import imageUploader from "../imageUploader";
@@ -662,6 +663,7 @@ export const AddReviewRatingFormValidator = (product_id, product_slug) => {
   const [toastText, setToastText] = useState("");
   const [toastType, setToastType] = useState("");
   const [toastOn, setToastOn] = useState(false);
+  const dispatch = useDispatch();
 
   const userInfo =
     Cookie.get("user_information") &&
@@ -708,6 +710,8 @@ export const AddReviewRatingFormValidator = (product_id, product_slug) => {
     };
 
     if (review_data) {
+      // set to redux first
+      dispatch(addSingleReview(review_data));
       reqSender(
         review_data,
         resetForm,

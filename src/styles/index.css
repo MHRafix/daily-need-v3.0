@@ -646,6 +646,10 @@
     @apply mt-10 mb-15;
   }
 
+  .separate_rating {
+    @apply p-extra_padding;
+  }
+
   #sorter_input_wrapper {
     @apply text-light text-black3 tracking-wider;
   }

@@ -33,7 +33,7 @@ export default function AverageReview({ all_reviews }) {
             />
           </span>
 
-          <p>{all_reviews.length} Ratings</p>
+          <p>{all_reviews.length} Reviews</p>
         </div>
       </div>
     </>

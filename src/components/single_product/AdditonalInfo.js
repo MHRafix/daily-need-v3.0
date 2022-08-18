@@ -11,7 +11,7 @@ import ReviewCard from "./ReviewCard";
 
 export default function AdditonalInfo({ product }) {
   const all_reviews = useSelector((state) => state.products.all_reviews);
-
+  const access = useSelector((state) => state.products.cm_access);
   const { _id, slug, additional_info } = product;
   const { description, weight } = additional_info;
   const [tab, setTab] = useState(1);
@@ -88,18 +88,31 @@ export default function AdditonalInfo({ product }) {
 
         {tab === 3 ? (
           <div className="additional_info_content_wrapper">
-            <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
-              Add Reviews and Ratings
-            </h3>
-            <div className="review_form my-10">
-              <FormikFormLayout
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-              >
-                <ReviewForm processing={processing} setState={setProductPic} />
-              </FormikFormLayout>
-            </div>
+            {access ? (
+              <>
+                <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
+                  Add Reviews and Ratings
+                </h3>
+                <div className="review_form my-10">
+                  <FormikFormLayout
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                  >
+                    <ReviewForm
+                      processing={processing}
+                      setState={setProductPic}
+                    />
+                  </FormikFormLayout>
+                </div>
+              </>
+            ) : (
+              <div className="review_form my-10">
+                <h1 className="text-orangee_red text-normal">
+                  You have no proper access to leave review. Please order first!
+                </h1>
+              </div>
+            )}
 
             {all_reviews.length ? (
               <div className="grid_layout layout_two my-15">
