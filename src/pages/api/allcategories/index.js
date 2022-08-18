@@ -12,8 +12,6 @@ handler.get(async (req, res) => {
 
   if (categories.length) {
     res.status(200).send(categories);
-  } else {
-    res.send({ error: "Opps, something went wrong!" });
   }
 });
 

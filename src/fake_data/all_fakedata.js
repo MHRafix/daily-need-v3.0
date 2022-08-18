@@ -865,3 +865,18 @@ export const products_data2 = [
     product_type: "fixed-sale",
   },
 ];
+
+export const month_name = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];

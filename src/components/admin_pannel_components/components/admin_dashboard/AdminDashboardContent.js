@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaCoins, FaUsers } from "react-icons/fa";
 import { MdAddShoppingCart, MdShoppingBasket } from "react-icons/md";
+import { month_name } from "../../../../fake_data/all_fakedata";
 import { chartDataCalculator } from "../../../../utilities/chartDataCalculator";
 import LineChart from "../../../../utilities/GraphChart/Rechart/Chart/LineChart";
 import LineChartFancy from "../../../../utilities/GraphChart/Rechart/LineChart/LineChartFancy";
@@ -90,20 +91,6 @@ export default function AdminDashboardContent({
 
   const current_year = new Date().getFullYear();
   const month_num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const month_name = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
 
   // filter out current year's canceled orders
   const current_years_canceled_orders = canceled_orders.filter(

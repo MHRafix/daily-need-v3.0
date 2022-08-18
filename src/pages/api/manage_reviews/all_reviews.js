@@ -1,16 +1,16 @@
 import nc from "next-connect";
-import BrandSlider from "../../../../models/BrandSlider";
+import Reviews from "../../../../models/Reviews";
 import db from "../../../utilities/database";
 
-// products getting function here
 const handler = nc();
 
 handler.get(async (req, res) => {
   await db.connect();
-  const brands = await BrandSlider.find({});
+  const all_reviews = await Reviews.find({});
   await db.disconnect();
-  if (brands.length) {
-    res.status(200).send(brands);
+
+  if (all_reviews.length) {
+    res.status(200).send(all_reviews);
   }
 });
 

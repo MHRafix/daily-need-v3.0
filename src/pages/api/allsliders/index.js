@@ -11,8 +11,6 @@ handler.get(async (req, res) => {
   await db.disconnect();
   if (sliders.length) {
     res.status(200).send(sliders);
-  } else {
-    res.send({ error: "Opps, something went wrong!" });
   }
 });
 

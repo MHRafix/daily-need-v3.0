@@ -12,8 +12,6 @@ handler.get(async (req, res) => {
 
   if (products.length) {
     res.status(200).send(products);
-  } else {
-    res.send({ error: "Opps, something went wrong!" });
   }
 });
 

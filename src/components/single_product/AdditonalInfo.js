@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { ErrorMessage } from "../../utilities/AlertMessage";
 import AlertToast from "../../utilities/alertToast/AlertToast";
 import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import ReviewForm from "../../utilities/Formik/Forms/ReviewForm";
@@ -8,6 +10,8 @@ import AverageReview from "./AverageReview";
 import ReviewCard from "./ReviewCard";
 
 export default function AdditonalInfo({ product }) {
+  const all_reviews = useSelector((state) => state.products.all_reviews);
+
   const { _id, slug, additional_info } = product;
   const { description, weight } = additional_info;
   const [tab, setTab] = useState(1);
@@ -97,20 +101,27 @@ export default function AdditonalInfo({ product }) {
               </FormikFormLayout>
             </div>
 
-            <div className="grid_layout layout_two my-15">
-              <div>
-                <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
-                  Average Review of Product
-                </h3>
-                <AverageReview />
+            {all_reviews.length ? (
+              <div className="grid_layout layout_two my-15">
+                <div>
+                  <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
+                    Average Review of Product
+                  </h3>
+                  <AverageReview all_reviews={all_reviews} />
+                </div>
+
+                <div className="separate_rating">
+                  <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
+                    All Reviews
+                  </h3>
+                  {all_reviews?.map((review) => (
+                    <ReviewCard key={review._id} review_data={review} />
+                  ))}
+                </div>
               </div>
-              <div className="separate_rating">
-                <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
-                  All Reviews
-                </h3>
-                <ReviewCard />
-              </div>
-            </div>
+            ) : (
+              <ErrorMessage message="No review here!" />
+            )}
           </div>
         ) : null}
       </div>

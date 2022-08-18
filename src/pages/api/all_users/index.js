@@ -2,7 +2,7 @@ import nc from "next-connect";
 import User from "../../../../models/Users";
 import db from "../../../utilities/database";
 
-// products getting function here
+// users getting function here
 const handler = nc();
 
 handler.get(async (req, res) => {

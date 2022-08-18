@@ -13,9 +13,6 @@ handler.get(async (req, res) => {
   if (all_orders.length) {
     await db.disconnect(); // database disconnect here
     res.send(all_orders); // send all orders data
-  } else {
-    // throw error here
-    res.send({ error: "Opps, something wrong!" });
   }
 });
 
