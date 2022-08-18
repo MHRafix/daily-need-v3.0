@@ -191,8 +191,8 @@ export const FormikFileField = ({
     <div id="field_wrapper">
       <label id="input_label" htmlFor="label">
         {form_label}
-        {/* {required && <span id="required_sign">*</span>} */}
-        <span id="required_sign">*</span>
+        {required && <span id="required_sign">*</span>}
+        {/* <span id="required_sign">*</span> */}
       </label>
       <br />
       <input

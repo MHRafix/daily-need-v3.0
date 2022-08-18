@@ -18,7 +18,7 @@ export default function SignleProductMain({ bread_string, single_product }) {
     <div className="document_body">
       <Breadcrumb bread_nav={bread_string} />
       <ProductView product={single_product} />
-      <AdditonalInfo additionalInfo={single_product?.additional_info} />
+      <AdditonalInfo product={single_product} />
       <RelatedProducts additionalInfo={single_product?.additional_info} />
     </div>
   );

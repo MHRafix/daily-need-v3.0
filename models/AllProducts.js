@@ -11,7 +11,6 @@ const productSchema = new mongoose.Schema(
       sale_price: { type: Number, required: true },
     },
     category: { type: String, required: true },
-    reviews_ratings: [{ rating: Number, review: String }],
     stock_available: { type: Number, required: true },
     sold_quantity: { type: Number, required: true },
     additional_info: {

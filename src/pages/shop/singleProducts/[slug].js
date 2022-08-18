@@ -33,7 +33,6 @@ export default function SingleProduct({ single_product }) {
 
 //   // find single one which is selected
 //   const single_product = products.find((product) => product.slug === slug);
-//   console.log(single_product);
 //   // return the selected product here
 //   return { props: { single_product } };
 // }
@@ -43,11 +42,11 @@ export async function getServerSideProps(context) {
   const { slug } = params;
 
   await db.connect();
-  const product = await AllProducts.findOne({ slug }).lean();
+  const single_product = await AllProducts.findOne({ slug }).lean();
   await db.disconnect();
   return {
     props: {
-      single_product: product,
+      single_product,
     },
   };
 }

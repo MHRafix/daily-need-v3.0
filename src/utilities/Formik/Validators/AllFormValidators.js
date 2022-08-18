@@ -484,7 +484,7 @@ export const AddProductsFormValidator = () => {
       setToastText("Sale price should be less than regulat price!");
     }
 
-    // avatar uploader hook import here
+    // image uploader hook import here
     const { image_upload_cloudinary } = imageUploader(thumbnail, bigThumbnail);
     const { small_thumbnail, big_thumbnail } = await image_upload_cloudinary();
 
@@ -656,7 +656,8 @@ export const AddLimitedProductsFormValidator = () => {
 };
 
 // add review and rating form validator
-export const AddReviewRatingFormValidator = () => {
+export const AddReviewRatingFormValidator = (product_id, product_slug) => {
+  const [productPic, setProductPic] = useState("");
   const [processing, setProcessing] = useState(false);
   const [toastText, setToastText] = useState("");
   const [toastType, setToastType] = useState("");
@@ -668,6 +669,8 @@ export const AddReviewRatingFormValidator = () => {
 
   const initialValues = {
     customer_name: userInfo?.user_name,
+    customer_email: userInfo?.user_email,
+    customer_pic: userInfo?.user_pic,
     rating: 4.5,
     review: "",
   };
@@ -681,21 +684,47 @@ export const AddReviewRatingFormValidator = () => {
   const onSubmit = async (values, { resetForm }) => {
     setProcessing(true);
 
-    reqSender(
-      values,
-      resetForm,
-      setProcessing,
-      setToastText,
-      setToastType,
-      setToastOn,
-      "manage_reviews/add_reviews"
-    );
+    const { customer_name, customer_email, customer_pic, rating, review } =
+      values;
+
+    const { avatar_upload_cloudinary } = avatarUploader(productPic);
+    const product_pic = await avatar_upload_cloudinary();
+    const date = new Date();
+    // make review data
+    const review_data = {
+      product_id,
+      product_slug,
+      customer_name,
+      customer_email,
+      customer_pic,
+      rating,
+      review,
+      product_pic,
+      review_date: {
+        current_date: date.getDate(),
+        current_month: date.getMonth() + 1,
+        current_year: date.getFullYear(),
+      },
+    };
+
+    if (review_data) {
+      reqSender(
+        review_data,
+        resetForm,
+        setProcessing,
+        setToastText,
+        setToastType,
+        setToastOn,
+        "manage_reviews/add_reviews"
+      );
+    }
   };
 
   return {
     initialValues,
     validationSchema,
     onSubmit,
+    setProductPic,
     processing,
     toastText,
     toastType,

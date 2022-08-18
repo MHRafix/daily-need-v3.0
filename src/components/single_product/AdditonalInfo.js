@@ -5,22 +5,23 @@ import ReviewForm from "../../utilities/Formik/Forms/ReviewForm";
 import { AddReviewRatingFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../utilities/toastConfig";
 import AverageReview from "./AverageReview";
+import ReviewCard from "./ReviewCard";
 
-export default function AdditonalInfo({ additionalInfo }) {
-  const { description, weight, tags } = additionalInfo;
-  const [tab, setTab] = useState("description");
-
+export default function AdditonalInfo({ product }) {
+  const { _id, slug, additional_info } = product;
+  const { description, weight } = additional_info;
+  const [tab, setTab] = useState(1);
   const {
     initialValues,
     validationSchema,
     onSubmit,
+    setProductPic,
     processing,
     toastText,
     toastType,
     toastOn,
     setToastOn,
-  } = AddReviewRatingFormValidator();
-
+  } = AddReviewRatingFormValidator(_id, slug);
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
@@ -30,8 +31,8 @@ export default function AdditonalInfo({ additionalInfo }) {
         <div className="flex justify-start items-center pb-3">
           <div>
             <button
-              onClick={() => setTab("description")}
-              id={tab === "description" ? "cart_btn" : "tab_btn"}
+              onClick={() => setTab(1)}
+              id={tab === 1 ? "cart_btn" : "tab_btn"}
               className="!rounded-sm !text-light !capitalize"
             >
               description
@@ -40,8 +41,8 @@ export default function AdditonalInfo({ additionalInfo }) {
           &nbsp;
           <div>
             <button
-              onClick={() => setTab("additional")}
-              id={tab === "additional" ? "cart_btn" : "tab_btn"}
+              onClick={() => setTab(2)}
+              id={tab === 2 ? "cart_btn" : "tab_btn"}
               className="!rounded-sm !text-light !capitalize"
             >
               Additonal info
@@ -50,24 +51,24 @@ export default function AdditonalInfo({ additionalInfo }) {
           &nbsp;
           <div>
             <button
-              onClick={() => setTab("review")}
-              id={tab === "review" ? "cart_btn" : "tab_btn"}
+              onClick={() => setTab(3)}
+              id={tab === 3 ? "cart_btn" : "tab_btn"}
               className="!rounded-sm !text-light !capitalize"
             >
               Review
             </button>
           </div>
         </div>
-        {tab === "description" && (
+        {tab === 1 ? (
           <div className="additional_info_content_wrapper">
             <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
               Description
             </h3>
             <p>{description}</p>
           </div>
-        )}
+        ) : null}
 
-        {tab === "additional" && (
+        {tab === 2 ? (
           <div className="additional_info_content_wrapper">
             <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
               Additonal Information
@@ -79,9 +80,9 @@ export default function AdditonalInfo({ additionalInfo }) {
               <div className="h-15 px-1 flex items-center">{weight} kg</div>
             </div>
           </div>
-        )}
+        ) : null}
 
-        {tab === "review" && (
+        {tab === 3 ? (
           <div className="additional_info_content_wrapper">
             <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
               Add Reviews and Ratings
@@ -92,18 +93,26 @@ export default function AdditonalInfo({ additionalInfo }) {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
               >
-                <ReviewForm processing={processing} />
+                <ReviewForm processing={processing} setState={setProductPic} />
               </FormikFormLayout>
             </div>
 
-            <div className="average_review_section my-15">
-              <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
-                Average Review of Product
-              </h3>
-              <AverageReview />
+            <div className="grid_layout layout_two my-15">
+              <div>
+                <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
+                  Average Review of Product
+                </h3>
+                <AverageReview />
+              </div>
+              <div className="separate_rating">
+                <h3 className="text-semi_medium font-medium tracking-wider text-black2 mb-10">
+                  All Reviews
+                </h3>
+                <ReviewCard />
+              </div>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </>
   );

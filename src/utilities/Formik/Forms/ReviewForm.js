@@ -1,8 +1,12 @@
 import { Form } from "formik";
 import React from "react";
-import { FormButton, FormikTextField } from "../../Form/FormField";
+import {
+  FormButton,
+  FormikFileField,
+  FormikTextField,
+} from "../../Form/FormField";
 
-export default function ReviewForm({ processing }) {
+export default function ReviewForm({ processing, setState }) {
   return (
     <Form>
       <FormikTextField
@@ -12,6 +16,13 @@ export default function ReviewForm({ processing }) {
       />
 
       <FormikTextField form_label="rating point" type="number" name="rating" />
+      <FormikFileField
+        form_label="product pic"
+        type="file"
+        name="product_pic"
+        setState={setState}
+        required={true}
+      />
 
       <FormikTextField
         form_label="review comment"

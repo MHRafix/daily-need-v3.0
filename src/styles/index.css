@@ -630,7 +630,7 @@
   }
 
   .additional_info_content_wrapper {
-    @apply p-1 text-sm text-black3 tracking-wider;
+    @apply lg:!p-2 xs:p-1 text-sm text-black3 tracking-wider;
   }
 
   #account_switcher_wrapper {

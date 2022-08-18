@@ -8,22 +8,23 @@ export default function AverageReview() {
     <>
       <div className="average_rating_wrapper">
         <div className="average_rating">
-          <h1 className="text-black2 text-big">
-            4.5<span className="text-black4 text-semi_medium">/5</span>
-          </h1>
+          <div className="overflow-hidden">
+            <h1 className="text-black2 text-big my-5">
+              4.5<span className="text-black4 text-semi_medium">/5</span>
+            </h1>
 
-          <div className="all_rating">
-            <Rating
-              initialRating={4.5}
-              readonly
-              emptySymbol={<FiStar />}
-              fullSymbol={<BsFillStarFill />}
-            />
+            <span className="text-green text-medium  my-5 block">
+              <Rating
+                initialRating={4.5}
+                readonly
+                emptySymbol={<FiStar />}
+                fullSymbol={<BsFillStarFill />}
+              />
+            </span>
 
             <p>24 Ratings</p>
           </div>
         </div>
-        <div className="separate_rating"></div>
       </div>
     </>
   );
