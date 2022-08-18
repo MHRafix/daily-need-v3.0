@@ -11,7 +11,7 @@ import {
   addCutomerAccess,
   storeAllReviews,
 } from "../../../redux/all_data/action";
-// import db from "../../../utilities/database";
+import db from "../../../utilities/database";
 
 export default function SingleProduct({
   single_product,
@@ -101,11 +101,11 @@ export async function getServerSideProps(context) {
 
   await db.connect();
   const single_product = await AllProducts.findOne({ slug }).lean();
-  const all_orders = await Order.find({});
   const all_reviews = await Reviews.find({
     product_id: single_product._id,
     product_slug: single_product.slug,
   }).lean();
+  const all_orders = await Order.find({});
   await db.disconnect();
   return {
     props: {
