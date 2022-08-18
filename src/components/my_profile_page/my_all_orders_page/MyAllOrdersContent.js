@@ -12,7 +12,6 @@ export default function MyAllOrdersContent({ my_orders }) {
   // handle modal and modal data
   const handleModal = (id) => {
     const modal_data = my_orders.find((order) => order._id === id);
-    console.log(id);
     setModalData(modal_data.products_data);
     setModal(true);
   };

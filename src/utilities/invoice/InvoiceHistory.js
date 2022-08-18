@@ -6,7 +6,6 @@ import OrderedProductsTable from "../React_Table/PaginationTable/OrderedProducts
 import { ORDERED_PRODUCTS_TABLE_COLUMNS } from "../React_Table/TableColumns";
 
 export default function InvoiceHistory({ modal_data }) {
-  console.log(modal_data);
   const userInfo =
     Cookie.get("user_information") &&
     JSON.parse(Cookie.get("user_information"));
@@ -42,9 +41,9 @@ export default function InvoiceHistory({ modal_data }) {
                 className="rounded-full"
               />
             )}
-          </div>
-          <div className="my-4 tracking-wider text-medium font-bold">
-            Name : &nbsp;&nbsp; {userInfo?.user_name}
+            <div className="my-4 tracking-wider text-medium font-bold">
+              Name : &nbsp;&nbsp; {userInfo?.user_name}
+            </div>
           </div>
           <div className="customers_info mb-5 text-left text-black2 text-normal">
             <div className="my-4 tracking-wider">
