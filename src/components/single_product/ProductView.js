@@ -77,14 +77,17 @@ export default function ProductView({ product }) {
               </span>
             )}
           </div>
-          <span className="text-green text-semi_medium  my-2 block">
-            <Rating
-              initialRating={average_rating}
-              readonly
-              emptySymbol={<FiStar />}
-              fullSymbol={<BsFillStarFill />}
-            />
-          </span>
+
+          {average_rating > 0 && (
+            <span className="text-green text-semi_medium  my-2 block">
+              <Rating
+                initialRating={average_rating}
+                readonly
+                emptySymbol={<FiStar />}
+                fullSymbol={<BsFillStarFill />}
+              />
+            </span>
+          )}
           <h5 className="text-thin text-black3 capitalize">
             {product?.product_status}
           </h5>

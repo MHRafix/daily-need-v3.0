@@ -2,15 +2,19 @@ import Cookie from "js-cookie";
 import { useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaBars, FaList } from "react-icons/fa";
+import ReactPaginate from "react-paginate";
 import { ErrorMessage } from "../../utilities/AlertMessage";
 import GridProductCard from "../../utilities/GridProductCard";
 import ListProductCard from "../../utilities/ListProductCard";
+import ProductPagination from "../../utilities/ProductPagination";
 
 export default function ShopProductArea({
   products_data,
   sidebaron,
   setsidebaron,
 }) {
+  const { handlePageClick, pageCount, currentItems } =
+    ProductPagination(products_data);
   const layout_status = Cookie.get("layout_changer")
     ? JSON.parse(Cookie.get("layout_changer"))
     : true;
@@ -81,17 +85,28 @@ export default function ShopProductArea({
       </div>
       {grid ? (
         <div className="grid_shop_products">
-          {products_data?.map((product) => (
+          {currentItems?.map((product) => (
             <GridProductCard key={product._id} product_data={product} />
           ))}
         </div>
       ) : (
         <div className="list_shop_products">
-          {products_data?.map((product) => (
+          {currentItems?.map((product) => (
             <ListProductCard key={product._id} product_data={product} />
           ))}
         </div>
       )}
+      <div className="pagination">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+        />
+      </div>
     </div>
   );
 }

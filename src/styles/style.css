@@ -106,3 +106,61 @@ table th {
 svg {
   margin: 0 2px;
 }
+
+.pagination {
+  margin: 20px 0px;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  align-items: center;
+  margin: auto;
+  width: 310px;
+  color: white;
+  border-radius: 2px;
+}
+
+li.previous,
+li.next {
+  background: white;
+  border: 1px solid #eee;
+}
+
+li.previous:hover {
+  background: linear-gradient(#ff934b, #ff5e62);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+li.next:hover {
+  background: linear-gradient(#ff934b, #ff5e62);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+li.selected {
+  padding: 4px 12px;
+  border-radius: 100%;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  margin: 0px 5px;
+  background: linear-gradient(#ff934b, #ff5e62);
+}
+
+li:hover {
+  background: linear-gradient(#ff934b, #ff5e62);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+li {
+  padding: 4px 12px;
+  border-radius: 100%;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  margin: 0px 5px;
+}
