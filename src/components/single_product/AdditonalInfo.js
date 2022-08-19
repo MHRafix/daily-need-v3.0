@@ -108,7 +108,7 @@ export default function AdditonalInfo({ product }) {
               </>
             ) : (
               <div className="review_form my-10">
-                <h1 className="text-orangee_red text-normal">
+                <h1 className="text-red-500 text-normal">
                   You have no proper access to leave review. Please order first!
                 </h1>
               </div>

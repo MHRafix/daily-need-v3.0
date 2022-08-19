@@ -1,17 +1,26 @@
 import Image from "next/image";
 import { useState } from "react";
-import { AiFillWarning } from "react-icons/ai";
+import { BsFillStarFill } from "react-icons/bs";
 import { FaTruckMoving } from "react-icons/fa";
+import { FiStar } from "react-icons/fi";
 import { GiBeachBag } from "react-icons/gi";
-// import { FaTruckMoving } from "react-icons/fa";
-// import { GiBeachBag } from "react-icons/gi";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import Rating from "react-rating";
+import { useDispatch, useSelector } from "react-redux";
 import AlertToast from "../../utilities/alertToast/AlertToast";
 import FeaturesCard from "../../utilities/FeaturesCard";
 import { handleAddToCart } from "../../utilities/handleCart";
+import toastConfig from "../../utilities/toastConfig";
 
 export default function ProductView({ product }) {
+  const all_reviews = useSelector((state) => state.products.all_reviews);
+  // calculate average rating
+  let total_rating = 0;
+  all_reviews.map((review) => {
+    total_rating = total_rating + review.rating;
+  });
+  const average_rating = total_rating / all_reviews?.length;
+
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
@@ -19,26 +28,7 @@ export default function ProductView({ product }) {
   const [toastOn, setToastOn] = useState(false);
   const [toastType, setToastType] = useState("");
   const [toastText, setToastText] = useState("");
-
-  // handle close toast here
-  const handleRemoveToast = () => {
-    setToastOn(false);
-  };
-
-  // auto close toast after ther 3000ms delay
-  if (toastOn) {
-    setTimeout(() => {
-      setToastOn(false);
-    }, 3000);
-  }
-
-  // toast setting configuration here
-  const toast_config = {
-    toastStyle: toastType,
-    alertText: toastText,
-    toastIcon: <AiFillWarning />,
-    handleRemoveToast: handleRemoveToast,
-  };
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   return (
     <>
@@ -68,6 +58,7 @@ export default function ProductView({ product }) {
             </div>
           )}
           <h1 className="product_title">{product?.title}</h1>
+
           <div id="product_price">
             <span
               id={
@@ -86,6 +77,14 @@ export default function ProductView({ product }) {
               </span>
             )}
           </div>
+          <span className="text-green text-semi_medium  my-2 block">
+            <Rating
+              initialRating={average_rating}
+              readonly
+              emptySymbol={<FiStar />}
+              fullSymbol={<BsFillStarFill />}
+            />
+          </span>
           <h5 className="text-thin text-black3 capitalize">
             {product?.product_status}
           </h5>

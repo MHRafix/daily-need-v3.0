@@ -679,7 +679,7 @@ export const AddReviewRatingFormValidator = (product_id, product_slug) => {
 
   const validationSchema = Yup.object({
     customer_name: Yup.string().required("Required!"),
-    rating: Yup.number().required("Required!"),
+    rating: Yup.number().min(1).max(5).required("Required!"),
     review: Yup.string().required("Required!"),
   });
 
