@@ -52,12 +52,18 @@ export default function Home({
 // }
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
-  const categroies = await fetch(`${process.env.ROOT_URI}/api/allcategories`);
-  const sliders = await fetch(`${process.env.ROOT_URI}/api/allsliders`);
-  const brands = await fetch(`${process.env.ROOT_URI}/api/allbrands`);
+  // const products = await fetch("http://localhost:3000/api/allproducts");
+  // const categories = await fetch("http://localhost:3000/api/allcategories");
+  // const sliders = await fetch(`${process.env.ROOT_URI}/api/allsliders`);
+  // const brands = await fetch(`${process.env.ROOT_URI}/api/allbrands`);
+  const res = await fetch("https://daily-need.vercel.app/api/allproducts");
+  const categories = await fetch(
+    "https://daily-need.vercel.app/api/allcategories"
+  );
+  const sliders = await fetch("https://daily-need.vercel.app/api/allsliders");
+  const brands = await fetch("https://daily-need.vercel.app/api/allbrands");
   const products = await res.json();
-  const all_categories = await categroies.json();
+  const all_categories = await categories.json();
   const all_sliders = await sliders.json();
   const all_brands = await brands.json();
 
