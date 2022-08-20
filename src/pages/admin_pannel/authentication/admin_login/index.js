@@ -21,16 +21,9 @@ export default function AdminLogin() {
     Cookie.get("user_information") &&
     JSON.parse(Cookie.get("user_information"));
 
-  const isLockScreen =
-    Cookie.get("lock_screen") && JSON.parse(Cookie.get("lock_screen"));
-
   useEffect(() => {
     if (userInfo?.user_admin) {
-      if (!isLockScreen) {
-        router.push("/admin_pannel/authentication/unlock_screen");
-      } else {
-        Router.back();
-      }
+      Router.back();
     }
   });
 

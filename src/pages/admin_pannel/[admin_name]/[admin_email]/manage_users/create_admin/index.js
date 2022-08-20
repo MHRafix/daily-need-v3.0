@@ -1,6 +1,5 @@
 import { Form } from "formik";
 import Cookie from "js-cookie";
-import { useRouter } from "next/router";
 import React from "react";
 import AdminPannelBreadcrumb from "../../../../../../components/admin_pannel_components/common/admin_pannel_breadcrumb/AdminPannelBreadcrumb";
 import AdminPannelLayoutContainer from "../../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
@@ -15,20 +14,11 @@ import toastConfig from "../../../../../../utilities/toastConfig";
 import ErrorPage from "../../../../../404";
 
 export default function CreateAdmin() {
-  const router = useRouter();
-
   const userInfo =
     Cookie.get("user_information") &&
     JSON.parse(Cookie.get("user_information"));
 
-  const isLockScreen =
-    Cookie.get("lock_screen") && JSON.parse(Cookie.get("lock_screen"));
-
-  if (userInfo?.user_admin) {
-    if (isLockScreen === true) {
-      router.push("/admin_pannel/authentication/unlock_screen");
-    }
-  } else {
+  if (!userInfo?.user_admin) {
     return <ErrorPage />;
   }
 

@@ -836,57 +836,6 @@ export const CreateAdminFormValidator = () => {
   };
 };
 
-// create admin and moderators validators here
-export const UnlockFormValidator = () => {
-  const [processing, setProcessing] = useState(false);
-  const [toastText, setToastText] = useState("");
-  const [toastType, setToastType] = useState("");
-  const [toastOn, setToastOn] = useState(false);
-
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
-
-  // initial vlaue of form
-  const initialValues = {
-    user_email: userInfo?.user_email,
-    user_password: "",
-  };
-
-  // validation schema using formik yup
-  const validationSchema = Yup.object({
-    user_password: Yup.string().required("Required"),
-  });
-
-  // on submit function here
-  const onSubmit = async (values, { resetForm }) => {
-    setProcessing(true);
-
-    if (values) {
-      reqSender(
-        values,
-        resetForm,
-        setProcessing,
-        setToastText,
-        setToastType,
-        setToastOn,
-        "admin_pannel_api/authentication/unlock_screen"
-      );
-    }
-  };
-
-  return {
-    initialValues,
-    validationSchema,
-    onSubmit,
-    processing,
-    toastText,
-    toastType,
-    toastOn,
-    setToastOn,
-  };
-};
-
 /**
  * category form validator here
  * cat image upload

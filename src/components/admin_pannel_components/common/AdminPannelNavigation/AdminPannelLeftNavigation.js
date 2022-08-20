@@ -30,7 +30,7 @@ export default function AdminPannelLeftNavigation({ setNavigationOn }) {
             <span className="text-light_purple !text-normal">
               <AiOutlineUserSwitch />
             </span>
-            &nbsp; switch to customer
+            &nbsp; go home
           </h3>
         </NextLink>
       </div>
