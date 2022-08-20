@@ -32,9 +32,7 @@ export default function CategoryShop({ matched_products, all_categories }) {
 
 // find the category
 export async function getStaticPaths() {
-  const products = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allproducts`
-  );
+  const products = await fetch("https://daily-need.vercel.app/api/allproducts");
   const all_products = await products.json();
   const slug = all_products.map((product) => ({
     params: { filter_slug: product.category },
@@ -49,11 +47,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { filter_slug } = params;
   // req for all prodcuts
-  const products = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allproducts`
-  );
+  const products = await fetch("https://daily-need.vercel.app/api/allproducts");
   const categories = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allcategories`
+    "https://daily-need.vercel.app/api/allcategories"
   );
   const all_categories = await categories.json();
   const all_products = await products.json();

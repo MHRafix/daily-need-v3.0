@@ -31,11 +31,9 @@ export default function GridShopPage({ all_products, all_categories }) {
 }
 
 export async function getStaticProps() {
-  const products = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allproducts`
-  );
+  const products = await fetch("https://daily-need.vercel.app/api/allproducts");
   const categories = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allcategories`
+    "https://daily-need.vercel.app/api/allcategories"
   );
 
   const all_products = await products.json();

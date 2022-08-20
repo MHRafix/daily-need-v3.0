@@ -68,9 +68,7 @@ export default function SingleProduct({
 
 // find the path
 export async function getStaticPaths() {
-  const products = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allproducts`
-  );
+  const products = await fetch("https://daily-need.vercel.app/api/allproducts");
   const all_products = await products.json();
   const slug = all_products.map((product) => ({
     params: { slug: product.slug },
@@ -85,16 +83,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   console.log(params);
-  const products = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/allproducts`
-  );
+  const products = await fetch("https://daily-need.vercel.app/api/allproducts");
   const all_products = await products.json();
   // find single product here
   const single_product = all_products.find((product) => product.slug === slug);
 
   // get all reviews here
   const reviews = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/manage_reviews/all_reviews`
+    "https://daily-need.vercel.app/api/manage_reviews/all_reviews"
   );
   const all_reviews = await reviews.json();
 
@@ -106,7 +102,7 @@ export async function getStaticProps({ params }) {
 
   // get all orders
   const orders = await fetch(
-    `${process.env.ROOT_API_URI_VERCEL}/manage_orders/all_orders`
+    "https://daily-need.vercel.app/api/manage_orders/all_orders"
   );
   const all_orders = await orders.json();
 
