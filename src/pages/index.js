@@ -1,12 +1,8 @@
-// import AllProducts from "../../models/AllProducts";
-// import BrandSlider from "../../models/BrandSlider";
-// import Category from "../../models/Category";
-// import HomeSlider from "../../models/HomeSlider";
 import LayoutContainer from "../components/commons/layout/LayoutContainer";
 import HomeMain from "../components/home_page/HomeMain";
 
 export default function Home({
-  products,
+  all_products,
   all_categories,
   all_sliders,
   all_brands,
@@ -18,7 +14,7 @@ export default function Home({
         description="This is home page of 'Daily Needs Grocery'"
       >
         <HomeMain
-          all_products={products}
+          all_products={all_products}
           all_categories={all_categories}
           all_sliders={all_sliders}
           all_brands={all_brands}
@@ -28,44 +24,19 @@ export default function Home({
   );
 }
 
-/**
- *
- * direct find from database
- *
- **/
-
-// export async function getServerSideProps() {
-//   await db.connect();
-//   const products = await AllProducts.find({});
-//   const all_categories = await Category.find({});
-//   const all_sliders = await HomeSlider.find({});
-//   const all_brands = await BrandSlider.find({});
-//   await db.disconnect();
-//   return {
-//     props: {
-//       products,
-//       all_categories,
-//       all_sliders,
-//       all_brands,
-//     },
-//   };
-// }
-
 export async function getStaticProps() {
-  // const products = await fetch("http://localhost:3000/api/allproducts");
-  // const categories = await fetch("http://localhost:3000/api/allcategories");
-  // const sliders = await fetch(`${process.env.ROOT_URI}/api/allsliders`);
-  // const brands = await fetch(`${process.env.ROOT_URI}/api/allbrands`);
-  const res = await fetch("https://daily-need.vercel.app/api/allproducts");
-  const categories = await fetch(
-    "https://daily-need.vercel.app/api/allcategories"
+  const products = await fetch(
+    `${process.env.ROOT_API_URI_VERCEL}/allproducts`
   );
-  const sliders = await fetch("https://daily-need.vercel.app/api/allsliders");
-  const brands = await fetch("https://daily-need.vercel.app/api/allbrands");
-  const products = await res.json();
+  const categories = await fetch(
+    `${process.env.ROOT_API_URI_VERCEL}/allcategories`
+  );
+  const sliders = await fetch(`${process.env.ROOT_API_URI_VERCEL}/allsliders`);
+  const brands = await fetch(`${process.env.ROOT_API_URI_VERCEL}/allbrands`);
+  const all_products = await products.json();
   const all_categories = await categories.json();
   const all_sliders = await sliders.json();
   const all_brands = await brands.json();
 
-  return { props: { products, all_categories, all_sliders, all_brands } };
+  return { props: { all_products, all_categories, all_sliders, all_brands } };
 }

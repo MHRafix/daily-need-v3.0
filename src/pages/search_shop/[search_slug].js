@@ -21,8 +21,8 @@ export default function SearchProduct({ matched_products, all_categories }) {
   return (
     <>
       <LayoutContainer
-        title="Category Shop"
-        description="This is category shop page of 'Daily Needs Grocery'"
+        title="Search Shop"
+        description="This is search shop page of 'Daily Needs Grocery'"
       >
         <SearchShopMain
           bread_string={bread_string}
@@ -32,25 +32,6 @@ export default function SearchProduct({ matched_products, all_categories }) {
     </>
   );
 }
-
-// get searched product serverSideprops
-// export async function getServerSideProps(context) {
-//   // selected prodcut unique id
-//   const { params } = context;
-//   const { search_slug } = params;
-
-//   // req for all prodcuts
-//   const res = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
-//   const products = await res.json();
-
-//   // filter searched products which is selected
-
-//   const matched_product = products.filter((product) =>
-//     product.title.toLowerCase().includes(search_slug.toLowerCase())
-//   );
-//   // return the filtered products here
-//   return { props: { matched_product } };
-// }
 
 export async function getServerSideProps(context) {
   const { params } = context;

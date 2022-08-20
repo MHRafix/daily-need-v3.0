@@ -30,9 +30,9 @@ export default function Topbar() {
             </button>
             <NextLink
               href={
-                user_loggedin
-                  ? "/my_account/my_profile/dashboard"
-                  : "/my_account/my_acc"
+                // user_loggedin
+                // ? "/my_account/my_profile/dashboard"
+                "/my_account/my_acc"
               }
               passHref
             >
@@ -44,9 +44,9 @@ export default function Topbar() {
             </NextLink>
             <NextLink
               href={
-                user_loggedin
-                  ? "/my_account/my_profile/dashboard"
-                  : "/my_account/my_acc"
+                // user_loggedin
+                // ? "/my_account/my_profile/dashboard"
+                "/my_account/my_acc"
               }
               passHref
             >

@@ -34,13 +34,7 @@ export default function BrandArea({ setNavbarToggle, navbarToggle }) {
       <div className="container_wrapper">
         <div className="brand_area">
           <div className="brand_wrapper">
-            <Image
-              src={Logo}
-              alt="site logo"
-              width={127}
-              height={38}
-              // layout="responsive"
-            />
+            <Image src={Logo} alt="site logo" width={127} height={38} />
           </div>
           <div className="serach_area">
             <input
@@ -65,30 +59,15 @@ export default function BrandArea({ setNavbarToggle, navbarToggle }) {
               </span>
               <span className="xs:hidden lg:!block">My Cart</span>
             </div>
-            {/* &nbsp;&nbsp;&nbsp; */}
 
-            {user_loggedin ? (
-              <NextLink href="/my_account/my_profile/dashboard" passHref>
-                <div className="header_action_icon ml-2">
-                  <Image
-                    src={user_loggedin?.user_pic}
-                    width={40}
-                    height={40}
-                    alt="user_pic"
-                    className="rounded-full"
-                  />
-                </div>
-              </NextLink>
-            ) : (
-              <NextLink href="/my_account/my_acc" passHref>
-                <div className="header_action_icon">
-                  <span className="cart_badge !mr-0">
-                    <FaUserCircle />
-                  </span>
-                  &nbsp; <span className="xs:hidden lg:!block">My Account</span>
-                </div>
-              </NextLink>
-            )}
+            <NextLink href="/my_account/my_acc" passHref>
+              <div className="header_action_icon">
+                <span className="cart_badge !mr-0">
+                  <FaUserCircle />
+                </span>
+                &nbsp; <span className="xs:hidden lg:!block">My Account</span>
+              </div>
+            </NextLink>
             <div className="header_action_icon2">
               {navbarToggle ? (
                 <button
