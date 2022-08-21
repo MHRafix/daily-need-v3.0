@@ -60,5 +60,5 @@ export async function getStaticProps({ params }) {
     (product) => product.product_type === filter_slug
   );
   // return the filtered products here
-  return { props: { matched_products, all_categories } };
+  return { props: { matched_products, all_categories }, revalidate: 10 };
 }

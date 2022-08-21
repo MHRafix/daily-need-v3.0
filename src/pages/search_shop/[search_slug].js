@@ -51,5 +51,6 @@ export async function getServerSideProps(context) {
       matched_products,
       all_categories,
     },
+    revalidate: 10,
   };
 }

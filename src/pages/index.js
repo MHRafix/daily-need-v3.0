@@ -36,5 +36,8 @@ export async function getStaticProps() {
   const all_sliders = await sliders.json();
   const all_brands = await brands.json();
 
-  return { props: { all_products, all_categories, all_sliders, all_brands } };
+  return {
+    props: { all_products, all_categories, all_sliders, all_brands },
+    revalidate: 10,
+  };
 }

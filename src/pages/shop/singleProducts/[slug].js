@@ -113,5 +113,6 @@ export async function getStaticProps({ params }) {
       all_reviews: this_reviews,
       all_orders,
     },
+    revalidate: 10,
   };
 }

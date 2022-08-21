@@ -38,5 +38,5 @@ export async function getStaticProps() {
   );
   const all_categories = await categories.json();
   // Pass data to the page via props
-  return { props: { sale_products, all_categories } };
+  return { props: { sale_products, all_categories }, revalidate: 10 };
 }
