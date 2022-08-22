@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import AdminPannelLayoutContainer from "../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
-import AdminDashboardMain from "../../../../components/admin_pannel_components/components/admin_dashboard/AdminDashboardMain";
 import ErrorPage from "../../../../pages/404";
 import { storeUserData } from "../../../../redux/user_data/action";
 
@@ -27,11 +26,7 @@ export default function AdminDashboard({
         title="Admin Dashboard"
         description="This is admin dashboard of 'Daily Needs Grocery' web application."
       >
-        <AdminDashboardMain
-          all_orders={all_orders}
-          all_users={all_users}
-          all_products={all_products}
-        />
+        hello
       </AdminPannelLayoutContainer>
     </>
   );
