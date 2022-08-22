@@ -1,37 +1,37 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import AdminPannelLayoutContainer from "../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
-import AdminDashboardMain from "../../../../components/admin_pannel_components/components/admin_dashboard/AdminDashboardMain";
-import ErrorPage from "../../../../pages/404";
+import ManageCategoryMain from "../../../../components/admin_pannel_components/components/manage_category/ManageCategoryMain";
+import { storeAllCategories } from "../../../../redux/all_data/action";
 import { storeUserData } from "../../../../redux/user_data/action";
-
-export default function AdminDashboard({
-  all_orders,
-  all_users,
+import ErrorPage from "../../../404";
+export default function ManagCategoryProducts({
   all_products,
+  all_categories,
   this_user,
 }) {
   // store categories to redux
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(storeUserData(this_user));
+    dispatch(storeAllCategories(all_categories));
   });
 
   if (!this_user?.user_admin) {
     return <ErrorPage />;
   }
-
   return (
     <>
       <AdminPannelLayoutContainer
-        title="Admin Dashboard"
-        description="This is admin dashboard of 'Daily Needs Grocery' web application."
+        title="Manage Category"
+        description="This is manage category of 'Daily Needs Grocery' web application admin pannel."
       >
-        <AdminDashboardMain
-          all_orders={all_orders}
-          all_users={all_users}
-          all_products={all_products}
-        />
+        {all_categories.length && (
+          <ManageCategoryMain
+            all_products={all_products}
+            all_categories={all_categories}
+          />
+        )}
       </AdminPannelLayoutContainer>
     </>
   );
@@ -56,23 +56,15 @@ export async function getStaticProps({ params }) {
     `https://daily-need.vercel.app/api/admin_pannel_api/manage_users/${admin_email}`
   );
   const this_user = await user.json();
-
-  // all orders
-  const orders = await fetch(
-    `https://daily-need.vercel.app/api/manage_orders/all_orders`
+  const products = await fetch("https://daily-need.vercel.app/api/allproducts");
+  const categories = await fetch(
+    "https://daily-need.vercel.app/api/allcategories"
   );
-  const all_orders = await orders.json();
-
-  // all products
-  const products = await fetch(`https://daily-need.vercel.app/api/allproducts`);
   const all_products = await products.json();
-
-  // all users
-  const users = await fetch(`https://daily-need.vercel.app/api/all_users`);
-  const all_users = await users.json();
+  const all_categories = await categories.json();
 
   return {
-    props: { all_orders, all_products, all_users, this_user },
+    props: { all_products, all_categories, this_user },
     revalidate: 10,
   };
 }
