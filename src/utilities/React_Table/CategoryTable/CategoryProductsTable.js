@@ -75,11 +75,11 @@ export default function CategoryProductsTable({
       <ReactTooltip place="left" type="dark" effect="solid" />
       <table id="products_table" {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup, i) => (
-            <tr key={i} {...headerGroup.getFooterGroupProps()}>
-              {headerGroup.headers.map((column, i) => (
+          {headerGroups.map((headerGroup, index) => (
+            <tr key={index} {...headerGroup.getFooterGroupProps()}>
+              {headerGroup.headers.map((column, index) => (
                 <th
-                  key={i}
+                  key={index}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   <span
@@ -117,10 +117,10 @@ export default function CategoryProductsTable({
         </thead>
 
         <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
+          {page.map((row, index) => {
             prepareRow(row);
             return (
-              <tr key={i} {...row.getRowProps()}>
+              <tr key={index} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   if (cell.column.id === "cat_image") {
                     return (
