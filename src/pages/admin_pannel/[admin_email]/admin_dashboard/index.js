@@ -53,8 +53,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { admin_email } = params;
   const user = await fetch(
-    // `https://daily-need.vercel.app/api/admin_pannel_api/manage_users/${admin_email}`
-    `http://localhost:3000/api/admin_pannel_api/manage_users/${admin_email}`
+    `https://daily-need.vercel.app/api/admin_pannel_api/manage_users/${admin_email}`
+    // `http://localhost:3000/api/admin_pannel_api/manage_users/${admin_email}`
   );
   const this_user = await user.json();
 
