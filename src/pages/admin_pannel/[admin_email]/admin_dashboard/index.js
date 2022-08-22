@@ -1,24 +1,22 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import AdminPannelLayoutContainer from "../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
-import ErrorPage from "../../../../pages/404";
-import { storeUserData } from "../../../../redux/user_data/action";
 
-export default function AdminDashboard({
-  all_orders,
-  all_users,
-  all_products,
-  this_user,
-}) {
-  // store categories to redux
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(storeUserData(this_user));
-  });
-
-  if (!this_user?.user_admin) {
-    return <ErrorPage />;
+export default function AdminDashboard(
+  {
+    // all_orders,
+    // all_users,
+    // all_products,
+    // this_user,
   }
+) {
+  // store categories to redux
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(storeUserData(this_user));
+  // });
+
+  // if (!this_user?.user_admin) {
+  //   return <ErrorPage />;
+  // }
 
   return (
     <>
