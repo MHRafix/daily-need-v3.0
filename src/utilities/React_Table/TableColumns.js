@@ -1,6 +1,7 @@
 // import { format } from 'date-fns';
-
 import Image from "next/image";
+import Admin from "../../images/users/admin.png";
+import Customer from "../../images/users/customer.png";
 import Action from "../Action";
 
 // mini users table header column
@@ -244,10 +245,7 @@ export const UserTableColumns = [
     name: "User Name",
     selector: (row) => row.user_name,
   },
-  {
-    name: "User Email",
-    selector: (row) => row.user_email,
-  },
+
   {
     name: "Profile Pic",
     selector: (row) => (
@@ -262,6 +260,32 @@ export const UserTableColumns = [
       </div>
     ),
   },
+  {
+    name: "User Email",
+    selector: (row) => row.user_email,
+  },
+  {
+    name: "User Role",
+    selector: (row) =>
+      row.user_admin === true ? (
+        <Image
+          src={Admin}
+          alt="role image"
+          data-tip="Admin"
+          width={40}
+          height={40}
+        />
+      ) : (
+        <Image
+          src={Customer}
+          alt="role image"
+          data-tip="Customer"
+          width={40}
+          height={40}
+        />
+      ),
+  },
+
   {
     name: "Action",
     selector: (row) => <Action />,
