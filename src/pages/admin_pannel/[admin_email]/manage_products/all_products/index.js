@@ -58,15 +58,12 @@ export async function getStaticProps({ params }) {
   const this_user = await user.json();
 
   // all products
-  const products = await fetch(`${process.env.ROOT_URI}/api/allproducts`);
-  const categories = await fetch(`${process.env.ROOT_URI}/api/allcategories`);
+  const products = await fetch(`https://daily-need.vercel.app/api/allproducts`);
+  const categories = await fetch(
+    `https://daily-need.vercel.app/api/allcategories`
+  );
   const all_products = await products.json();
   const all_categories = await categories.json();
 
   return { props: { all_products, all_categories, this_user }, revalidate: 10 };
 }
-// import React from "react";
-
-// export default function Allproducts() {
-//   return <div>allproducts</div>;
-// }
