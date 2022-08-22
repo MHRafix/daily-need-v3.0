@@ -1,10 +1,10 @@
-import Cookie from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FiMessageSquare, FiSearch } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineDarkMode, MdOutlineLanguage } from "react-icons/md";
 import { RiBarChartHorizontalLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 export default function AdminPannelTopNavigation({
   setNavigationOn,
@@ -12,10 +12,7 @@ export default function AdminPannelTopNavigation({
 }) {
   const [notification, setNotification] = useState(0);
   const [messages, setMessages] = useState(1);
-
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
+  const userInfo = useSelector((state) => state.users.loggedin_user);
 
   return (
     <>

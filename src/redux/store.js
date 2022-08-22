@@ -3,10 +3,12 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import products from "./all_data/reducer";
 import cart_product from "./cart_products/reducer";
+import users from "./user_data/reducer";
 
 const combinedReducer = combineReducers({
   cart_product,
   products,
+  users,
 });
 
 const masterReducer = (state, action) => {
@@ -19,6 +21,9 @@ const masterReducer = (state, action) => {
       },
       allProducts: {
         products: state.products,
+      },
+      user_data: {
+        user_data: state.users,
       },
     };
     return nextState;

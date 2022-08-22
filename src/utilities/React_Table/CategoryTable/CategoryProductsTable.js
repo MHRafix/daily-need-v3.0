@@ -1,20 +1,22 @@
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
-import { FiBookOpen } from "react-icons/fi";
+import { FiBookOpen, FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
-import { uuid } from "uuidv4";
+import useDeleteReq from "../../../hooks/deleteReq";
+import AlertToast from "../../alertToast/AlertToast";
+import toastConfig from "../../toastConfig";
+import { CATEGORY_PRODUCTS_TABLE_COLUMNS } from "../TableColumns";
 import { TableDataSorterInput, TablePagination } from "../TableParts";
 
 export default function CategoryProductsTable({
   handleModal,
   all_products,
   CATEGORY_DATA,
-  TABLE_COLUMNS,
 }) {
-  const columns = useMemo(() => TABLE_COLUMNS, []);
+  const columns = useMemo(() => CATEGORY_PRODUCTS_TABLE_COLUMNS, []);
   const [data, setData] = useState(CATEGORY_DATA);
 
   const tableInstance = useTable(
@@ -60,19 +62,24 @@ export default function CategoryProductsTable({
     pageSize,
   };
 
+  const { toastOn, setToastOn, toastType, toastText, handleDelete } =
+    useDeleteReq();
+
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
   return (
     <>
+      {toastOn && <AlertToast toast_config={toast_config} />}
       {/* data sorter  */}
       <TableDataSorterInput dependency={sorting_dependency} />
       {/* react table here */}
       <ReactTooltip place="left" type="dark" effect="solid" />
       <table id="products_table" {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr key={uuid()} {...headerGroup.getFooterGroupProps()}>
-              {headerGroup.headers.map((column) => (
+          {headerGroups.map((headerGroup, i) => (
+            <tr key={i} {...headerGroup.getFooterGroupProps()}>
+              {headerGroup.headers.map((column, i) => (
                 <th
-                  key={uuid()}
+                  key={i}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   <span
@@ -110,10 +117,10 @@ export default function CategoryProductsTable({
         </thead>
 
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
-              <tr key={uuid()} {...row.getRowProps()}>
+              <tr key={i} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   if (cell.column.id === "cat_image") {
                     return (
@@ -156,8 +163,18 @@ export default function CategoryProductsTable({
                         <span className="flex justify-center items-center">
                           &nbsp;&nbsp;
                           <RiDeleteBinLine
+                            onClick={() =>
+                              handleDelete(
+                                `admin_pannel_api/manage_category/${cell.value}`
+                              )
+                            }
                             data-tip="Delete"
                             className="text-red-500 cursor-pointer text-normal outline-none"
+                          />
+                          &nbsp;&nbsp;
+                          <FiEdit
+                            data-tip="Edit"
+                            className="text-light_purple cursor-pointer text-normal outline-none"
                           />
                           &nbsp;&nbsp;
                           <FiBookOpen

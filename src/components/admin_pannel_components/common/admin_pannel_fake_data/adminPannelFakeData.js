@@ -63,11 +63,7 @@ export const admin_pannel_navigation = [
         sub_nav_name: "admin login",
         sub_nav_link: "admin_login",
       },
-      {
-        _id: 2,
-        sub_nav_name: "create admin",
-        sub_nav_link: "create_admin",
-      },
+
       {
         _id: 3,
         sub_nav_name: "forgot password",

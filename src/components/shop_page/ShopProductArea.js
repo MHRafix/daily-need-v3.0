@@ -18,7 +18,6 @@ export default function ShopProductArea({
   const layout_status = Cookie.get("layout_changer")
     ? JSON.parse(Cookie.get("layout_changer"))
     : true;
-
   const [grid, setGrid] = useState(layout_status);
 
   // handle grid layout
@@ -96,7 +95,7 @@ export default function ShopProductArea({
           ))}
         </div>
       )}
-      {currentItems?.length > 9 && (
+      {products_data?.length > 9 && (
         <div className="pagination">
           <ReactPaginate
             breakLabel="..."

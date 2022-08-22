@@ -11,10 +11,7 @@ import { AddCategoryFormValidator } from "../../../../utilities/Formik/Validator
 import ReactModal from "../../../../utilities/Modal/ReactModal";
 import CategoryProductsTable from "../../../../utilities/React_Table/CategoryTable/CategoryProductsTable";
 import ReactPaginationTable from "../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
-import {
-  CATEGORY_PRODUCTS_TABLE_COLUMNS,
-  PRODUCTS_TABLE_COLUMNS,
-} from "../../../../utilities/React_Table/TableColumns";
+import { PRODUCTS_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
 import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
@@ -87,7 +84,6 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
             handleModal={handleModal}
             all_products={all_products}
             CATEGORY_DATA={all_categories}
-            TABLE_COLUMNS={CATEGORY_PRODUCTS_TABLE_COLUMNS}
           />
         </DashboardContentLayout>
         {modal && (

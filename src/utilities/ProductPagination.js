@@ -9,7 +9,7 @@ export default function ProductPagination(items) {
     const endOffset = itemOffset + 9;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / 9));
-  }, [itemOffset, 9]);
+  }, [itemOffset, items.length]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {

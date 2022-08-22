@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import NextLink from "next/link";
 import React, { useState } from "react";
 import {
@@ -6,15 +5,13 @@ import {
   MdKeyboardArrowRight,
   MdKeyboardArrowUp,
 } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 export default function AdminPannelLeftNav({ nav_data }) {
   const { main_nav, main_nav_link, main_nav_icon, sub_navs } = nav_data;
 
   // user information
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
-
+  const userInfo = useSelector((state) => state.users.loggedin_user);
   const [subNavOn, setSubNavOn] = useState(false);
 
   return (
@@ -29,7 +26,7 @@ export default function AdminPannelLeftNav({ nav_data }) {
         >
           {main_nav_link ? (
             <NextLink
-              href={`/admin_pannel/${userInfo?.user_name}/${userInfo?.user_email}${main_nav_link}`}
+              href={`/admin_pannel/${userInfo?.user_email}${main_nav_link}`}
               passHref
             >
               <h3
@@ -96,18 +93,15 @@ export default function AdminPannelLeftNav({ nav_data }) {
 
 export const SubNav = ({ sub_nav }) => {
   const { sub_nav_name, sub_nav_link } = sub_nav;
-
   // user information
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
+  const userInfo = useSelector((state) => state.users.loggedin_user);
   return (
     <>
       <NextLink
         href={
           sub_nav_name === "admin login" || sub_nav_name === "forgot password"
             ? `/admin_pannel/authentication/${sub_nav_link}`
-            : `/admin_pannel/${userInfo?.user_name}/${userInfo?.user_email}${sub_nav_link}`
+            : `/admin_pannel/${userInfo?.user_email}${sub_nav_link}`
         }
         passHref
       >
