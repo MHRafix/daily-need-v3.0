@@ -1,4 +1,8 @@
 // import { format } from 'date-fns';
+
+import Image from "next/image";
+import Action from "../Action";
+
 // mini users table header column
 export const MINI_USER_TABLE_COLUMNS = [
   {
@@ -232,5 +236,34 @@ export const LIMITED_PRODUCTS_TABLE_COLUMNS = [
   {
     Header: "Action",
     accessor: "_id",
+  },
+];
+
+export const UserTableColumns = [
+  {
+    name: "User Name",
+    selector: (row) => row.user_name,
+  },
+  {
+    name: "User Email",
+    selector: (row) => row.user_email,
+  },
+  {
+    name: "Profile Pic",
+    selector: (row) => (
+      <div style={{ padding: "5px" }}>
+        <Image
+          src={row.user_pic}
+          alt="user pic"
+          width={40}
+          height={40}
+          className="rounded-full"
+        />
+      </div>
+    ),
+  },
+  {
+    name: "Action",
+    selector: (row) => <Action />,
   },
 ];

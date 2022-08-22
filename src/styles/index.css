@@ -754,6 +754,10 @@
   }
 
   /* all btn css here */
+  #action_btn {
+    @apply hover:bg-zinc-200 hover:duration-500 px-extra_padding py-extra_padding3 rounded-full;
+  }
+
   .btn {
     @apply bg-gradient-to-r from-orangee to-orangee_red;
   }

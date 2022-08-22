@@ -945,7 +945,7 @@ export const AddHomeSliderFormValidator = () => {
         setToastText,
         setToastType,
         setToastOn,
-        "admin_pannel_api/manage_slider/add_home_slider"
+        "admin_pannel_api/manage_slider/home_slider/add_home_slider"
       );
     }
   };
@@ -1005,7 +1005,7 @@ export const AddBrandSliderFormValidator = () => {
         setToastTextBrand,
         setToastTypeBrand,
         setToastOnBrand,
-        "admin_pannel_api/manage_slider/add_brand_slider"
+        "admin_pannel_api/manage_slider/brand_slider/add_brand_slider"
       );
     }
   };

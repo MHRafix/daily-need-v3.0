@@ -1,6 +1,6 @@
 import nc from "next-connect";
-import HomeSlider from "../../../../../models/HomeSlider";
-import db from "../../../../utilities/database";
+import HomeSlider from "../../../../../../models/HomeSlider";
+import db from "../../../../../utilities/database";
 
 const handler = nc();
 handler.post(async (req, res) => {

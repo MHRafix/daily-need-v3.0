@@ -15,7 +15,6 @@ export default function ReactOrdersTable({ ORDERS_DATA, handleModal }) {
   const columns = useMemo(() => ORDERS_TABLE_COLUMN, []);
   const [data, setData] = useState(ORDERS_DATA);
   const [active, setActive] = useState("reset");
-  console.log(uuid());
   const tableInstance = useTable(
     {
       columns,

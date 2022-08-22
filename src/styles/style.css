@@ -164,3 +164,72 @@ li {
   font-weight: 500;
   margin: 0px 5px;
 }
+
+#action_plate {
+  display: grid;
+  grid-gap: 5px;
+  width: 7.5rem;
+  margin: 5px;
+  height: 8rem;
+  position: absolute;
+  top: 35px;
+  bottom: 0;
+  left: -20px;
+  right: 0;
+  border-radius: 5px;
+  z-index: 9999999999;
+  opacity: 1;
+  background-color: #fff;
+  padding: 8px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-duration: 1000ms;
+  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
+    0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+}
+
+.gelpCx {
+  overflow-y: initial !important;
+  overflow-x: auto;
+}
+
+div#action_btn_icon {
+  display: flex;
+  padding: 8px 10px;
+  border-radius: 99999px;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+div#action_btn_icon:hover {
+  background: #eee;
+  transition: 0.3s;
+}
+
+/* browser bar css */
+.gelpCx::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+.gelpCx::-webkit-scrollbar:horizontal {
+  width: 0.2rem;
+  height: 0.2rem;
+}
+
+.gelpCx::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gelpCx::-webkit-scrollbar-thumb {
+  background: rgb(108, 95, 252);
+  border-radius: 5rem;
+}
+
+html::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
