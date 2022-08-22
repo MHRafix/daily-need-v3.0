@@ -16,12 +16,12 @@ text.recharts-text.recharts-cartesian-axis-tick-value {
 }
 
 /* react table css here */
-select.sorting_input {
+input.sorting_input {
   font-size: 14px;
   color: #626060d1;
   letter-spacing: 1px;
   border: 1px solid #e1e1e1d1;
-  padding: 8px 10px;
+  padding: 5px 10px;
   border-radius: 5px;
   font-weight: 500;
   outline: none;
@@ -232,4 +232,8 @@ html::-webkit-scrollbar {
 
 html::-webkit-scrollbar-track {
   background: transparent;
+}
+
+.sc-dmRaPn.gelpCx {
+  border: 1px solid #9790903b !important;
 }
