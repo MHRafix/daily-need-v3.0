@@ -1,13 +1,13 @@
 import Cookie from "js-cookie";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Category from "../../../../../../../models/Category";
-import LimitedProducts from "../../../../../../../models/LimitedProducts";
-import AdminPannelLayoutContainer from "../../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
-import LimitedProductsMain from "../../../../../../components/admin_pannel_components/components/manage_products/limited_products/LimitedProductsMain";
-import { storeAllCategories } from "../../../../../../redux/all_data/action";
-import db from "../../../../../../utilities/database";
-import ErrorPage from "../../../../../404";
+import Category from "../../../../../../models/Category";
+import LimitedProducts from "../../../../../../models/LimitedProducts";
+import AdminPannelLayoutContainer from "../../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer";
+import LimitedProductsMain from "../../../../../components/admin_pannel_components/components/manage_products/limited_products/LimitedProductsMain";
+import { storeAllCategories } from "../../../../../redux/all_data/action";
+import db from "../../../../../utilities/database";
+import ErrorPage from "../../../../404";
 
 export default function LimitedProductsPage({
   limited_products,
