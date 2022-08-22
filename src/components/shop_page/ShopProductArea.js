@@ -3,7 +3,6 @@ import { useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaBars, FaList } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import { ErrorMessage } from "../../utilities/AlertMessage";
 import GridProductCard from "../../utilities/GridProductCard";
 import ListProductCard from "../../utilities/ListProductCard";
 import ProductPagination from "../../utilities/ProductPagination";
@@ -31,11 +30,6 @@ export default function ShopProductArea({
     Cookie.set("layout_changer", JSON.stringify(false));
     setGrid(false);
   };
-
-  // error page
-  if (!products_data?.length) {
-    return <ErrorMessage message="No product found!" />;
-  }
 
   return (
     <div className="shop_product_area">
@@ -84,14 +78,14 @@ export default function ShopProductArea({
       </div>
       {grid ? (
         <div className="grid_shop_products">
-          {currentItems?.map((product) => (
-            <GridProductCard key={product._id} product_data={product} />
+          {currentItems?.map((product, i) => (
+            <GridProductCard key={i} product_data={product} />
           ))}
         </div>
       ) : (
         <div className="list_shop_products">
-          {currentItems?.map((product) => (
-            <ListProductCard key={product._id} product_data={product} />
+          {currentItems?.map((product, i) => (
+            <ListProductCard key={i} product_data={product} />
           ))}
         </div>
       )}
