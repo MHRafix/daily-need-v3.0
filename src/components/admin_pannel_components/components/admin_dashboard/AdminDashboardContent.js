@@ -9,7 +9,6 @@ import ReactModal from "../../../../utilities/Modal/ReactModal";
 import ReactOrdersTable from "../../../../utilities/React_Table/OrdersTable/ReactOrdersTable";
 import ReactPaginationTable from "../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
 import { ORDERED_PRODUCT_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
-import DashboardUsersMiniTable from "../../../../utilities/React_Table/UsersDataTable/DashboardUsersMiniTable";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 import GridBox from "../../admin_pannel_utilities/GridBoxes/GridBox";
 
@@ -144,10 +143,10 @@ export default function AdminDashboardContent({
           </div>
           {/* users mini table */}
           <div className="xl:!w-1/3 xs:w-full">
-            <DashboardUsersMiniTable
+            {/* <DashboardUsersMiniTable
               item_name="users table"
               users_data={all_users}
-            />
+            /> */}
           </div>
         </div>
       </div>
