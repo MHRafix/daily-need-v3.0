@@ -54,3 +54,9 @@
 
 //   return { props: { all_users, this_user }, revalidate: 10 };
 // }
+
+import React from "react";
+
+export default function Allusers() {
+  return <div>Allusers</div>;
+}
