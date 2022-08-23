@@ -1,59 +1,41 @@
-import React from "react";
-import AlertToast from "../../../../../utilities/alertToast/AlertToast";
-import FormikFormLayout from "../../../../../utilities/Formik/FormikLayout/FormikFormLayout";
-import AddProductsForm from "../../../../../utilities/Formik/Forms/AddProductsForm";
-import { AddProductsFormValidator } from "../../../../../utilities/Formik/Validators/AllFormValidators";
+import React, { useState } from "react";
+import { HiOutlineViewGridAdd } from "react-icons/hi";
+import AddProductsFormMain from "../../../../../utilities/Formik/Forms/product_form/AddProductsFormMain";
 import ReactPaginationTable from "../../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
 import { PRODUCTS_TABLE_COLUMNS } from "../../../../../utilities/React_Table/TableColumns";
-import toastConfig from "../../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function AllProductsContent({ all_products, all_categories }) {
-  const {
-    initialValues,
-    validationSchema,
-    onSubmit,
-    setThumbnail,
-    setBigThumbnail,
-    processing,
-    toastText,
-    toastType,
-    toastOn,
-    setToastOn,
-  } = AddProductsFormValidator();
+  const [show, setShow] = useState(false);
 
-  // toast config
-  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
-
+  // handle add item form show
+  const handleAddFormShow = () => {
+    setShow(() => (show ? false : true));
+  };
   return (
     <>
-      {/* message toast alert */}
-      {toastOn && <AlertToast toast_config={toast_config} />}
-
       {/* add products form  */}
-      <div className="dashboard_row_wrapper">
-        <div className="add_products_form">
-          <DashboardContentLayout item_name="add products">
-            <FormikFormLayout
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              <AddProductsForm
-                setThumbnail={setThumbnail}
-                setBigThumbnail={setBigThumbnail}
-                processing={processing}
-                all_categories={all_categories}
-              />
-            </FormikFormLayout>
-          </DashboardContentLayout>
+      {show && (
+        <div className="dashboard_row_wrapper">
+          <div className="add_products_form">
+            <AddProductsFormMain
+              show={show}
+              handleAddFormShow={handleAddFormShow}
+              all_categories={all_categories}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* all products managing table */}
       <div className="dashboard_row_wrapper">
         <div className="manage_products_table">
-          <DashboardContentLayout item_name="manage all products">
+          <DashboardContentLayout
+            item_name="all users table"
+            btn_content={!show && <HiOutlineViewGridAdd />}
+            btn_id={!show && "expand_btn"}
+            handleAddItem={handleAddFormShow}
+          >
             <ReactPaginationTable
               PRODUCTS_DATA={all_products}
               PRODUCTS_TABLE_COLUMNS={PRODUCTS_TABLE_COLUMNS}

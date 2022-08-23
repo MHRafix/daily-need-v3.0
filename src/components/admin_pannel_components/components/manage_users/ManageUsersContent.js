@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { FiUserPlus } from "react-icons/fi";
 import useDeleteReq from "../../../../hooks/deleteReq";
 import { UserSorter } from "../../../../lib/Tables/FilterSorter";
 import { UserTableConfig } from "../../../../lib/Tables/TableColumns";
 import UsersTable from "../../../../lib/Tables/UsersTable";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
+import AddUserForm from "../../../../utilities/Formik/Forms/user_form/AddUserForm";
 import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageUsersContent({ all_users }) {
   const [data, setData] = useState(all_users);
   const [active, setActive] = useState("reset");
+  const [show, setShow] = useState(false);
 
   // delete hook
   const { toastOn, setToastOn, toastType, toastText, handleDelete } =
@@ -49,13 +52,30 @@ export default function ManageUsersContent({ all_users }) {
     handleResetFilter,
     active,
   };
+
+  // handle add item form show
+  const handleAddFormShow = () => {
+    setShow(() => (show ? false : true));
+  };
+
   return (
     <>
       {/* alert toast here  */}
       {toastOn && <AlertToast toast_config={toast_config} />}
 
+      {show && (
+        <div className="dashboard_row_wrapper">
+          <AddUserForm show={show} handleAddFormShow={handleAddFormShow} />
+        </div>
+      )}
+
       <div className="dashboard_row_wrapper">
-        <DashboardContentLayout item_name="all users table">
+        <DashboardContentLayout
+          item_name="all users table"
+          btn_content={!show && <FiUserPlus />}
+          btn_id={!show && "expand_btn"}
+          handleAddItem={handleAddFormShow}
+        >
           <UserSorter dependency={sorting_dependency} />
           <UsersTable table_columns={UserTableColumns} table_data={data} />
         </DashboardContentLayout>

@@ -655,19 +655,19 @@
   }
 
   #red_signal_status {
-    @apply bg-red-500 tracking-wider text-white rounded-full px-1 py-extra_padding md:!text-exthin xs:text-thin capitalize;
+    @apply bg-red-500 tracking-wider text-white rounded-full px-1 py-extra_padding text-thin capitalize;
   }
 
   #green_signal_status {
-    @apply bg-emerald-400 tracking-wider text-white rounded-full px-1 py-extra_padding md:!text-exthin xs:text-thin capitalize;
+    @apply bg-emerald-400 tracking-wider text-white rounded-full px-1 py-extra_padding text-thin capitalize;
   }
 
   #warning_signal_status {
-    @apply bg-amber-400 text-white tracking-wider rounded-full px-1 py-extra_padding md:!text-exthin xs:text-thin capitalize;
+    @apply bg-amber-400 text-white tracking-wider rounded-full px-1 py-extra_padding text-thin capitalize;
   }
 
   #info_signal_status {
-    @apply tracking-wider rounded-full px-1 py-extra_padding md:!text-exthin xs:text-thin capitalize bg-indigo-400 text-white;
+    @apply tracking-wider rounded-full px-1 py-extra_padding text-thin capitalize bg-indigo-400 text-white;
   }
   /* sumury box css here  */
 
@@ -754,6 +754,15 @@
   }
 
   /* all btn css here */
+
+  #expand_btn {
+    @apply bg-green text-white text-semi_medium w-14 h-14 flex items-center justify-center rounded-full hover:duration-300 hover:bg-black;
+  }
+
+  #minimize_btn {
+    @apply bg-orangee_red text-white text-semi_medium w-14 h-14 flex items-center justify-center rounded-full hover:duration-300 hover:bg-black;
+  }
+
   #action_btn {
     @apply hover:bg-zinc-200 hover:duration-500 px-extra_padding py-extra_padding3 rounded-full;
   }

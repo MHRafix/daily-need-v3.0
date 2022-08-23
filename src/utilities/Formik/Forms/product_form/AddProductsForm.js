@@ -5,8 +5,8 @@ import {
   FormikFileField,
   FormikSelectField,
   FormikTextField,
-} from "../../Form/FormField";
-import FormFieldFlexLayout from "../FormikLayout/FormFieldFlexLayout";
+} from "../../../Form/FormField";
+import FormFieldFlexLayout from "../../FormikLayout/FormFieldFlexLayout";
 
 export default function AddProductsForm({
   setThumbnail,

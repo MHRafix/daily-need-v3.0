@@ -9,7 +9,7 @@ import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayo
 import { RegistrationFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../utilities/toastConfig";
 
-export default function SignupForm() {
+export default function SignupForm({ btn_name }) {
   const {
     initialValues,
     validationSchema,
@@ -69,15 +69,16 @@ export default function SignupForm() {
             required={true}
           />
 
-          <p className="text-light text-black4 tracking-wide my-10">
-            Your personal data will be used to support your experience
-            throughout this website, to manage access to your account, and for
-            other purposes described in our privacy policy.
-          </p>
-
+          {!btn_name && (
+            <p className="text-light text-black4 tracking-wide my-10">
+              Your personal data will be used to support your experience
+              throughout this website, to manage access to your account, and for
+              other purposes described in our privacy policy.
+            </p>
+          )}
           <FormButton
             type="submit"
-            btn_name="Signup Now"
+            btn_name={btn_name || "Signup Now"}
             processing={processing}
           />
         </Form>
