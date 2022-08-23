@@ -1,8 +1,8 @@
+import { Formik } from "formik";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { ErrorMessage } from "../../utilities/AlertMessage";
 import AlertToast from "../../utilities/alertToast/AlertToast";
-import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import ReviewForm from "../../utilities/Formik/Forms/ReviewForm";
 import { AddReviewRatingFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../utilities/toastConfig";
@@ -94,7 +94,7 @@ export default function AdditonalInfo({ product }) {
                   Add Reviews and Ratings
                 </h3>
                 <div className="review_form my-10">
-                  <FormikFormLayout
+                  <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
@@ -103,7 +103,7 @@ export default function AdditonalInfo({ product }) {
                       processing={processing}
                       setState={setProductPic}
                     />
-                  </FormikFormLayout>
+                  </Formik>
                 </div>
               </>
             ) : (

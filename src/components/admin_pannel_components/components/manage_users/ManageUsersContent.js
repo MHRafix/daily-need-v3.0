@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import useDeleteReq from "../../../../hooks/http_req/deleteReq";
-import AddUserForm from "../../../../lib/formik/Forms/user_form/AddUserForm";
+import AddUserForm from "../../../../lib/Formik/Forms/user_form/AddUserForm";
 import Table from "../../../../lib/Tables/table/Table";
 import { UserTableConfig } from "../../../../lib/Tables/table_config/TableColumns";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";

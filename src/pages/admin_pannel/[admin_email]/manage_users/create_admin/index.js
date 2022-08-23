@@ -1,4 +1,4 @@
-import { Form } from "formik";
+import { Form, Formik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import AdminPannelBreadcrumb from "../../../../../components/admin_pannel_components/common/admin_pannel_breadcrumb/AdminPannelBreadcrumb";
@@ -60,11 +60,7 @@ export default function CreateAdmin({ this_user }) {
               onSubmit={onSubmit}
             >
               <Form>
-                <FormikTextField
-                  form_label="user name"
-                  type="text"
-                  name="user_name"
-                />
+                <Formik form_label="user name" type="text" name="user_name" />
                 <FormikTextField
                   form_label="user email"
                   type="email"
