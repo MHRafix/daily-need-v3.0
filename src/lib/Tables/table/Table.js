@@ -37,10 +37,14 @@ export default function Table({
   };
   return (
     <>
-      {sorter ? (
-        <ProductSorter dependency={sorting_dependency} isProduct={true} />
-      ) : (
-        <UserSorter dependency={sorting_dependency} />
+      {sorting_dependency && (
+        <>
+          {sorter ? (
+            <ProductSorter dependency={sorting_dependency} isProduct={true} />
+          ) : (
+            <UserSorter dependency={sorting_dependency} />
+          )}
+        </>
       )}
       <DataTable
         direction="auto"

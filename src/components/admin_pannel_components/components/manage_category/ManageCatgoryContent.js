@@ -1,31 +1,28 @@
-import { Form, Formik } from "formik";
 import React, { useState } from "react";
-import AlertToast from "../../../../utilities/alertToast/AlertToast";
+import { BiCategoryAlt } from "react-icons/bi";
+import { FiMinimize } from "react-icons/fi";
+import useDeleteReq from "../../../../hooks/http_req/deleteReq";
+import CategoryForm from "../../../../lib/Formik/Forms/add_category_form/CategoryForm";
+import Table from "../../../../lib/Tables/table/Table";
 import {
-  FormButton,
-  FormikFileField,
-  FormikTextField,
-} from "../../../../utilities/Form/FormField";
-import { AddCategoryFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
+  CategoryTableConfig,
+  ProductTableConfig,
+} from "../../../../lib/Tables/table_config/TableColumns";
+import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import ReactModal from "../../../../utilities/Modal/ReactModal";
-import CategoryProductsTable from "../../../../utilities/React_Table/CategoryTable/CategoryProductsTable";
-import ReactPaginationTable from "../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
-import { PRODUCTS_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
 import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageCatgoryContent({ all_products, all_categories }) {
-  const {
-    initialValues,
-    validationSchema,
-    onSubmit,
-    setCatImg,
-    processing,
-    toastText,
-    toastType,
-    toastOn,
-    setToastOn,
-  } = AddCategoryFormValidator();
+  // handle add item form show
+  const [show, setShow] = useState(false);
+  const handleAddFormShow = () => {
+    setShow(() => (show ? false : true));
+  };
+
+  // delete hook
+  const { toastOn, setToastOn, toastType, toastText, handleDelete } =
+    useDeleteReq();
 
   // toast config
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
@@ -42,47 +39,42 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
     setModal(true);
   };
 
+  // users table config
+  const { CategoryTableColumns } = CategoryTableConfig(
+    handleDelete,
+    all_products,
+    handleModal
+  );
+
+  const { ProductTableColumns } = ProductTableConfig();
   return (
     <>
       {/* alert toast here  */}
       {toastOn && <AlertToast toast_config={toast_config} />}
       {/* orders show on table */}
-      <div className="dashboard_row_wrapper">
-        <DashboardContentLayout item_name="add category">
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
+      {show && (
+        <div className="dashboard_row_wrapper">
+          <DashboardContentLayout
+            item_name="add category"
+            btn_content={show && <FiMinimize />}
+            btn_id={show && "minimize_btn"}
+            handleAddItem={handleAddFormShow}
           >
-            <Form>
-              <FormikTextField
-                form_label="category name"
-                type="text"
-                name="cat_name"
-              />
-              <FormikFileField
-                form_label="category image"
-                setState={setCatImg}
-                type="file"
-                name="cat_image"
-                required={true}
-              />
-              <br />
-              <FormButton
-                type="submit"
-                btn_name="Add Category"
-                processing={processing}
-              />
-            </Form>
-          </Formik>
-        </DashboardContentLayout>
-      </div>
+            <CategoryForm />
+          </DashboardContentLayout>
+        </div>
+      )}
       <div className="dashboard_row_wrapper">
-        <DashboardContentLayout item_name="category products">
-          <CategoryProductsTable
-            handleModal={handleModal}
-            all_products={all_products}
-            CATEGORY_DATA={all_categories}
+        <DashboardContentLayout
+          item_name="category products"
+          btn_content={!show && <BiCategoryAlt />}
+          btn_id={!show && "expand_btn"}
+          handleAddItem={handleAddFormShow}
+        >
+          <Table
+            table_columns={CategoryTableColumns}
+            table_data={all_categories}
+            sorter={false}
           />
         </DashboardContentLayout>
         {modal && (
@@ -91,9 +83,10 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
             modal_data={modalData}
             modal_title="Category Products"
           >
-            <ReactPaginationTable
-              PRODUCTS_DATA={modalData}
-              PRODUCTS_TABLE_COLUMNS={PRODUCTS_TABLE_COLUMNS}
+            <Table
+              table_columns={ProductTableColumns}
+              table_data={modalData}
+              sorter={true}
             />
           </ReactModal>
         )}

@@ -59,7 +59,11 @@ export default function CreateAdmin({ this_user }) {
               onSubmit={onSubmit}
             >
               <Form>
-                <Formik form_label="user name" type="text" name="user_name" />
+                <FormikTextField
+                  form_label="user name"
+                  type="text"
+                  name="user_name"
+                />
                 <FormikTextField
                   form_label="user email"
                   type="email"

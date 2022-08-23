@@ -164,6 +164,10 @@ li {
   margin: 0px 5px;
 }
 
+.action_three-dots {
+  position: relative;
+}
+
 #action_plate_two {
   width: 7rem;
   height: 5rem;
@@ -171,9 +175,9 @@ li {
   grid-gap: 5px;
   margin: 5px;
   position: absolute;
-  top: 35px;
+  top: 25px;
   bottom: 0;
-  left: -65px;
+  left: -110px;
   right: 0;
   border-radius: 5px;
   z-index: 9999999999;
@@ -194,9 +198,9 @@ li {
   grid-gap: 5px;
   margin: 5px;
   position: absolute;
-  top: 35px;
+  top: 25px;
   bottom: 0;
-  left: -65px;
+  left: -110px;
   right: 0;
   border-radius: 5px;
   z-index: 9999999999;
@@ -260,5 +264,9 @@ html::-webkit-scrollbar-track {
 }
 
 .bMgaAx div:first-child {
+  overflow: initial !important;
+}
+
+.dBbhDz div:first-child {
   overflow: initial !important;
 }

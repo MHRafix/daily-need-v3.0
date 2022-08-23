@@ -35,12 +35,28 @@ const productSort = (rowA, rowB) => {
   return 0;
 };
 
+// product sort
+const catSort = (rowA, rowB) => {
+  const a = rowA.cat_name.toLowerCase();
+  const b = rowB.cat_name.toLowerCase();
+
+  if (a > b) {
+    return 1;
+  }
+
+  if (b > a) {
+    return -1;
+  }
+
+  return 0;
+};
+
 // user table config and columns here
 export const UserTableConfig = (handleDelete) => {
   const UserTableColumns = [
     {
       name: "User Name",
-      selector: (row) => row.user_name,
+      selector: (row) => <div className="capitalize">{row.user_name}</div>,
       sortable: true,
       sortFunction: caseInsensitiveSort,
     },
@@ -105,13 +121,13 @@ export const ProductTableConfig = (handleDelete) => {
   const ProductTableColumns = [
     {
       name: "Title",
-      selector: (row) => row.title,
+      selector: (row) => <div className="capitalize">{row.title}</div>,
       sortable: true,
       sortFunction: productSort,
     },
 
     {
-      // name: "Image",
+      name: "Image",
       selector: (row) => (
         <div style={{ padding: "5px" }}>
           <Image
@@ -175,31 +191,6 @@ export const ProductTableConfig = (handleDelete) => {
       sortable: true,
       sortFunction: productSort,
     },
-    // {
-    //   name: "Action",
-    //   selector: (row) => row._id,
-    //   sortable: true,
-    //   sortFunction: caseInsensitiveSort,
-    // },
-    // {
-    //   name: "User Role",
-    //   selector: (row) =>
-    //     row.user_admin ? (
-    //       <span
-    //         className="flex items-center justify-between"
-    //         id="green_signal_status"
-    //       >
-    //         Admin <MdOutlineAdminPanelSettings size={15} />
-    //       </span>
-    //     ) : (
-    //       <span
-    //         className="flex items-center justify-between"
-    //         id="warning_signal_status"
-    //       >
-    //         Customer <BiUserCircle size={15} />
-    //       </span>
-    //     ),
-    // },
 
     {
       name: "Action",
@@ -214,4 +205,62 @@ export const ProductTableConfig = (handleDelete) => {
   ];
 
   return { ProductTableColumns };
+};
+
+// category table config and columns here
+export const CategoryTableConfig = (
+  handleDelete,
+  all_products,
+  handleModal
+) => {
+  // handle quantity of category products
+  const handleCategoryQty = (category) => {
+    const category_products = all_products?.filter(
+      (product) => product.category === category
+    );
+    return <div>{category_products.length}</div>;
+  };
+
+  const CategoryTableColumns = [
+    {
+      name: "Category Name",
+      selector: (row) => <div className="!capitalize">{row.cat_name}</div>,
+      sortable: true,
+      sortFunction: catSort,
+    },
+
+    {
+      name: "Category Image",
+      selector: (row) => (
+        <div style={{ padding: "5px" }}>
+          <Image
+            src={row.cat_image}
+            alt="product pic"
+            width={50}
+            height={50}
+            className="rounded-full"
+          />
+        </div>
+      ),
+    },
+    {
+      name: "Products Quantity",
+      selector: (row) => handleCategoryQty(row.cat_name),
+    },
+
+    {
+      name: "Action",
+      selector: (row) => (
+        <Action
+          // isShow={true}
+          api_url={`admin_pannel_api/manage_products/delete_product/${row._id}`}
+          handleDelete={handleDelete}
+          handleModal={handleModal}
+          keyProperties={row.cat_name}
+        />
+      ),
+    },
+  ];
+
+  return { CategoryTableColumns };
 };
