@@ -9,7 +9,7 @@ export const UserSorter = ({ dependency }) => {
         <input
           type="search"
           placeholder="Name filter..."
-          className="sorting_input"
+          className="sorting_input lg:!w-80 xs:w-full"
           onChange={handleFiltering}
         />
       </div>

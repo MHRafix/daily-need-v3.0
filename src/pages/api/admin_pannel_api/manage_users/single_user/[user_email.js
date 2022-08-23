@@ -1,6 +1,6 @@
 import nc from "next-connect";
-import User from "../../../../../models/Users";
-import db from "../../../../utilities/database";
+import User from "../../../../../../models/Users";
+import db from "../../../../../utilities/database";
 
 const handler = nc();
 

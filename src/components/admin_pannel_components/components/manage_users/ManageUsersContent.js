@@ -1,30 +1,26 @@
 import React, { useState } from "react";
+import useDeleteReq from "../../../../hooks/deleteReq";
 import { UserSorter } from "../../../../lib/Tables/FilterSorter";
-import { UserTableColumns } from "../../../../lib/Tables/TableColumns";
+import { UserTableConfig } from "../../../../lib/Tables/TableColumns";
 import UsersTable from "../../../../lib/Tables/UsersTable";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
-import { AddCategoryFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageUsersContent({ all_users }) {
-  const {
-    initialValues,
-    validationSchema,
-    onSubmit,
-    setCatImg,
-    processing,
-    toastText,
-    toastType,
-    toastOn,
-    setToastOn,
-  } = AddCategoryFormValidator();
+  const [data, setData] = useState(all_users);
+  const [active, setActive] = useState("reset");
+
+  // delete hook
+  const { toastOn, setToastOn, toastType, toastText, handleDelete } =
+    useDeleteReq();
+
+  // users table config
+  const { UserTableColumns } = UserTableConfig(handleDelete);
 
   // toast config
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
-  const [data, setData] = useState(all_users);
-  const [active, setActive] = useState("reset");
   // handle search filtering
   const handleFiltering = (e) => {
     const search_res = all_users.filter((user) =>

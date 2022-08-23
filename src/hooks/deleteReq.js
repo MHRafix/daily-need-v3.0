@@ -8,10 +8,10 @@ export default function useDeleteReq() {
   const [toastText, setToastText] = useState("");
 
   const handleDelete = async (end_point) => {
+    console.log(`/api/${end_point}`);
     const cnfDel = window.confirm("Are you sure ?");
     if (cnfDel) {
       try {
-        console.log("Yes");
         const { data } = await axios.delete(`/api/${end_point}`);
 
         if (data?.success) {

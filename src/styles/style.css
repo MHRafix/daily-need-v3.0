@@ -17,15 +17,14 @@ text.recharts-text.recharts-cartesian-axis-tick-value {
 
 /* react table css here */
 input.sorting_input {
-  font-size: 14px;
+  font-size: 12px;
   color: #626060d1;
   letter-spacing: 1px;
   border: 1px solid #e1e1e1d1;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 7px 10px;
+  border-radius: 2px;
   font-weight: 500;
   outline: none;
-  margin: 0px 10px;
 }
 
 table {
@@ -165,12 +164,35 @@ li {
   margin: 0px 5px;
 }
 
-#action_plate {
+#action_plate_two {
+  width: 7rem;
+  height: 5rem;
   display: grid;
   grid-gap: 5px;
-  width: 7.5rem;
   margin: 5px;
+  position: absolute;
+  top: 35px;
+  bottom: 0;
+  left: -20px;
+  right: 0;
+  border-radius: 5px;
+  z-index: 9999999999;
+  opacity: 1;
+  background-color: #fff;
+  padding: 8px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-duration: 1000ms;
+  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
+    0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+}
+
+#action_plate_three {
+  width: 7rem;
   height: 8rem;
+  display: grid;
+  grid-gap: 5px;
+  margin: 5px;
   position: absolute;
   top: 35px;
   bottom: 0;
@@ -193,16 +215,15 @@ li {
   overflow-x: auto;
 }
 
-div#action_btn_icon {
+button#action_btn_icon {
   display: flex;
-  padding: 8px 10px;
+  padding: 5px 10px;
   border-radius: 99999px;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  background: #fff;
 }
 
-div#action_btn_icon:hover {
+button#action_btn_icon:hover {
   background: #eee;
   transition: 0.3s;
 }
@@ -236,4 +257,8 @@ html::-webkit-scrollbar-track {
 
 .sc-dmRaPn.gelpCx {
   border: 1px solid #9790903b !important;
+}
+
+.bMgaAx div:first-child {
+  overflow: initial !important;
 }
