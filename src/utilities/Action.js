@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiBookOpen, FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-export default function Action({ isShow, id, handleDelete }) {
+export default function Action({ isShow, api_url, handleDelete }) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -24,9 +24,7 @@ export default function Action({ isShow, id, handleDelete }) {
             <button
               id="action_btn_icon"
               onClick={() => {
-                handleDelete(
-                  `admin_pannel_api/manage_users/delete_user/62d7ed726913aee3ba3970c0`
-                );
+                handleDelete(api_url);
               }}
             >
               <RiDeleteBinLine className="text-red-500 cursor-pointer text-normal outline-none" />

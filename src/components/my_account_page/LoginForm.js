@@ -1,7 +1,6 @@
-import { Form } from "formik";
+import { Form, Formik } from "formik";
 import AlertToast from "../../utilities/alertToast/AlertToast";
 import { FormButton, FormikTextField } from "../../utilities/Form/FormField";
-import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { LoginFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../utilities/toastConfig";
 
@@ -25,7 +24,7 @@ export default function LoginForm() {
       {/* message toast alert */}
       {toastOn && <AlertToast toast_config={toast_config} />}
 
-      <FormikFormLayout
+      <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
@@ -49,7 +48,7 @@ export default function LoginForm() {
             processing={processing}
           />
         </Form>
-      </FormikFormLayout>
+      </Formik>
     </>
   );
 }

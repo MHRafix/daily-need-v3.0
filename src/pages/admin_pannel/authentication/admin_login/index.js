@@ -1,4 +1,4 @@
-import { Form } from "formik";
+import { Form, Formik } from "formik";
 import Cookie from "js-cookie";
 import Head from "next/head";
 import Image from "next/image";
@@ -10,7 +10,6 @@ import {
   FormButton,
   FormikTextField,
 } from "../../../../utilities/Form/FormField";
-import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { AdminLoginFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../../../utilities/toastConfig";
 
@@ -54,7 +53,7 @@ export default function AdminLogin() {
             <div className="text-center mb-7">
               <Image src={Logo} alt="Logo" />
             </div>
-            <FormikFormLayout
+            <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
@@ -76,7 +75,7 @@ export default function AdminLogin() {
                   processing={processing}
                 />
               </Form>
-            </FormikFormLayout>
+            </Formik>
           </div>
         </div>
       </main>

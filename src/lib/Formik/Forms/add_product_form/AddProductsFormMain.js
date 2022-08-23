@@ -1,9 +1,9 @@
+import { Formik } from "formik";
 import React from "react";
 import { FiMinimize } from "react-icons/fi";
 import DashboardContentLayout from "../../../../components/admin_pannel_components/admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
-import AlertToast from "../../../alertToast/AlertToast";
-import toastConfig from "../../../toastConfig";
-import FormikFormLayout from "../../FormikLayout/FormikFormLayout";
+import AlertToast from "../../../../utilities/alertToast/AlertToast";
+import toastConfig from "../../../../utilities/toastConfig";
 import { AddProductsFormValidator } from "../../Validators/AllFormValidators";
 import AddProductsForm from "./AddProductsForm";
 
@@ -39,7 +39,7 @@ export default function AddProductsFormMain({
         btn_id={show && "minimize_btn"}
         handleAddItem={handleAddFormShow}
       >
-        <FormikFormLayout
+        <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
@@ -50,7 +50,7 @@ export default function AddProductsFormMain({
             processing={processing}
             all_categories={all_categories}
           />
-        </FormikFormLayout>
+        </Formik>
       </DashboardContentLayout>
     </>
   );

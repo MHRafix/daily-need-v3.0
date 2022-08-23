@@ -1,7 +1,6 @@
 import { CardElement, useStripe } from "@stripe/react-stripe-js";
-import { Form } from "formik";
+import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import AlertToast from "../alertToast/AlertToast";
 import { FormButton, FormikTextField } from "../Form/FormField";
 import { PaymentFormValidator } from "../Formik/Validators/AllFormValidators";
@@ -71,7 +70,7 @@ export default function PaymentForm({ payable_amount, order_id }) {
       {/* message toast alert */}
       {toastOn && <AlertToast toast_config={toast_config} />}
 
-      <FormikFormLayout
+      <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
@@ -110,7 +109,7 @@ export default function PaymentForm({ payable_amount, order_id }) {
             />
           </div>
         </Form>
-      </FormikFormLayout>
+      </Formik>
     </>
   );
 }

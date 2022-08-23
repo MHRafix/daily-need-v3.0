@@ -1,7 +1,7 @@
+import { Formik } from "formik";
 import React from "react";
 import { useSelector } from "react-redux";
 import AlertToast from "../../../../../utilities/alertToast/AlertToast";
-import FormikFormLayout from "../../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import AddLimitedProductsForm from "../../../../../utilities/Formik/Forms/AddLimitedProductsForm";
 import { AddLimitedProductsFormValidator } from "../../../../../utilities/Formik/Validators/AllFormValidators";
 import LimitedOffersTable from "../../../../../utilities/React_Table/LimitedOffersProductsTable/LimitedOffersTable";
@@ -36,7 +36,7 @@ export default function LimitedProductsContent({ limited_products }) {
       <div className="dashboard_row_wrapper">
         <div className="add_products_form">
           <DashboardContentLayout item_name="add limited products">
-            <FormikFormLayout
+            <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
@@ -47,7 +47,7 @@ export default function LimitedProductsContent({ limited_products }) {
                 processing={processing}
                 all_categories={all_categories}
               />
-            </FormikFormLayout>
+            </Formik>
           </DashboardContentLayout>
         </div>
       </div>

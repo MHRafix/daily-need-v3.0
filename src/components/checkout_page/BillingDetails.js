@@ -1,9 +1,9 @@
+import { Formik } from "formik";
 import NextLink from "next/link";
 import { MdShoppingCart } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { ErrorMessage } from "../../utilities/AlertMessage";
 import AlertToast from "../../utilities/alertToast/AlertToast";
-import FormikFormLayout from "../../utilities/Formik/FormikLayout/FormikFormLayout";
 import CheckoutForm from "../../utilities/Formik/Forms/CheckoutForm";
 import { CheckoutFormValidator } from "../../utilities/Formik/Validators/AllFormValidators";
 import StripePaymentForm from "../../utilities/StripePayment/StripePaymentForm";
@@ -67,13 +67,13 @@ export default function BillingDetails() {
                   Billing Details
                 </h1>
               </div>
-              <FormikFormLayout
+              <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
               >
                 <CheckoutForm processing={processing} />
-              </FormikFormLayout>
+              </Formik>
             </div>
           ) : (
             <div className="billing_details_form lg:w-3/5 lg:!mt-0 !mt-15">

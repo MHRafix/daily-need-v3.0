@@ -1,4 +1,4 @@
-import { Form } from "formik";
+import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import {
@@ -6,7 +6,6 @@ import {
   FormikFileField,
   FormikTextField,
 } from "../../../../utilities/Form/FormField";
-import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { AddCategoryFormValidator } from "../../../../utilities/Formik/Validators/AllFormValidators";
 import ReactModal from "../../../../utilities/Modal/ReactModal";
 import CategoryProductsTable from "../../../../utilities/React_Table/CategoryTable/CategoryProductsTable";
@@ -50,7 +49,7 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
       {/* orders show on table */}
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="add category">
-          <FormikFormLayout
+          <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
@@ -75,7 +74,7 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
                 processing={processing}
               />
             </Form>
-          </FormikFormLayout>
+          </Formik>
         </DashboardContentLayout>
       </div>
       <div className="dashboard_row_wrapper">

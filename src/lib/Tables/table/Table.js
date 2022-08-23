@@ -1,6 +1,13 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-export default function UsersTable({ table_columns, table_data }) {
+import { ProductSorter, UserSorter } from "../table_filterer/FilterSorter";
+
+export default function Table({
+  table_columns,
+  table_data,
+  sorting_dependency,
+  sorter,
+}) {
   const customSort = (rows, selector, direction) => {
     return orderBy(rows, selector, direction);
   };
@@ -29,19 +36,26 @@ export default function UsersTable({ table_columns, table_data }) {
     },
   };
   return (
-    <DataTable
-      direction="auto"
-      fixedHeaderScrollHeight="300px"
-      responsive
-      subHeaderAlign="right"
-      subHeaderWrap
-      columns={table_columns}
-      data={table_data}
-      sortFunction={customSort}
-      customStyles={customStyles}
-      highlightOnHover
-      pointerOnHover
-      pagination
-    />
+    <>
+      {sorter ? (
+        <ProductSorter dependency={sorting_dependency} isProduct={true} />
+      ) : (
+        <UserSorter dependency={sorting_dependency} />
+      )}
+      <DataTable
+        direction="auto"
+        fixedHeaderScrollHeight="300px"
+        responsive
+        subHeaderAlign="right"
+        subHeaderWrap
+        columns={table_columns}
+        data={table_data}
+        sortFunction={customSort}
+        customStyles={customStyles}
+        highlightOnHover
+        pointerOnHover
+        pagination
+      />
+    </>
   );
 }

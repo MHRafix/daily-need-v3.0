@@ -1,6 +1,6 @@
 import {
   MdOutlineKeyboardArrowLeft,
-  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardArrowRight
 } from "react-icons/md";
 
 // table data pagination
@@ -156,26 +156,18 @@ export const TableDataSorter = ({ dependency }) => {
 };
 
 // user data sortere here
-export const UserSorter = ({ dependency }) => {
-  const { setPageSize, pageSize, handleUserFilter, handleResetFilter, active } =
+export const TableUserFilter = ({ dependency }) => {
+  const { handleSearchFiltering, handleUserFilter, handleResetFilter, active } =
     dependency;
 
   return (
     <div id="table_sorter_wrapper">
       <div id="sorter_input_wrapper">
-        Show
-        <select
+        <input
           className="sorting_input"
-          value={pageSize}
-          onChange={(e) => setPageSize(Number(e.target.value))}
-        >
-          {[5, 10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              {pageSize}
-            </option>
-          ))}
-        </select>
-        entries
+          placeholder="filter title..."
+          onChange={handleSearchFiltering}
+        />
       </div>
 
       <div id="table_data_filter_wrapper">

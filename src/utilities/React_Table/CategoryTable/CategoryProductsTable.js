@@ -5,7 +5,7 @@ import { FiBookOpen, FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { usePagination, useSortBy, useTable } from "react-table";
 import ReactTooltip from "react-tooltip";
-import useDeleteReq from "../../../hooks/deleteReq";
+import useDeleteReq from "../../../hooks/http_req/deleteReq";
 import AlertToast from "../../alertToast/AlertToast";
 import toastConfig from "../../toastConfig";
 import { CATEGORY_PRODUCTS_TABLE_COLUMNS } from "../TableColumns";

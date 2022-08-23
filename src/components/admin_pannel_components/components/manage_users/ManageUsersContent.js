@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { FiUserPlus } from "react-icons/fi";
-import useDeleteReq from "../../../../hooks/deleteReq";
-import { UserSorter } from "../../../../lib/Tables/FilterSorter";
-import { UserTableConfig } from "../../../../lib/Tables/TableColumns";
-import UsersTable from "../../../../lib/Tables/UsersTable";
+import useDeleteReq from "../../../../hooks/http_req/deleteReq";
+import AddUserForm from "../../../../lib/formik/Forms/user_form/AddUserForm";
+import Table from "../../../../lib/Tables/table/Table";
+import { UserTableConfig } from "../../../../lib/Tables/table_config/TableColumns";
 import AlertToast from "../../../../utilities/alertToast/AlertToast";
-import AddUserForm from "../../../../utilities/Formik/Forms/user_form/AddUserForm";
 import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
@@ -25,7 +24,7 @@ export default function ManageUsersContent({ all_users }) {
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
   // handle search filtering
-  const handleFiltering = (e) => {
+  const handleSearchFilter = (e) => {
     const search_res = all_users.filter((user) =>
       user.user_name.toLowerCase().includes(e.target.value.toLowerCase())
     );
@@ -47,7 +46,7 @@ export default function ManageUsersContent({ all_users }) {
 
   // sorting dependency
   const sorting_dependency = {
-    handleFiltering,
+    handleSearchFilter,
     handleUserFilter,
     handleResetFilter,
     active,
@@ -76,8 +75,12 @@ export default function ManageUsersContent({ all_users }) {
           btn_id={!show && "expand_btn"}
           handleAddItem={handleAddFormShow}
         >
-          <UserSorter dependency={sorting_dependency} />
-          <UsersTable table_columns={UserTableColumns} table_data={data} />
+          <Table
+            table_columns={UserTableColumns}
+            table_data={data}
+            sorting_dependency={sorting_dependency}
+            sorter={false}
+          />
         </DashboardContentLayout>
       </div>
     </>

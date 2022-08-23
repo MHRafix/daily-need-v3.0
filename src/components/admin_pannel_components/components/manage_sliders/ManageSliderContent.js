@@ -1,4 +1,4 @@
-import { Form } from "formik";
+import { Form, Formik } from "formik";
 import React from "react";
 import { BiErrorCircle } from "react-icons/bi";
 import { MdCloudDone } from "react-icons/md";
@@ -8,7 +8,6 @@ import {
   FormikFileField,
   FormikTextField,
 } from "../../../../utilities/Form/FormField";
-import FormikFormLayout from "../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import {
   AddBrandSliderFormValidator,
   AddHomeSliderFormValidator,
@@ -79,7 +78,7 @@ export default function ManageSliderContent() {
       {/* add home slider image  */}
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="add home slider image">
-          <FormikFormLayout
+          <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
@@ -104,13 +103,13 @@ export default function ManageSliderContent() {
                 processing={processing}
               />
             </Form>
-          </FormikFormLayout>
+          </Formik>
         </DashboardContentLayout>
       </div>
       {/* add brand slider image  */}
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="add brand image">
-          <FormikFormLayout
+          <Formik
             initialValues={initialValuesBrand}
             validationSchema={validationSchemaBrand}
             onSubmit={onSubmitBrand}
@@ -135,7 +134,7 @@ export default function ManageSliderContent() {
                 processing={processingBrand}
               />
             </Form>
-          </FormikFormLayout>
+          </Formik>
         </DashboardContentLayout>
       </div>
     </>
