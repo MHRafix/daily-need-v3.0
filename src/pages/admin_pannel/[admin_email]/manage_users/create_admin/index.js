@@ -9,7 +9,6 @@ import {
   FormButton,
   FormikTextField,
 } from "../../../../../utilities/Form/FormField";
-import FormikFormLayout from "../../../../../utilities/Formik/FormikLayout/FormikFormLayout";
 import { CreateAdminFormValidator } from "../../../../../utilities/Formik/Validators/AllFormValidators";
 import toastConfig from "../../../../../utilities/toastConfig";
 import ErrorPage from "../../../../404";
@@ -54,7 +53,7 @@ export default function CreateAdmin({ this_user }) {
         <div id="create_user_page_wrapper">
           <div className="bg-white lg:!p-2.4 xs:p-1.5 rounded-md md:!w-3/6 xs:w-full shadow-xl">
             {toastOn && <AlertToast toast_config={toast_config} />}
-            <FormikFormLayout
+            <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
@@ -73,7 +72,7 @@ export default function CreateAdmin({ this_user }) {
                   processing={processing}
                 />
               </Form>
-            </FormikFormLayout>
+            </Formik>
           </div>
         </div>
       </AdminPannelLayoutContainer>
