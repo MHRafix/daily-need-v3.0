@@ -8,7 +8,6 @@ export default function useDeleteReq() {
   const [toastText, setToastText] = useState("");
 
   const handleDelete = async (end_point) => {
-    console.log(`/api/${end_point}`);
     const cnfDel = window.confirm("Are you sure ?");
     if (cnfDel) {
       try {

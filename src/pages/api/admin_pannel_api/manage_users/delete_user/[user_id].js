@@ -9,11 +9,10 @@ handler.delete(async (req, res) => {
   await db.connect();
   const deleted = await User.deleteOne({ _id: user_id });
   await db.disconnect();
-  console.log(deleted);
-  if (deleted) {
+  if (deleted.deletedCount > 0) {
     res.status(200).json({ success: "User deleted successfully!" });
   } else {
-    res.status(404).json({ error: "Opps, something went wrong inprocess!" });
+    res.json({ error: "Opps, something went wrong inprocess!" });
   }
 });
 export default handler;

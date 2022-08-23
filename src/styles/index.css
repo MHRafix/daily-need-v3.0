@@ -651,7 +651,7 @@
   }
 
   #sorter_input_wrapper {
-    @apply text-light text-black3 tracking-wider;
+    @apply text-light text-black3 tracking-wider md:!w-5/12 xs:w-full;
   }
 
   #red_signal_status {

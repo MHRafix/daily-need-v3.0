@@ -24,7 +24,9 @@ export default function Action({ isShow, id, handleDelete }) {
             <button
               id="action_btn_icon"
               onClick={() => {
-                handleDelete(`admin_pannel_api/manage_users/delete_user/${id}`);
+                handleDelete(
+                  `admin_pannel_api/manage_users/delete_user/62d7ed726913aee3ba3970c0`
+                );
               }}
             >
               <RiDeleteBinLine className="text-red-500 cursor-pointer text-normal outline-none" />
