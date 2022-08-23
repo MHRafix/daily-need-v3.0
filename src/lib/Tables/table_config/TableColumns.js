@@ -264,3 +264,77 @@ export const CategoryTableConfig = (
 
   return { CategoryTableColumns };
 };
+
+// category table config and columns here
+export const OrderedTableConfig = (handleDelete, all_products, handleModal) => {
+  const OrderedTableColumns = [
+    {
+      name: "CM Name",
+      selector: (row) => (
+        <div className="!capitalize">{row.customer_info.customer_name}</div>
+      ),
+      sortable: true,
+      sortFunction: catSort,
+    },
+    {
+      name: "CM Mobile",
+      selector: (row) => (
+        <div className="!capitalize">{row.customer_info.customer_mobile}</div>
+      ),
+      sortable: true,
+      sortFunction: catSort,
+    },
+    {
+      name: "Order Date",
+      selector: (row) => (
+        <div className="!capitalize">{row.updatedAt.slice(0, 10)}</div>
+      ),
+      sortable: true,
+      sortFunction: catSort,
+    },
+    {
+      name: "Total Amount",
+      selector: (row) => (
+        <div className="!capitalize font-semibold">
+          ৳ {row.order_overview.total_amount}
+        </div>
+      ),
+      sortable: true,
+      sortFunction: catSort,
+    },
+    {
+      name: "Payment Mode",
+      selector: (row) =>
+        row.payment_info.payment_status === "due" ? (
+          <span className="red_signal_status capitalize">
+            {row.payment_info.payment_status}
+          </span>
+        ) : (
+          <span className="green_signal_status capitalize">
+            {row.payment_info.payment_status}
+          </span>
+        ),
+      sortable: true,
+      sortFunction: catSort,
+    },
+    {
+      name: "Status",
+      selector: (row) => row.order_overview.order_status,
+    },
+
+    {
+      name: "Action",
+      selector: (row) => (
+        <Action
+          // isShow={true}
+          api_url={`admin_pannel_api/manage_products/delete_product/${row._id}`}
+          handleDelete={handleDelete}
+          handleModal={handleModal}
+          keyProperties={row.cat_name}
+        />
+      ),
+    },
+  ];
+
+  return { OrderedTableColumns };
+};

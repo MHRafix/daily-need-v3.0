@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { FaCoins, FaUsers } from "react-icons/fa";
 import { MdAddShoppingCart, MdShoppingBasket } from "react-icons/md";
 import { month_name } from "../../../../fake_data/all_fakedata";
+import Table from "../../../../lib/Tables/table/Table";
+import { OrderedTableConfig } from "../../../../lib/Tables/table_config/TableColumns";
 import { chartDataCalculator } from "../../../../utilities/chartDataCalculator";
 import LineChart from "../../../../utilities/GraphChart/Rechart/Chart/LineChart";
 import LineChartFancy from "../../../../utilities/GraphChart/Rechart/LineChart/LineChartFancy";
 import ReactModal from "../../../../utilities/Modal/ReactModal";
-import ReactOrdersTable from "../../../../utilities/React_Table/OrdersTable/ReactOrdersTable";
 import ReactPaginationTable from "../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
 import { ORDERED_PRODUCT_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
@@ -119,6 +120,7 @@ export default function AdminDashboardContent({
     setModal(dep);
   };
 
+  const { OrderedTableColumns } = OrderedTableConfig();
   return (
     <>
       {/* summury boxes */}
@@ -154,8 +156,11 @@ export default function AdminDashboardContent({
       {/* orders show on table */}
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="all orders">
-          <ReactOrdersTable
-            ORDERS_DATA={all_orders}
+          <Table
+            table_columns={OrderedTableColumns}
+            table_data={all_orders}
+            // sorting_dependency={sorting_dependency}
+            sorter={true}
             handleModal={handleModal}
           />
         </DashboardContentLayout>
