@@ -3,11 +3,30 @@ line.recharts-cartesian-axis-line {
 }
 
 text.recharts-text.recharts-cartesian-axis-tick-value {
+  display: grid !important;
   margin: 10px !important;
   font-size: 12px !important;
 }
 
+.recharts-tooltip-wrapper.recharts-tooltip-wrapper-right.recharts-tooltip-wrapper-top {
+  display: block !important;
+}
+
+ul.recharts-tooltip-item-list {
+  display: block !important;
+  width: 130px !important;
+}
+
+p.recharts-tooltip-label {
+  display: block !important;
+}
+
+li.recharts-tooltip-item {
+  text-align: left !important;
+}
+
 .recharts-default-tooltip {
+  display: block;
   padding: 15px 25px !important;
   background-color: rgb(255, 255, 255) !important;
   border: none !important;
@@ -234,29 +253,29 @@ button#action_btn_icon:hover {
 
 /* browser bar css */
 .gelpCx::-webkit-scrollbar {
-  width: 0.2rem;
+  width: 0.2rem !important;
 }
 
 .gelpCx::-webkit-scrollbar:horizontal {
-  width: 0.2rem;
-  height: 0.2rem;
+  width: 0.2rem !important;
+  height: 0.2rem !important;
 }
 
 .gelpCx::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent !important;
 }
 
 .gelpCx::-webkit-scrollbar-thumb {
-  background: rgb(108, 95, 252);
-  border-radius: 5rem;
+  background: rgb(108, 95, 252) !important;
+  border-radius: 5rem !important;
 }
 
 html::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 0.5rem !important;
 }
 
 html::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent !important;
 }
 
 .sc-dmRaPn.gelpCx {

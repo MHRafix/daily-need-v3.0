@@ -25,27 +25,29 @@ export default function AdminPannelLeftNav({ nav_data }) {
           className="main_nav_link text-black2 my-2 w-full"
         >
           {main_nav_link ? (
-            <NextLink
-              href={`/admin_pannel/${userInfo?.user_email}${main_nav_link}`}
-              passHref
+            <h3
+              id={
+                subNavOn
+                  ? "admin_pannel_nav_link_active"
+                  : "admin_pannel_nav_link"
+              }
+              className="!text-normal"
             >
-              <h3
-                id={
-                  subNavOn
-                    ? "admin_pannel_nav_link_active"
-                    : "admin_pannel_nav_link"
-                }
-                className="!text-normal"
+              <NextLink
+                href={`/admin_pannel/${userInfo?.user_email}${main_nav_link}`}
+                passHref
               >
-                <span className="text-light_purple text-normal">
-                  {main_nav_icon}
-                </span>
-                &nbsp;&nbsp;
-                <span className="w-full flex items-center justify-between">
-                  {main_nav}
-                </span>
-              </h3>
-            </NextLink>
+                <>
+                  <span className="text-light_purple text-normal">
+                    {main_nav_icon}
+                  </span>
+                  &nbsp;&nbsp;
+                  <span className="w-full flex items-center justify-between">
+                    {main_nav}
+                  </span>
+                </>
+              </NextLink>
+            </h3>
           ) : (
             <>
               <h3

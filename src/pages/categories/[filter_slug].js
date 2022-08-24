@@ -10,7 +10,7 @@ export default function CategoryShop({ matched_products, all_categories }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(storeAllCategories(all_categories));
-  }, [all_categories.length]);
+  });
 
   const router = useRouter();
   const { filter_slug } = router.query;

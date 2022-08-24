@@ -1,28 +1,55 @@
 import React, { useState } from "react";
+import useModalFilter from "../../../../../hooks/filter_func/useModalFilter";
+import useOrderFilter from "../../../../../hooks/filter_func/useOrderFilter";
+import useDeleteReq from "../../../../../hooks/http_req/deleteReq";
+import Table from "../../../../../lib/Tables/table/Table";
+import {
+  OrderedTableConfig,
+  ProductTableConfig,
+} from "../../../../../lib/Tables/table_config/TableColumns";
 import ReactModal from "../../../../../utilities/Modal/ReactModal";
-import ReactOrdersTable from "../../../../../utilities/React_Table/OrdersTable/ReactOrdersTable";
-import ReactPaginationTable from "../../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
-import { ORDERED_PRODUCT_TABLE_COLUMNS } from "../../../../../utilities/React_Table/TableColumns";
+import toastConfig from "../../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function AllOrdersContent({ all_orders }) {
-  const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [orderData, setOrderData] = useState(all_orders);
+  const [modal, setModal] = useState(false);
 
-  // handle modal and modal data
-  const handleModal = (id) => {
-    const modal_data = all_orders.find((order) => order._id === id);
-    setModalData(modal_data.products_data);
+  // handle  modal data
+  const handleModal = (products_data) => {
+    setModalData(products_data);
+    setFilterData(products_data);
     setModal(true);
   };
+
+  // initialize filter and sorting dependency
+  const { sorting_dependency } = useModalFilter(modalData, setFilterData);
+  const { order_sorting_dependency } = useOrderFilter(all_orders, setOrderData);
+
+  // delete hook
+  const { toastOn, setToastOn, toastType, toastText, handleDelete } =
+    useDeleteReq();
+
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
+
+  // table columns and config
+  const { OrderedTableColumns } = OrderedTableConfig(handleDelete, handleModal);
+  const { ProductTableColumns } = ProductTableConfig(handleDelete);
 
   return (
     <>
       {/* orders show on table */}
       <div className="dashboard_row_wrapper">
         <DashboardContentLayout item_name="all orders">
-          <ReactOrdersTable
-            ORDERS_DATA={all_orders}
+          <Table
+            table_columns={OrderedTableColumns}
+            table_data={orderData}
+            sorting_dependency={order_sorting_dependency}
+            sorter={true}
+            isProduct={false}
             handleModal={handleModal}
           />
         </DashboardContentLayout>
@@ -30,11 +57,14 @@ export default function AllOrdersContent({ all_orders }) {
           <ReactModal
             setModal={setModal}
             modal_data={modalData}
-            modal_title="Order Details"
+            modal_title="Ordered Products"
           >
-            <ReactPaginationTable
-              PRODUCTS_DATA={modalData}
-              PRODUCTS_TABLE_COLUMNS={ORDERED_PRODUCT_TABLE_COLUMNS}
+            <Table
+              table_columns={ProductTableColumns}
+              table_data={filterData}
+              sorting_dependency={sorting_dependency}
+              sorter={true}
+              isProduct={true}
             />
           </ReactModal>
         )}

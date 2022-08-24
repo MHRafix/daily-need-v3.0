@@ -60,7 +60,7 @@ export default function AdminDashboardContent({
       box_number: users,
       box_icon: <FaUsers />,
       icon_color: "#6c5ffc",
-      note: "Admin, user & vendor",
+      note: "Admin, User & Vendor",
     },
     {
       _id: 2,
@@ -149,7 +149,7 @@ export default function AdminDashboardContent({
 
       {/* summury boxes */}
       <div className="dashboard_row_wrapper">
-        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-12">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {summury_content.map((box) => (
             <GridBox key={box._id} box_content={box} />
           ))}

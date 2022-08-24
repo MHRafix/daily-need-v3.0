@@ -73,7 +73,9 @@ export const UserTableConfig = (handleDelete) => {
   const UserTableColumns = [
     {
       name: "User Name",
-      selector: (row) => <div className="capitalize">{row.user_name}</div>,
+      selector: (row) => (
+        <div className="capitalize block">{row.user_name}</div>
+      ),
       sortable: true,
       sortFunction: userSort,
     },
@@ -147,13 +149,21 @@ export const ProductTableConfig = (handleDelete) => {
       name: "Image",
       selector: (row) => (
         <div style={{ padding: "5px" }}>
-          <Image
-            src={row.thumbnail}
-            alt="product pic"
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
+          {row.thumbnail.src ? (
+            <Image
+              src={row.thumbnail}
+              alt="product pic"
+              className="rounded-full"
+            />
+          ) : (
+            <Image
+              src={row.thumbnail}
+              alt="product pic"
+              width={50}
+              height={50}
+              className="rounded-full"
+            />
+          )}
         </div>
       ),
     },

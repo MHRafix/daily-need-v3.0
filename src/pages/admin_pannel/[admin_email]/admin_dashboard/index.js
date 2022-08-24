@@ -26,7 +26,7 @@ export default function AdminDashboard({
     } else {
       setError(true);
     }
-  }, []);
+  });
 
   if (error) {
     return <ErrorPage />;

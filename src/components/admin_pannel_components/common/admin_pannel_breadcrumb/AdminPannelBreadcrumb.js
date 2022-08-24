@@ -1,11 +1,9 @@
-import Cookie from "js-cookie";
 import NextLink from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function AdminPannelBreadcrumb({ page_name, breadcrumb_name }) {
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
+  const userInfo = useSelector((state) => state.users.loggedin_user);
 
   return (
     <>
@@ -26,7 +24,7 @@ export default function AdminPannelBreadcrumb({ page_name, breadcrumb_name }) {
         {breadcrumb_name && (
           <div>
             <NextLink
-              href={`/admin_pannel/${userInfo?.user_name}/${userInfo?.user_email}/admin_dashboard`}
+              href={`/admin_pannel/${userInfo?.user_email}/admin_dashboard`}
               passHref
             >
               <span className="md:!text-normal xs:text-sm text-black3 tracking-wider capitalize font-semibold cursor-pointer hover:text-light_purple hover:duration-300">
