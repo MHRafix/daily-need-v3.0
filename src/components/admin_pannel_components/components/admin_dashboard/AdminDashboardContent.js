@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { FaCoins, FaUsers } from "react-icons/fa";
 import { MdAddShoppingCart, MdShoppingBasket } from "react-icons/md";
 import { month_name } from "../../../../fake_data/all_fakedata";
+import useModalFilter from "../../../../hooks/filter_func/useModalFilter";
+import useOrderFilter from "../../../../hooks/filter_func/useOrderFilter";
+import useDeleteReq from "../../../../hooks/http_req/deleteReq";
 import Table from "../../../../lib/Tables/table/Table";
-import { OrderedTableConfig } from "../../../../lib/Tables/table_config/TableColumns";
+import {
+  OrderedTableConfig,
+  ProductTableConfig,
+} from "../../../../lib/Tables/table_config/TableColumns";
+import AlertToast from "../../../../utilities/alertToast/AlertToast";
 import { chartDataCalculator } from "../../../../utilities/chartDataCalculator";
 import LineChart from "../../../../utilities/GraphChart/Rechart/Chart/LineChart";
 import LineChartFancy from "../../../../utilities/GraphChart/Rechart/LineChart/LineChartFancy";
 import ReactModal from "../../../../utilities/Modal/ReactModal";
-import ReactPaginationTable from "../../../../utilities/React_Table/PaginationTable/ReactPaginationTable";
-import { ORDERED_PRODUCT_TABLE_COLUMNS } from "../../../../utilities/React_Table/TableColumns";
+import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 import GridBox from "../../admin_pannel_utilities/GridBoxes/GridBox";
 
@@ -37,12 +43,14 @@ export default function AdminDashboardContent({
     (order) => order.order_overview.order_status == "canceled"
   );
 
-  // summury data state here
+  // summury data and modal data state here
   const [users, setUsers] = useState(all_users?.length);
   const [orders, setOrders] = useState(completed_orders?.length);
   const [profit, setProfit] = useState((total_sells / 100) * 25);
-  const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [orderData, setOrderData] = useState([]);
+  const [modal, setModal] = useState(false);
 
   // summury box content
   const summury_content = [
@@ -113,16 +121,32 @@ export default function AdminDashboardContent({
     data.push(chart_obj);
   }
 
-  // handle modal and modal data
-  const handleModal = (dep, id) => {
-    const modal_data = all_orders.find((order) => order._id === id);
-    setModalData(modal_data.products_data);
-    setModal(dep);
+  // handle  modal data
+  const handleModal = (products_data) => {
+    setModalData(products_data);
+    setFilterData(products_data);
+    setModal(true);
   };
 
-  const { OrderedTableColumns } = OrderedTableConfig();
+  // initialize filter and sorting dependency
+  const { sorting_dependency } = useModalFilter(modalData, setFilterData);
+  const { order_sorting_dependency } = useOrderFilter(all_orders, setOrderData);
+
+  // delete hook
+  const { toastOn, setToastOn, toastType, toastText, handleDelete } =
+    useDeleteReq();
+
+  // toast config
+  const { toast_config } = toastConfig(setToastOn, toastType, toastText);
+
+  // table columns and config
+  const { OrderedTableColumns } = OrderedTableConfig(handleDelete, handleModal);
+  const { ProductTableColumns } = ProductTableConfig(handleDelete);
+
   return (
     <>
+      {toastOn && <AlertToast toast_config={toast_config} />}
+
       {/* summury boxes */}
       <div className="dashboard_row_wrapper">
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-12">
@@ -158,9 +182,10 @@ export default function AdminDashboardContent({
         <DashboardContentLayout item_name="all orders">
           <Table
             table_columns={OrderedTableColumns}
-            table_data={all_orders}
-            // sorting_dependency={sorting_dependency}
+            table_data={orderData}
+            sorting_dependency={order_sorting_dependency}
             sorter={true}
+            isProduct={false}
             handleModal={handleModal}
           />
         </DashboardContentLayout>
@@ -168,11 +193,14 @@ export default function AdminDashboardContent({
           <ReactModal
             setModal={setModal}
             modal_data={modalData}
-            modal_title="Order Details"
+            modal_title="Ordered Products"
           >
-            <ReactPaginationTable
-              PRODUCTS_DATA={modalData}
-              PRODUCTS_TABLE_COLUMNS={ORDERED_PRODUCT_TABLE_COLUMNS}
+            <Table
+              table_columns={ProductTableColumns}
+              table_data={filterData}
+              sorting_dependency={sorting_dependency}
+              sorter={true}
+              isProduct={true}
             />
           </ReactModal>
         )}

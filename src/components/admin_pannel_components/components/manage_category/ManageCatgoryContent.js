@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FiMinimize } from "react-icons/fi";
+import useModalFilter from "../../../../hooks/filter_func/useModalFilter";
 import useDeleteReq from "../../../../hooks/http_req/deleteReq";
 import CategoryForm from "../../../../lib/Formik/Forms/add_category_form/CategoryForm";
 import Table from "../../../../lib/Tables/table/Table";
@@ -14,11 +15,25 @@ import toastConfig from "../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function ManageCatgoryContent({ all_products, all_categories }) {
-  // handle add item form show
-  const [show, setShow] = useState(false);
-  const handleAddFormShow = () => {
-    setShow(() => (show ? false : true));
+  const [modalData, setModalData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [modal, setModal] = useState(false);
+
+  // handle  modal data
+  const handleModal = (cat) => {
+    const modal_data = all_products?.filter(
+      (product) => product.category === cat
+    );
+    setModalData(modal_data);
+    setFilterData(modal_data);
+    setModal(true);
   };
+
+  // initialize filter and sorting dependency
+  const { show, sorting_dependency, handleAddFormShow } = useModalFilter(
+    modalData,
+    setFilterData
+  );
 
   // delete hook
   const { toastOn, setToastOn, toastType, toastText, handleDelete } =
@@ -27,18 +42,6 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
   // toast config
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
-  // handle modal and modal data
-  const [modal, setModal] = useState(false);
-  const [modalData, setModalData] = useState([]);
-
-  const handleModal = (cat) => {
-    const modal_data = all_products?.filter(
-      (product) => product.category === cat
-    );
-    setModalData(modal_data);
-    setModal(true);
-  };
-
   // users table config
   const { CategoryTableColumns } = CategoryTableConfig(
     handleDelete,
@@ -46,7 +49,9 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
     handleModal
   );
 
-  const { ProductTableColumns } = ProductTableConfig();
+  // modal product table
+  const { ProductTableColumns } = ProductTableConfig(handleDelete);
+
   return (
     <>
       {/* alert toast here  */}
@@ -74,7 +79,6 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
           <Table
             table_columns={CategoryTableColumns}
             table_data={all_categories}
-            sorter={false}
           />
         </DashboardContentLayout>
         {modal && (
@@ -85,8 +89,10 @@ export default function ManageCatgoryContent({ all_products, all_categories }) {
           >
             <Table
               table_columns={ProductTableColumns}
-              table_data={modalData}
+              table_data={filterData}
+              sorting_dependency={sorting_dependency}
               sorter={true}
+              isProduct={true}
             />
           </ReactModal>
         )}

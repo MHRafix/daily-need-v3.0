@@ -315,7 +315,7 @@
     @apply flex items-center;
   }
   #card_icon {
-    @apply p-2 bg-deep_green text-semi_medium text-white rounded-full mr-5;
+    @apply p-2 bg-green text-semi_medium text-white rounded-full mr-5;
   }
 
   .cart_table {
@@ -655,7 +655,7 @@
   }
 
   #red_signal_status {
-    @apply bg-red-500 tracking-wider text-white rounded-full px-1 py-extra_padding text-thin capitalize;
+    @apply bg-orangee_red tracking-wider text-white rounded-full px-1 py-extra_padding text-thin capitalize;
   }
 
   #green_signal_status {

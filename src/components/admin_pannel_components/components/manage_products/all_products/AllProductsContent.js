@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
+import useModalFilter from "../../../../../hooks/filter_func/useModalFilter";
 import useDeleteReq from "../../../../../hooks/http_req/deleteReq";
 import AddProductsFormMain from "../../../../../lib/Formik/Forms/add_product_form/AddProductsFormMain";
 import Table from "../../../../../lib/Tables/table/Table";
@@ -9,9 +10,12 @@ import toastConfig from "../../../../../utilities/toastConfig";
 import DashboardContentLayout from "../../../admin_pannel_utilities/DashboardLayout/DashboardContentLayout";
 
 export default function AllProductsContent({ all_products, all_categories }) {
-  const [data, setData] = useState(all_products);
-  const [active, setActive] = useState("reset");
-  const [show, setShow] = useState(false);
+  // initialize filter and sorting dependency
+  const [filterData, setFilterData] = useState(all_products);
+  const { show, sorting_dependency, handleAddFormShow } = useModalFilter(
+    all_products,
+    setFilterData
+  );
 
   // delete hook
   const { toastOn, setToastOn, toastType, toastText, handleDelete } =
@@ -23,50 +27,6 @@ export default function AllProductsContent({ all_products, all_categories }) {
   // toast config
   const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
-  // handle search filtering
-  const handleSearchFilter = (e) => {
-    const search_res = all_products.filter((product) =>
-      product.title.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setData(search_res);
-  };
-
-  // handle status filter function here
-  const handleStatusFilter = (status, activer) => {
-    const filtered_products = all_products?.filter(
-      (product) => product.product_status === status
-    );
-    setActive(activer);
-    setData(filtered_products);
-  };
-
-  // handle type filter function here
-  const handleTypeFilter = (type, activer) => {
-    const filtered_products = all_products?.filter(
-      (product) => product.product_type === type
-    );
-    setActive(activer);
-    setData(filtered_products);
-  };
-
-  // reset filter
-  const handleResetFilter = (activer) => {
-    setActive(activer);
-    setData(all_products);
-  };
-  // sorting dependency
-  const sorting_dependency = {
-    handleSearchFilter,
-    handleStatusFilter,
-    handleTypeFilter,
-    handleResetFilter,
-    active,
-  };
-
-  // handle add item form show
-  const handleAddFormShow = () => {
-    setShow(() => (show ? false : true));
-  };
   return (
     <>
       {toastOn && <AlertToast toast_config={toast_config} />}
@@ -94,9 +54,10 @@ export default function AllProductsContent({ all_products, all_categories }) {
           >
             <Table
               table_columns={ProductTableColumns}
-              table_data={data}
+              table_data={filterData}
               sorting_dependency={sorting_dependency}
               sorter={true}
+              isProduct={true}
             />
           </DashboardContentLayout>
         </div>

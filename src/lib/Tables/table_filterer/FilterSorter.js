@@ -110,31 +110,31 @@ export const ProductSorter = ({ dependency, isProduct }) => {
             id={active === "reset" ? "filter_btn_active" : "filter_btn"}
             onClick={() => handleResetFilter("reset")}
           >
-            <button>All Orders</button>
+            <button>All</button>
           </div>
           <div
             id={active === "shipped" ? "filter_btn_active" : "filter_btn"}
             onClick={() => handleStatusFilter("shipped", "shipped")}
           >
-            <button>Shipped Orders</button>
+            <button>Shipped</button>
           </div>
           <div
             id={active === "canceled" ? "filter_btn_active" : "filter_btn"}
             onClick={() => handleStatusFilter("canceled", "canceled")}
           >
-            <button>Canceled Orders</button>
+            <button>Canceled</button>
           </div>
           <div
             id={active === "pendding" ? "filter_btn_active" : "filter_btn"}
             onClick={() => handleStatusFilter("pendding", "pendding")}
           >
-            <button>Pendding Orders</button>
+            <button>Pendding</button>
           </div>
           <div
             id={active === "inprogress" ? "filter_btn_active" : "filter_btn"}
             onClick={() => handleStatusFilter("inprogress", "inprogress")}
           >
-            <button>Inprogress Orders</button>
+            <button>Inprogress</button>
           </div>
         </div>
       )}

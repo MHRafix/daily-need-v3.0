@@ -7,6 +7,7 @@ export default function Table({
   table_data,
   sorting_dependency,
   sorter,
+  isProduct,
 }) {
   const customSort = (rows, selector, direction) => {
     return orderBy(rows, selector, direction);
@@ -40,7 +41,10 @@ export default function Table({
       {sorting_dependency && (
         <>
           {sorter ? (
-            <ProductSorter dependency={sorting_dependency} isProduct={true} />
+            <ProductSorter
+              dependency={sorting_dependency}
+              isProduct={isProduct}
+            />
           ) : (
             <UserSorter dependency={sorting_dependency} />
           )}

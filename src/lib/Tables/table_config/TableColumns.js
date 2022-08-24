@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { BiUserCircle } from "react-icons/bi";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { month_name } from "../../../fake_data/all_fakedata";
 import Action from "../../../utilities/Action";
 
 // table row sorter here
-const caseInsensitiveSort = (rowA, rowB) => {
+const userSort = (rowA, rowB) => {
   const a = rowA.user_name.toLowerCase();
   const b = rowB.user_name.toLowerCase();
 
@@ -23,6 +24,22 @@ const caseInsensitiveSort = (rowA, rowB) => {
 const productSort = (rowA, rowB) => {
   const a = rowA.title.toLowerCase();
   const b = rowB.title.toLowerCase();
+
+  if (a > b) {
+    return 1;
+  }
+
+  if (b > a) {
+    return -1;
+  }
+
+  return 0;
+};
+
+// product sort
+const orderSort = (rowA, rowB) => {
+  const a = rowA.order_overview.order_status.toLowerCase();
+  const b = rowB.order_overview.order_status.toLowerCase();
 
   if (a > b) {
     return 1;
@@ -58,7 +75,7 @@ export const UserTableConfig = (handleDelete) => {
       name: "User Name",
       selector: (row) => <div className="capitalize">{row.user_name}</div>,
       sortable: true,
-      sortFunction: caseInsensitiveSort,
+      sortFunction: userSort,
     },
 
     {
@@ -79,7 +96,7 @@ export const UserTableConfig = (handleDelete) => {
       name: "User Email",
       selector: (row) => row.user_email,
       sortable: true,
-      sortFunction: caseInsensitiveSort,
+      sortFunction: userSort,
     },
     {
       name: "User Role",
@@ -266,7 +283,19 @@ export const CategoryTableConfig = (
 };
 
 // category table config and columns here
-export const OrderedTableConfig = (handleDelete, all_products, handleModal) => {
+export const OrderedTableConfig = (handleDelete, handleModal) => {
+  const orderStatus = (cell) => {
+    if (cell === "canceled") {
+      return <span id="red_signal_status">canceled</span>;
+    } else if (cell === "shipped") {
+      return <span id="green_signal_status">shipped</span>;
+    } else if (cell === "pendding") {
+      return <span id="warning_signal_status">pendding</span>;
+    } else if (cell === "inprogress") {
+      return <span id="info_signal_status">inprogress</span>;
+    }
+  };
+
   const OrderedTableColumns = [
     {
       name: "CM Name",
@@ -274,7 +303,7 @@ export const OrderedTableConfig = (handleDelete, all_products, handleModal) => {
         <div className="!capitalize">{row.customer_info.customer_name}</div>
       ),
       sortable: true,
-      sortFunction: catSort,
+      sortFunction: orderSort,
     },
     {
       name: "CM Mobile",
@@ -282,15 +311,19 @@ export const OrderedTableConfig = (handleDelete, all_products, handleModal) => {
         <div className="!capitalize">{row.customer_info.customer_mobile}</div>
       ),
       sortable: true,
-      sortFunction: catSort,
+      sortFunction: orderSort,
     },
     {
       name: "Order Date",
       selector: (row) => (
-        <div className="!capitalize">{row.updatedAt.slice(0, 10)}</div>
+        <div>
+          {row.order_overview.order_date.date}{" "}
+          {month_name[row.order_overview.order_date.month]}{" "}
+          {row.order_overview.order_date.year}
+        </div>
       ),
       sortable: true,
-      sortFunction: catSort,
+      sortFunction: orderSort,
     },
     {
       name: "Total Amount",
@@ -300,37 +333,36 @@ export const OrderedTableConfig = (handleDelete, all_products, handleModal) => {
         </div>
       ),
       sortable: true,
-      sortFunction: catSort,
+      sortFunction: orderSort,
     },
     {
-      name: "Payment Mode",
+      name: "Payment Status",
       selector: (row) =>
         row.payment_info.payment_status === "due" ? (
-          <span className="red_signal_status capitalize">
-            {row.payment_info.payment_status}
-          </span>
+          <span id="red_signal_status">{row.payment_info.payment_status}</span>
         ) : (
-          <span className="green_signal_status capitalize">
+          <span id="green_signal_status">
             {row.payment_info.payment_status}
           </span>
         ),
       sortable: true,
-      sortFunction: catSort,
+      sortFunction: orderSort,
     },
     {
       name: "Status",
-      selector: (row) => row.order_overview.order_status,
+      selector: (row) => orderStatus(row.order_overview.order_status),
+      sortable: true,
+      sortFunction: orderSort,
     },
 
     {
       name: "Action",
       selector: (row) => (
         <Action
-          // isShow={true}
           api_url={`admin_pannel_api/manage_products/delete_product/${row._id}`}
           handleDelete={handleDelete}
           handleModal={handleModal}
-          keyProperties={row.cat_name}
+          keyProperties={row.products_data}
         />
       ),
     },
