@@ -49,7 +49,7 @@ export default function AdminDashboardContent({
   const [profit, setProfit] = useState((total_sells / 100) * 25);
   const [modalData, setModalData] = useState([]);
   const [filterData, setFilterData] = useState([]);
-  const [orderData, setOrderData] = useState([]);
+  const [orderData, setOrderData] = useState(all_orders);
   const [modal, setModal] = useState(false);
 
   // summury box content
