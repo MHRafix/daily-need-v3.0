@@ -5,7 +5,7 @@ import { FaBars, FaList } from 'react-icons/fa';
 
 export default function ViewType({ view_type }) {
 	const { setGrid, grid, sidebaron, setsidebaron } = view_type;
-
+	console.log(grid);
 	// handle grid layout
 	const handleGridLayout = () => {
 		Cookie.set('layout_changer', JSON.stringify(true));
@@ -21,25 +21,22 @@ export default function ViewType({ view_type }) {
 	return (
 		<div className='view_type'>
 			<button
-				className={
-					sidebaron
-						? 'layout_changer_btn_active lg:!hidden'
-						: 'layout_changer_btn lg:!hidden'
-				}
+				className=' lg:!hidden'
+				id={sidebaron ? 'layout_changer_btn_active' : 'layout_changer_btn'}
 				onClick={() => setsidebaron(true)}
 			>
 				<FaBars />
 			</button>
 			&nbsp;&nbsp;&nbsp;
 			<button
-				className={grid ? 'layout_changer_btn_active' : 'layout_changer_btn'}
+				id={grid ? 'layout_changer_btn_active' : 'layout_changer_btn'}
 				onClick={handleGridLayout}
 			>
 				<BsFillGridFill />
 			</button>
 			&nbsp;&nbsp;&nbsp;
 			<button
-				className={!grid ? 'layout_changer_btn_active' : 'layout_changer_btn'}
+				id={!grid ? 'layout_changer_btn_active' : 'layout_changer_btn'}
 				onClick={handleListLayout}
 			>
 				<FaList />

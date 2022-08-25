@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
+import useAnimation from '../../hooks/animation/useAnimation';
 import ShopProductArea from './ShopProductArea';
 import ShopSidebar from './ShopSidebar';
 
@@ -20,14 +22,21 @@ export default function ShopArea({ all_products }) {
 			product?.prices?.regular_price <= maxRange
 	);
 
-	// const { appear, leave, steps_shop_sidebar } = animation();
+	// animation hook
+	const { fadeRight } = useAnimation();
 
 	return (
 		<div className='shop_area_wrapper'>
 			<div className='grid_shop_area'>
 				{sidebaron ? (
 					// <Animate steps={steps_shop_sidebar}>
-					<div className={sidebaron ? 'toggle_sidebar_area' : 'sidebar_area'}>
+					<motion.div
+						className={sidebaron ? 'toggle_sidebar_area' : 'sidebar_area'}
+						initial='offscreen'
+						whileInView='onscreen'
+						viewport={fadeRight.viewport}
+						variants={fadeRight}
+					>
 						<div className='cart_header_area !bg-white !text-black2 absolute right-0 top-0 lg:hidden !p-0'>
 							<div
 								onClick={() => setSidebaron(false)}
@@ -41,7 +50,7 @@ export default function ShopArea({ all_products }) {
 							priceRangeData={priceRangeData}
 							// handleSetCookie={handleSetCookie}
 						/>
-					</div>
+					</motion.div>
 				) : (
 					// </Animate>
 					<div className={sidebaron ? 'toggle_sidebar_area' : 'sidebar_area'}>
