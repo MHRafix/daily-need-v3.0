@@ -20,12 +20,13 @@ export default function MiniCart({ cart_products, cartState, cartActive }) {
 
 	return (
 		<AnimatePresence>
-			{cartState && (
+			{cartActive && (
 				<motion.div
 					className={
-						cartActive
-							? 'mini_cart_wrapper_active shadow-lg'
-							: 'mini_cart_wrapper shadow-lg'
+						// cartActive
+						// ?
+						'mini_cart_wrapper_active shadow-lg'
+						// : 'mini_cart_wrapper shadow-lg'
 					}
 					initial='offscreen'
 					exit={fadeRight.exit}

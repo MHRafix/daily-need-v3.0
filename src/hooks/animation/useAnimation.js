@@ -1,5 +1,9 @@
 export default function useAnimation() {
-	// fade down to up animation
+	/**
+	 * fade down to up animation
+	 * usein: cart table body item
+	 */
+
 	const fadeUp = {
 		viewport: { once: true, amount: 0.2 },
 		offscreen: {
@@ -14,7 +18,11 @@ export default function useAnimation() {
 		},
 	};
 
-	// fade right to left animation
+	/**
+	 * fade right to left animation
+	 * usein: mini cart item card
+	 */
+
 	const fadeLeft = {
 		viewport: { once: true, amount: 0.2 },
 		offscreen: {
@@ -30,7 +38,11 @@ export default function useAnimation() {
 		// exit: { x: 50, opacity: 0, duration: 0.5 },
 	};
 
-	// fade left to right animation
+	/**
+	 * fade left to right animation for
+	 * mini cart area wrapper
+	 */
+
 	const fadeRight = {
 		viewport: { once: true, amount: 0.2 },
 		offscreen: {
@@ -54,7 +66,11 @@ export default function useAnimation() {
 		},
 	};
 
-	// slide down to up animation
+	/**
+	 * slide down to up animation
+	 * usein: product grid and list card
+	 */
+
 	const slideUp = {
 		viewport: { once: true, amount: 0.2 },
 		offscreen: {
@@ -71,21 +87,55 @@ export default function useAnimation() {
 		},
 	};
 
-	// scale small to big animation
+	/**
+	 * scale small to big animation
+	 * usein: admin dashboard summury grid box
+	 */
+
 	const pulseZoom = {
 		viewport: { once: true, amount: 0.2 },
 		offscreen: {
 			scale: 0.7,
+			opacity: 0,
+		},
+
+		onscreen: {
+			scale: 1,
+			opacity: 1,
+			transition: {
+				type: 'spring',
+				bounce: 0.3,
+				duration: 0.5,
+				ease: 'easeOut',
+			},
+		},
+	};
+
+	/**
+	 * fade pop animation
+	 * usein: admin dashboard tabledataaction plate
+	 */
+
+	const fadePop = {
+		offscreen: {
+			scale: 0.8,
 		},
 
 		onscreen: {
 			scale: 1,
 			transition: {
-				type: 'spring',
-				bounce: 0.4,
-				duration: 0.3,
+				duration: 0.09,
+			},
+		},
+
+		exit: {
+			scale: 0.8,
+			transition: {
+				duration: 0.09,
 			},
 		},
 	};
-	return { fadeUp, slideUp, fadeLeft, fadeRight, pulseZoom };
+
+	// return all animation here
+	return { fadeUp, slideUp, fadeLeft, fadeRight, pulseZoom, fadePop };
 }

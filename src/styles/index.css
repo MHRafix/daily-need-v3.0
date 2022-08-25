@@ -696,7 +696,8 @@
 	}
 
 	#chart_area_wrapper {
-		@apply lg:!p-1 xs:p-extra_padding4 overflow-scroll;
+		@apply lg:!p-1 xs:p-extra_padding4;
+		/* @apply lg:!p-1 xs:p-extra_padding4 overflow-scroll; */
 	}
 
 	#chart_area {
@@ -896,7 +897,7 @@
 		border-radius: 5rem;
 	}
 
-	#chart_area_wrapper::-webkit-scrollbar {
+	/* #chart_area_wrapper::-webkit-scrollbar {
 		width: 0.2rem;
 	}
 
@@ -911,6 +912,24 @@
 
 	#chart_area_wrapper::-webkit-scrollbar-thumb {
 		background: rgb(108, 95, 252);
+		border-radius: 5rem;
+	} */
+
+	.mini_cart_wrapper_active ::-webkit-scrollbar {
+		width: 0.3rem;
+	}
+
+	.mini_cart_wrapper_active ::-webkit-scrollbar:horizontal {
+		width: 0rem;
+		height: 0rem;
+	}
+
+	.mini_cart_wrapper_active ::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.mini_cart_wrapper_active ::-webkit-scrollbar-thumb {
+		background-image: linear-gradient(to bottom right, #ff934b, #ff5e62);
 		border-radius: 5rem;
 	}
 
@@ -1069,7 +1088,7 @@
 		justify-content: center;
 	}
 
-	.mini_cart_wrapper {
+	/* .mini_cart_wrapper {
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -1078,7 +1097,7 @@
 		z-index: 500;
 		width: 0px;
 		transition: width 0.8s;
-	}
+	} */
 
 	.toggle_sidebar_area {
 		background: white;
