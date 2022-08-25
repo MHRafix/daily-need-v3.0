@@ -6,13 +6,22 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 import { ImCross } from 'react-icons/im';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import cardAnimation from '../hooks/animation/cardAnimation';
-import AlertToast from './alertToast/AlertToast';
+import useAnimation from '../hooks/animation/useAnimation';
+import AlertToast from '../utilities/alertToast/AlertToast';
 import { handleAddToCart } from './handleCart';
 import toastConfig from './toastConfig';
+
 export default function GridProductCard({ product_data }) {
+	// toast state here
+	const [toastOn, setToastOn] = useState(false);
+	const [toastType, setToastType] = useState('');
+	const [toastText, setToastText] = useState('');
+
+	const dispatch = useDispatch(); //from react redux
+	const [qty, setQty] = useState(1); // product qty state
+
 	// import card animation here
-	const { initial, animate, exit, transition } = cardAnimation();
+	const { slideUp } = useAnimation();
 
 	// destructuring product data here
 	const {
@@ -26,15 +35,8 @@ export default function GridProductCard({ product_data }) {
 		additional_info,
 	} = product_data;
 
-	const dispatch = useDispatch();
 	const { regular_price, sale_price } = prices;
 	const { weight } = additional_info;
-	const [qty, setQty] = useState(1);
-
-	// toast state here
-	const [toastOn, setToastOn] = useState(false);
-	const [toastType, setToastType] = useState('');
-	const [toastText, setToastText] = useState('');
 
 	// toast config
 	const { toast_config } = toastConfig(setToastOn, toastType, toastText);
@@ -45,12 +47,10 @@ export default function GridProductCard({ product_data }) {
 
 			<motion.div
 				id='product_card_grid_style'
-				viewport={{ once: true, amount: 0.8 }}
+				initial='offscreen'
 				whileInView='onscreen'
-				initial={('offscreen', initial)}
-				animate={animate}
-				exit={exit}
-				transition={transition}
+				viewport={slideUp.viewport}
+				variants={slideUp}
 			>
 				<div id='card_header'>
 					<div id='stock_slae_badge'>
@@ -62,12 +62,14 @@ export default function GridProductCard({ product_data }) {
 								% OFF
 							</div>
 						)}
+
 						{stock_available > 0 ? (
 							<div id='stock_status_green'></div>
 						) : (
 							<div id='stock_status_red'></div>
 						)}
 					</div>
+
 					<NextLink href={`/shop/singleProducts/${slug}`} passHref>
 						<div id='product_thumbnail'>
 							<Image
@@ -80,6 +82,7 @@ export default function GridProductCard({ product_data }) {
 						</div>
 					</NextLink>
 				</div>
+
 				<div id='card_body'>
 					<NextLink href={`/shop/singleProducts/${slug}`} passHref>
 						<h3 id='product_title'>{title}</h3>

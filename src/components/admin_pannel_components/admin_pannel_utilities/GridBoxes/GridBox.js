@@ -1,21 +1,23 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import CountUp from 'react-countup';
-import cardAnimation from '../../../../hooks/animation/cardAnimation';
+import useAnimation from '../../../../hooks/animation/useAnimation';
 
 export default function GridBox({ box_content }) {
+	// animation hook
+	const { pulseZoom } = useAnimation();
+
+	// destructuring box data
 	const { box_name, box_number, box_icon, icon_color, note } = box_content;
-	const { initial, animate, exit, transition } = cardAnimation();
+
 	return (
 		<>
 			<motion.div
 				id='box_wrapper'
 				whileInView='onscreen'
-				viewport={{ once: true, amount: 0.8 }}
-				initial={initial}
-				animate={animate}
-				exit={exit}
-				transition={transition}
+				viewport={pulseZoom.viewport}
+				initial='offscreen'
+				variants={pulseZoom}
 			>
 				<div className='box_content'>
 					<div>

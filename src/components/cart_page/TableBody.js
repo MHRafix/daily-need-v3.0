@@ -2,47 +2,43 @@ import Cookie from 'js-cookie';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { useState } from 'react';
-import { AiFillWarning } from 'react-icons/ai';
+// import { AiFillWarning } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
+import useAnimation from '../../hooks/animation/useAnimation';
 import { qtyDecrease, qtyIncrease } from '../../redux/cart_products/action';
 import AlertToast from '../../utilities/alertToast/AlertToast';
 import { handleReduceCart } from '../../utilities/handleReduceCart';
+import toastConfig from '../../utilities/toastConfig';
 
 export default function TableBody({ carted_products }) {
-	// destructure product information
-	const { _id, slug, thumbnail, title, prices, quantity } = carted_products;
-	const dispatch = useDispatch();
-
 	// toast state here
 	const [toastOn, setToastOn] = useState(false);
 	const [toastType, setToastType] = useState('');
 	const [toastText, setToastText] = useState('');
 
-	// handle close toast here
-	const handleRemoveToast = () => {
-		// setToastText("");
-		setToastOn(false);
-	};
+	// animation hook
+	const { fadeUp } = useAnimation();
 
-	// auto close toast after ther 3000ms delay
-	if (toastOn) {
-		setTimeout(() => {
-			setToastOn(false);
-		}, 3000);
-	}
+	// destructure product data
+	const { _id, slug, thumbnail, title, prices, quantity } = carted_products;
+	const dispatch = useDispatch();
 
-	// toast setting configuration here
-	const toast_config = {
-		toastStyle: toastType,
-		alertText: toastText,
-		toastIcon: <AiFillWarning />,
-		handleRemoveToast: handleRemoveToast,
-	};
+	// toast config here
+	const { toast_config } = toastConfig(setToastOn, toastType, toastText);
 
 	return (
 		<>
+			{/* toast alert  */}
 			{toastOn && <AlertToast toast_config={toast_config} />}
-			<div className='table_body'>
+
+			<motion.div
+				className='table_body'
+				initial='offscreen'
+				whileInView='onscreen'
+				viewport={fadeUp.viewport}
+				variants={fadeUp}
+			>
 				<div className='table_body_item'>
 					{thumbnail && (
 						<Image
@@ -119,7 +115,7 @@ export default function TableBody({ carted_products }) {
 						✖
 					</span>
 				</div>
-			</div>
+			</motion.div>
 		</>
 	);
 }
@@ -147,7 +143,7 @@ const handleUpdateCart = (
 				dispatch(updateDep(_id));
 			} else {
 				setToastOn(true);
-				setToastType('warning_toast');
+				setToastType('error_toast');
 				setToastText('Maximum quantity limit exceed!');
 			}
 		} else {
@@ -156,7 +152,7 @@ const handleUpdateCart = (
 				dispatch(updateDep(_id));
 			} else {
 				setToastOn(true);
-				setToastType('warning_toast');
+				setToastType('error_toast');
 				setToastText('Minimum quantity limit exceed!');
 			}
 		}
