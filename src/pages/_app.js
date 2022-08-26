@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
-				<AnimatePresence>
+				<AnimatePresence exitBeforeEnter initial={false}>
 					<Component {...pageProps} />
 				</AnimatePresence>
 			</Hydrate>

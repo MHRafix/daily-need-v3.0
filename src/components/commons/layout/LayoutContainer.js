@@ -11,13 +11,14 @@ export default function LayoutContainer({ children, title, description }) {
 	return (
 		<motion.div
 			className='page_main_wrapper'
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
+			initial={{ scaleY: 0.7 }}
+			animate={{ scaleY: 1 }}
+			exit={{ scaleY: 0.7 }}
+			transition={{ duration: 0.3 }}
 		>
 			<Head>
-				<title className='capitalize'>
-					{title ? `Daily Needs - ${title}` : 'Daily Needs'}
+				<title>
+					{title ? `${title.toUpperCase()} - Daily Needs` : 'Daily Needs'}
 				</title>
 				<meta name='description' content={description} />
 				<link rel='icon' href='/favicon.ico' />
@@ -29,11 +30,14 @@ export default function LayoutContainer({ children, title, description }) {
 			{/* app body is here */}
 			<main>
 				<div className='container_wrapper'>{children}</div>
+
 				{/* messenger chat icon here */}
 				{/* <MessengerCustomerChat
           pageId="110944118380097"
           appId="588889365150764"
         /> */}
+
+				{/* scroll to top btn */}
 				<div>
 					<ScrollToTop
 						smooth={true}
