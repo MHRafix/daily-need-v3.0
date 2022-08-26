@@ -8,11 +8,11 @@ export default function ProfileNav({ menu_data }) {
 	const { href, menu_name, menu_icon } = menu_data;
 	const router = useRouter();
 	const { asPath } = router;
-	const active_path = `/my_account/${userInfo.user_email}/my_profile/${href}`;
+	const active_path = `/my_account/${userInfo.user_email}/my_profile${href}`;
 
 	return (
 		<NextLink
-			href={`/my_account/${userInfo.user_email}/my_profile/${href}`}
+			href={`/my_account/${userInfo.user_email}/my_profile${href}`}
 			passHref
 		>
 			<div

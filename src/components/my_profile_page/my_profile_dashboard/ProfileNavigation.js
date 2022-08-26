@@ -35,9 +35,11 @@ export default function ProfileNavigation() {
 						className='rounded-full my-5 mx-auto'
 					/>
 				)}
-				<h3 className='text-deep_cyan font-semibold tracking-wide text-normal capitalize'>
-					{userInfo?.user_name}
-				</h3>
+				{userInfo?.user_name && (
+					<h3 className='text-deep_cyan font-semibold tracking-wide text-normal capitalize'>
+						{userInfo?.user_name}
+					</h3>
+				)}
 				<button
 					className='!text-sm tracking-wide'
 					id='cart_btn'
