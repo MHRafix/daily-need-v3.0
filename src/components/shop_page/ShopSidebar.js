@@ -8,7 +8,6 @@ import SidebarPartContainer from '../commons/layout/SidebarPartContainer';
 export default function ShopSidebar({ priceRangeData }) {
 	const { setMinRange, setMaxRange } = priceRangeData;
 	const all_categories = useSelector((state) => state.products.all_categories);
-
 	return (
 		<div className='sidebar_wrapper'>
 			<SidebarPartContainer filterer_name='filter by price'>

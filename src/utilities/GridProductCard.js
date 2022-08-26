@@ -73,6 +73,7 @@ export default function GridProductCard({ product_data }) {
 					<NextLink href={`/shop/singleProducts/${slug}`} passHref>
 						<div id='product_thumbnail'>
 							<Image
+								priority={true}
 								id='product_thumbnail'
 								src={thumbnail}
 								width='130'

@@ -4,6 +4,7 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import uuid from 'react-uuid';
 import Loader from '../../images/loader/loader.gif';
 
+// custom text field
 export const FormTextField = ({
 	form_label,
 	type,
@@ -31,6 +32,7 @@ export const FormTextField = ({
 	);
 };
 
+// custom file field
 export const FormFileField = ({ required, setState }) => {
 	return (
 		<div>
@@ -59,6 +61,7 @@ export const FormFileField = ({ required, setState }) => {
 	);
 };
 
+// custom commetn field
 export const FormTextArea = ({ form_label, cols, rows, required }) => {
 	return (
 		<div id='field_wrapper'>
@@ -72,7 +75,7 @@ export const FormTextArea = ({ form_label, cols, rows, required }) => {
 	);
 };
 
-// form button
+// custom form button
 export const FormButton = ({ type, btn_name, processing, disable }) => {
 	return (
 		<div id='field_wrapper' className='!w-full mt-2'>

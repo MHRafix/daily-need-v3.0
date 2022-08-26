@@ -367,7 +367,7 @@
 	}
 
 	#product_sorting {
-		@apply p-1 border border-slate-200 outline-none text-black4 w-full;
+		@apply p-1 border border-slate-200 outline-none text-black4 lg:w-full;
 	}
 
 	.checkout_table_wrapper {

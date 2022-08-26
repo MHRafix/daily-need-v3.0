@@ -5,7 +5,7 @@ import { FaBars, FaList } from 'react-icons/fa';
 
 export default function ViewType({ view_type }) {
 	const { setGrid, grid, sidebaron, setsidebaron } = view_type;
-	console.log(grid);
+
 	// handle grid layout
 	const handleGridLayout = () => {
 		Cookie.set('layout_changer', JSON.stringify(true));

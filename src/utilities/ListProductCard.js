@@ -72,6 +72,7 @@ export default function ListProductCard({ product_data }) {
 					<NextLink href={`/shop/singleProducts/${slug}`} passHref>
 						<div id='product_thumbnail'>
 							<Image
+								priority={true}
 								id='product_thumbnail'
 								src={thumbnail}
 								alt='product_thumbnail'
