@@ -1,30 +1,26 @@
-import Cookie from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { MyProfileErrMssg } from '../../../utilities/AlertMessage';
 import Breadcrumb from '../../commons/Breadcrumb/Breadcrumb';
 import ProfileContentContainer from '../my_profile_dashboard/ProfileContentContainer';
 import VerifyUserContent from './VerifyUserContent';
 
 export default function VerifyUserDetailsMain() {
-	// user info
-	const userInfo =
-		Cookie.get('user_information') &&
-		JSON.parse(Cookie.get('user_information'));
+	// logged in user data
+	const userInfo = useSelector((state) => state.users.loggedin_user);
 
-	// const bread_string = `My Profile / ${userInfo?.user_name} / user verification`;
+	const bread_string = `${userInfo?.user_name} / My Profile / user verification`;
 
-	const bread_string = 'My Profile / user verification';
+	if (!userInfo?.user_email) {
+		// prevent fake user
+		const bread_string = 'fake user';
 
-	// if (userInfo?.user_name) {
-	// } else {
-	//   // prevent fake user
-	//   const bread_string = "fake user";
-
-	//   return (
-	//     <MyProfileErrMssg
-	//       bread_string={bread_string}
-	//       message="You are not logged in. Please login to explore more!"
-	//     />
-	//   );
-	// }
+		return (
+			<MyProfileErrMssg
+				bread_string={bread_string}
+				message='You are not logged in. Please login to explore more!'
+			/>
+		);
+	}
 
 	return (
 		<>

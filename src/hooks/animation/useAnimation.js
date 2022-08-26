@@ -84,11 +84,6 @@ export default function useAnimation() {
 				duration: 0.5,
 			},
 		},
-
-		exit: {
-			y: 100,
-			transition: { type: 'spring', bounce: 0.4, duration: 0.5 },
-		},
 	};
 
 	/**

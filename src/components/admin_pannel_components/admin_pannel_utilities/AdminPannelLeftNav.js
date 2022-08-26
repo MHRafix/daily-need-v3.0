@@ -8,11 +8,10 @@ import {
 import { useSelector } from 'react-redux';
 
 export default function AdminPannelLeftNav({ nav_data }) {
+	const [subNavOn, setSubNavOn] = useState(false);
 	const { main_nav, main_nav_link, main_nav_icon, sub_navs } = nav_data;
-
 	// user information
 	const userInfo = useSelector((state) => state.users.loggedin_user);
-	const [subNavOn, setSubNavOn] = useState(false);
 
 	return (
 		<>

@@ -49,7 +49,6 @@ export default function GridProductCard({ product_data }) {
 				id='product_card_grid_style'
 				initial='offscreen'
 				whileInView='onscreen'
-				exit={slideUp.exit}
 				variants={slideUp}
 			>
 				<div id='card_header'>

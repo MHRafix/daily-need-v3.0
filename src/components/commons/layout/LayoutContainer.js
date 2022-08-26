@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import { HiArrowSmUp } from 'react-icons/hi';
+import { IoIosArrowUp } from 'react-icons/io';
 import ScrollToTop from 'react-scroll-to-top';
 import FooterCopyrightArea from '../Footer/FooterCopyrightArea';
 import FooterFeaturesCard from '../Footer/FooterFeaturesCard';
@@ -11,14 +11,14 @@ export default function LayoutContainer({ children, title, description }) {
 	return (
 		<motion.div
 			className='page_main_wrapper'
-			initial={{ opacity: 0 }}
+			initial={{ opacity: 0.7 }}
 			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			transition={{ duration: 0.3 }}
+			exit={{ opacity: 0.7 }}
+			// transition={{ duration: 0.3 }}
 		>
 			<Head>
 				<title>
-					{title ? `${title.toUpperCase()} - Daily Needs` : 'Daily Needs'}
+					{title ? `Daily Needs - ${title.toUpperCase()}` : 'Daily Needs'}
 				</title>
 				<meta name='description' content={description} />
 				<link rel='icon' href='/favicon.ico' />
@@ -43,7 +43,7 @@ export default function LayoutContainer({ children, title, description }) {
 						smooth={true}
 						top={300}
 						color='#fff'
-						component={<HiArrowSmUp />}
+						component={<IoIosArrowUp />}
 						id='gotop_client_btn'
 					/>
 				</div>

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import { HiArrowSmUp } from 'react-icons/hi';
+import { IoIosArrowUp } from 'react-icons/io';
 import ScrollToTop from 'react-scroll-to-top';
 import AdminPannelLeftNavigation from '../AdminPannelNavigation/AdminPannelLeftNavigation';
 import AdminPannelTopNavigation from '../AdminPannelNavigation/AdminPannelTopNavigation';
@@ -60,7 +60,7 @@ export default function AdminPannelLayoutContainer({
 										smooth={true}
 										top={300}
 										color='#fff'
-										component={<HiArrowSmUp />}
+										component={<IoIosArrowUp />}
 										id='expand_btn'
 									/>
 								</div>

@@ -1,35 +1,34 @@
-import Cookie from "js-cookie";
-import { MyProfileErrMssg } from "../../../utilities/AlertMessage";
-import Breadcrumb from "../../commons/Breadcrumb/Breadcrumb";
-import ProfileContentContainer from "../my_profile_dashboard/ProfileContentContainer";
-import HistoryDownloadContent from "./HistoryDownloadContent";
+import { useSelector } from 'react-redux';
+import { MyProfileErrMssg } from '../../../utilities/AlertMessage';
+import Breadcrumb from '../../commons/Breadcrumb/Breadcrumb';
+import ProfileContentContainer from '../my_profile_dashboard/ProfileContentContainer';
+import HistoryDownloadContent from './HistoryDownloadContent';
 
 export default function HistoryDownloadMain({ my_orders }) {
-  // breadcrunb navigation
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
+	// logged in user data
+	const userInfo = useSelector((state) => state.users.loggedin_user);
 
-  if (userInfo?.user_name) {
-    var bread_string = `My Profile/${userInfo?.user_name}/history download`;
-  } else {
-    // prevent fake user
-    const bread_string = "fake user";
+	// breadcrunb navigation
+	var bread_string = `${userInfo?.user_name} / my profile / history download`;
 
-    return (
-      <MyProfileErrMssg
-        bread_string={bread_string}
-        message="You are not logged in. Please login to explore more!"
-      />
-    );
-  }
+	// prevent fake user
+	if (!userInfo?.user_email) {
+		const bread_string = 'fake user';
 
-  return (
-    <>
-      <Breadcrumb bread_nav={bread_string} />
-      <ProfileContentContainer>
-        <HistoryDownloadContent my_orders={my_orders} />
-      </ProfileContentContainer>
-    </>
-  );
+		return (
+			<MyProfileErrMssg
+				bread_string={bread_string}
+				message='You are not logged in. Please login to explore more!'
+			/>
+		);
+	}
+
+	return (
+		<>
+			<Breadcrumb bread_nav={bread_string} />
+			<ProfileContentContainer>
+				<HistoryDownloadContent my_orders={my_orders} />
+			</ProfileContentContainer>
+		</>
+	);
 }

@@ -1,36 +1,33 @@
-import Cookie from "js-cookie";
-import { useRouter } from "next/router";
-import { MyProfileErrMssg } from "../../../utilities/AlertMessage";
-import Breadcrumb from "../../commons/Breadcrumb/Breadcrumb";
-import ProfileContentContainer from "../my_profile_dashboard/ProfileContentContainer";
-import MyAllOrdersContent from "./MyAllOrdersContent";
+import { useSelector } from 'react-redux';
+import { MyProfileErrMssg } from '../../../utilities/AlertMessage';
+import Breadcrumb from '../../commons/Breadcrumb/Breadcrumb';
+import ProfileContentContainer from '../my_profile_dashboard/ProfileContentContainer';
+import MyAllOrdersContent from './MyAllOrdersContent';
 
 export default function MyAllOrdersMain({ my_orders }) {
-  // breadcrunb navigation
-  const userInfo =
-    Cookie.get("user_information") &&
-    JSON.parse(Cookie.get("user_information"));
+	// loggedin user data
+	const userInfo = useSelector((state) => state.users.loggedin_user);
 
-  if (userInfo?.user_name) {
-    var bread_string = `My Profile/${userInfo?.user_name}/manage all orders`;
-  } else {
-    // prevent fake user
-    const bread_string = "fake user";
+	// breadcrunb navigation
+	const bread_string = `${userInfo?.user_name} / my profile / manage all orders`;
 
-    return (
-      <MyProfileErrMssg
-        bread_string={bread_string}
-        message="You are not logged in. Please login to explore more!"
-      />
-    );
-  }
+	// prevent fake user
+	if (!userInfo?.user_email) {
+		const bread_string = 'fake user';
+		return (
+			<MyProfileErrMssg
+				bread_string={bread_string}
+				message='You are not logged in. Please login to explore more!'
+			/>
+		);
+	}
 
-  return (
-    <>
-      <Breadcrumb bread_nav={bread_string} />
-      <ProfileContentContainer>
-        <MyAllOrdersContent my_orders={my_orders} />
-      </ProfileContentContainer>
-    </>
-  );
+	return (
+		<>
+			<Breadcrumb bread_nav={bread_string} />
+			<ProfileContentContainer>
+				<MyAllOrdersContent my_orders={my_orders} />
+			</ProfileContentContainer>
+		</>
+	);
 }

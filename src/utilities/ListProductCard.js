@@ -50,7 +50,6 @@ export default function ListProductCard({ product_data }) {
 				id='product_card_list_style'
 				initial='offscreen'
 				whileInView='onscreen'
-				exit={slideUp.exit}
 				variants={slideUp}
 			>
 				<div id='card_header_list'>
