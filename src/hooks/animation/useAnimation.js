@@ -72,9 +72,8 @@ export default function useAnimation() {
 	 */
 
 	const slideUp = {
-		viewport: { once: true, amount: 0.2 },
 		offscreen: {
-			y: 60,
+			y: 100,
 		},
 
 		onscreen: {
@@ -82,8 +81,13 @@ export default function useAnimation() {
 			transition: {
 				type: 'spring',
 				bounce: 0.4,
-				duration: 0.7,
+				duration: 0.5,
 			},
+		},
+
+		exit: {
+			y: 100,
+			transition: { type: 'spring', bounce: 0.4, duration: 0.5 },
 		},
 	};
 
@@ -93,7 +97,6 @@ export default function useAnimation() {
 	 */
 
 	const pulseZoom = {
-		viewport: { once: true, amount: 0.2 },
 		offscreen: {
 			scale: 0.7,
 			opacity: 0,
@@ -108,6 +111,12 @@ export default function useAnimation() {
 				duration: 0.5,
 				ease: 'easeOut',
 			},
+		},
+
+		exit: {
+			scale: 0.7,
+			opacity: 0,
+			transition: { duration: 0.5 },
 		},
 	};
 

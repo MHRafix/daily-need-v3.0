@@ -15,7 +15,7 @@ export default function GridBox({ box_content }) {
 			<motion.div
 				id='box_wrapper'
 				whileInView='onscreen'
-				viewport={pulseZoom.viewport}
+				exit={pulseZoom.exit}
 				initial='offscreen'
 				variants={pulseZoom}
 			>

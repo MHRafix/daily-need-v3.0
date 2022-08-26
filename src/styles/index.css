@@ -760,6 +760,10 @@
 		@apply bg-green text-white text-semi_medium w-14 h-14 flex items-center justify-center rounded-full hover:duration-300 hover:bg-black;
 	}
 
+	#gotop_client_btn {
+		@apply bg-gradient-to-r from-orangee to-orangee_red text-white text-semi_medium w-14 h-14 flex items-center justify-center rounded-full hover:duration-300 hover:bg-gradient-to-r hover:from-black hover:to-black;
+	}
+
 	#minimize_btn {
 		@apply bg-orangee_red text-white text-semi_medium w-14 h-14 flex items-center justify-center rounded-full hover:duration-300 hover:bg-black;
 	}

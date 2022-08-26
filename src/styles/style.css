@@ -240,7 +240,7 @@ li {
 
 button#action_btn_icon {
 	display: flex;
-	padding: 5px 10px;
+	padding: 5px 8px;
 	border-radius: 99999px;
 	justify-content: flex-start;
 	align-items: center;

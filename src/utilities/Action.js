@@ -32,7 +32,6 @@ export default function Action({
 						id={keyProperties ? 'action_plate_three' : 'action_plate_two'}
 						initial='offscreen'
 						whileInView='onscreen'
-						// viewport={fadePop.viewport}
 						exit={fadePop.exit}
 						variants={fadePop}
 					>

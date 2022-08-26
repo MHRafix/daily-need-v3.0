@@ -1,4 +1,7 @@
+import { motion } from 'framer-motion';
 import Head from 'next/head';
+import { HiArrowSmUp } from 'react-icons/hi';
+import ScrollToTop from 'react-scroll-to-top';
 import FooterCopyrightArea from '../Footer/FooterCopyrightArea';
 import FooterFeaturesCard from '../Footer/FooterFeaturesCard';
 import FooterMain from '../Footer/FooterMain';
@@ -6,7 +9,12 @@ import HeaderMain from '../Header/HeaderMain';
 
 export default function LayoutContainer({ children, title, description }) {
 	return (
-		<div className='page_main_wrapper'>
+		<motion.div
+			className='page_main_wrapper'
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+		>
 			<Head>
 				<title className='capitalize'>
 					{title ? `Daily Needs - ${title}` : 'Daily Needs'}
@@ -21,13 +29,20 @@ export default function LayoutContainer({ children, title, description }) {
 			{/* app body is here */}
 			<main>
 				<div className='container_wrapper'>{children}</div>
-
 				{/* messenger chat icon here */}
-
 				{/* <MessengerCustomerChat
           pageId="110944118380097"
           appId="588889365150764"
         /> */}
+				<div>
+					<ScrollToTop
+						smooth={true}
+						top={300}
+						color='#fff'
+						component={<HiArrowSmUp />}
+						id='gotop_client_btn'
+					/>
+				</div>
 			</main>
 
 			{/* app footer is here */}
@@ -36,6 +51,6 @@ export default function LayoutContainer({ children, title, description }) {
 				<FooterMain />
 				<FooterCopyrightArea />
 			</footer>
-		</div>
+		</motion.div>
 	);
 }
