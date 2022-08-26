@@ -11,9 +11,9 @@ export default function LayoutContainer({ children, title, description }) {
 	return (
 		<motion.div
 			className='page_main_wrapper'
-			initial={{ scaleY: 0.7 }}
+			initial={{ scaleY: 0 }}
 			animate={{ scaleY: 1 }}
-			exit={{ scaleY: 0.7 }}
+			exit={{ scaleY: 0 }}
 			transition={{ duration: 0.3 }}
 		>
 			<Head>
