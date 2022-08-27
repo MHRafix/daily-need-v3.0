@@ -5,17 +5,19 @@ export default function useAnimation() {
 	 */
 
 	const fadeUp = {
-		viewport: { once: true, amount: 0.2 },
 		offscreen: {
 			y: 50,
 			opacity: 0,
+			transition: { duration: 0.3 },
 		},
 
 		onscreen: {
 			y: 0,
 			opacity: 1,
-			transition: { type: 'spring', bounce: 0.4, duration: 0.3 },
+			transition: { duration: 0.3 },
 		},
+
+		exit: { y: 50, opacity: 0, transition: { duration: 0.3 } },
 	};
 
 	/**
@@ -24,18 +26,18 @@ export default function useAnimation() {
 	 */
 
 	const fadeLeft = {
-		viewport: { once: true, amount: 0.2 },
 		offscreen: {
 			x: -50,
 			opacity: 0,
+			transition: { duration: 0.2 },
 		},
 
 		onscreen: {
 			x: 0,
 			opacity: 1,
-			transition: { type: 'spring', bounce: 0.4, duration: 1, delay: 0.3 },
+			transition: { duration: 0.2, delay: 0.4 },
 		},
-		// exit: { x: 50, opacity: 0, duration: 0.5 },
+		exit: { x: 50, opacity: 0, duration: 0.2 },
 	};
 
 	/**
@@ -44,16 +46,16 @@ export default function useAnimation() {
 	 */
 
 	const fadeRight = {
-		viewport: { once: true, amount: 0.2 },
 		offscreen: {
 			x: 100,
 			opacity: 0,
+			transition: { duration: 0.3 },
 		},
 
 		onscreen: {
 			x: 0,
 			opacity: 1,
-			transition: { type: 'spring', duration: 0.5 },
+			transition: { duration: 0.3 },
 		},
 
 		exit: {
@@ -74,15 +76,22 @@ export default function useAnimation() {
 	const slideUp = {
 		offscreen: {
 			y: 100,
+			opacity: 0,
+			transition: { duration: 0.3 },
 		},
 
 		onscreen: {
 			y: 0,
+			opacity: 1,
 			transition: {
-				type: 'spring',
-				bounce: 0.4,
-				duration: 0.5,
+				duration: 0.3,
 			},
+		},
+
+		exit: {
+			y: 0,
+			opacity: 0,
+			transition: { duration: 0.3 },
 		},
 	};
 
@@ -95,23 +104,21 @@ export default function useAnimation() {
 		offscreen: {
 			scale: 0.7,
 			opacity: 0,
+			transition: { duration: 0.3 },
 		},
 
 		onscreen: {
 			scale: 1,
 			opacity: 1,
 			transition: {
-				type: 'spring',
-				bounce: 0.3,
-				duration: 0.5,
-				ease: 'easeOut',
+				duration: 0.3,
 			},
 		},
 
 		exit: {
-			scale: 0.7,
+			scale: 0.5,
 			opacity: 0,
-			transition: { duration: 0.5 },
+			transition: { duration: 0.3 },
 		},
 	};
 
@@ -123,19 +130,25 @@ export default function useAnimation() {
 	const fadePop = {
 		offscreen: {
 			scale: 0.8,
+			opacity: 0,
+			transition: {
+				duration: 0.2,
+			},
 		},
 
 		onscreen: {
 			scale: 1,
+			opacity: 1,
 			transition: {
-				duration: 0.09,
+				duration: 0.2,
 			},
 		},
 
 		exit: {
-			scale: 0.8,
+			scale: 0.5,
+			opacity: 0,
 			transition: {
-				duration: 0.09,
+				duration: 0.2,
 			},
 		},
 	};

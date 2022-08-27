@@ -22,12 +22,7 @@ export default function MiniCart({ cart_products, cartState, cartActive }) {
 		<AnimatePresence>
 			{cartActive && (
 				<motion.div
-					className={
-						// cartActive
-						// ?
-						'mini_cart_wrapper_active shadow-lg'
-						// : 'mini_cart_wrapper shadow-lg'
-					}
+					className='mini_cart_wrapper_active shadow-lg'
 					initial='offscreen'
 					exit={fadeRight.exit}
 					whileInView='onscreen'
@@ -49,7 +44,7 @@ export default function MiniCart({ cart_products, cartState, cartActive }) {
 					</div>
 					{cart_products.length > 0 ? (
 						<>
-							<div className='cart_content_area' style={{ height: '64%' }}>
+							<div className='cart_content_area' style={{ height: '58%' }}>
 								{cart_products.map((product) => (
 									<CartItemCard key={product._id} product={product} />
 								))}

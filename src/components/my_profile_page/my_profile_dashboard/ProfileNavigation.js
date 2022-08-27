@@ -1,26 +1,17 @@
-import Cookie from 'js-cookie';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import { MdLogout } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { profile_navigation } from '../../../fake_data/all_fakedata';
+import { useHandleLogout } from '../../../hooks/othersHooks/useHandleLogout';
 import ProfileNav from '../../../utilities/ProfileNav';
 
 export default function ProfileNavigation() {
 	// user info
 	const userInfo = useSelector((state) => state.users.loggedin_user);
 
-	// handle logout and remove user information cookie from the browser
-	const history = useRouter();
-
-	const handleLogout = () => {
-		history.push('/my_account/my_acc');
-		Cookie.remove('user_information');
-		Cookie.remove('user_verify');
-		Cookie.remove('lock_screen');
-	};
+	const { handleLogout } = useHandleLogout();
 
 	return (
 		<div className='profile_details_wrapper'>

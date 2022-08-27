@@ -111,7 +111,7 @@
 	}
 
 	.nav_link_href {
-		@apply !capitalize cursor-pointer tracking-wider mx-3;
+		@apply !capitalize cursor-pointer tracking-wider mx-3 text-black2 hover:text-black hover:duration-300;
 	}
 
 	.nav_link_href_big {
@@ -198,6 +198,10 @@
 		@apply flex justify-between items-center;
 	}
 
+	#only_remove_action {
+		@apply text-red-500 cursor-pointer text-semi_medium absolute right-2 top-2 hover:text-red-300 hover:duration-300;
+	}
+
 	#sale_badge {
 		@apply bg-light_green py-extra_padding1 px-1.1 text-thin rounded-sm text-green border-green;
 	}
@@ -276,7 +280,7 @@
 	}
 
 	.home_nav {
-		@apply font-bold text-black3 cursor-pointer;
+		@apply font-bold text-black3 cursor-pointer hover:text-black hover:duration-300;
 	}
 
 	.single_product_view {
@@ -406,7 +410,7 @@
 	}
 
 	.cart_item_wrapper {
-		@apply flex items-center bg-white rounded-md my-5 py-1.5 px-2;
+		@apply flex items-center bg-white rounded-md my-5 py-1.5 px-2 relative;
 	}
 
 	.cart_footer_area {

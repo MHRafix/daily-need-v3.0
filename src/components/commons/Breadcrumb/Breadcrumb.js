@@ -5,9 +5,9 @@ export default function Breadcrumb({ bread_nav }) {
 	return (
 		<div className='breadcrumb_wrapper flex'>
 			<NextLink href='/' passHref>
-				<span className='home_nav'>Home </span>
+				<button className='home_nav'>Home </button>
 			</NextLink>
-			<div className='tracking-wider capitalize'>/ {bread_nav}</div>
+			<div className='tracking-wider capitalize'>&nbsp;/ {bread_nav}</div>
 		</div>
 	);
 }

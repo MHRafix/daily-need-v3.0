@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
@@ -27,43 +27,50 @@ export default function Action({
 				>
 					<BsThreeDotsVertical size={20} />
 				</button>
+			</div>
+			<AnimatePresence>
 				{visible && (
 					<motion.div
-						id={keyProperties ? 'action_plate_three' : 'action_plate_two'}
+						className='absolute z-50'
 						initial='offscreen'
 						whileInView='onscreen'
 						exit={fadePop.exit}
 						variants={fadePop}
 					>
-						<button id='action_btn_icon' onClick={() => setVisible(false)}>
-							<FiEdit className='text-light_purple cursor-pointer text-normal outline-none' />
-							&nbsp;Update
-						</button>
-						<button
-							id='action_btn_icon'
-							onClick={() => {
-								handleDelete(api_url);
-								setVisible(false);
-							}}
-						>
-							<RiDeleteBinLine className='text-red-500 cursor-pointer text-normal outline-none' />
-							&nbsp;Delete
-						</button>
-						{keyProperties && (
+						<div id={keyProperties ? 'action_plate_three' : 'action_plate_two'}>
+							<button
+								id='action_btn_icon'
+								onClick={() => setVisible((state) => state && false)}
+							>
+								<FiEdit className='text-light_purple cursor-pointer text-normal outline-none' />
+								&nbsp;Update
+							</button>
 							<button
 								id='action_btn_icon'
 								onClick={() => {
-									handleModal(keyProperties);
-									setVisible(false);
+									handleDelete(api_url);
+									setVisible((state) => state && false);
 								}}
 							>
-								<MdOutlinePlaylistAdd className='text-green cursor-pointer text-normal outline-none' />
-								&nbsp;Details
+								<RiDeleteBinLine className='text-red-500 cursor-pointer text-normal outline-none' />
+								&nbsp;Delete
 							</button>
-						)}
+							{keyProperties && (
+								<button
+									id='action_btn_icon'
+									onClick={() => {
+										handleModal(keyProperties);
+										setVisible((state) => state && false);
+									}}
+								>
+									<MdOutlinePlaylistAdd className='text-green cursor-pointer text-normal outline-none' />
+									&nbsp;Details
+								</button>
+							)}
+						</div>
 					</motion.div>
 				)}
-			</div>
+			</AnimatePresence>
 		</div>
 	);
 }

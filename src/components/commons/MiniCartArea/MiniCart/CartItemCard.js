@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import NextLink from 'next/link';
+import { AiFillMinusCircle } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import useAnimation from '../../../../hooks/animation/useAnimation';
 import { handleReduceCart } from '../../../../utilities/handleReduceCart';
@@ -23,8 +24,8 @@ export default function CartItemCard({ product }) {
 				<Image src={product?.thumbnail} alt='' width={80} height={80} />
 			</div>
 			<div className='ml-10 !text-left'>
-				<div id='stock_slae_badge'>
-					{product?.prices?.sale_price !== 0 && (
+				{product?.prices?.sale_price !== 0 && (
+					<div id='stock_slae_badge'>
 						<div id='sale_badge'>
 							{Math.ceil(
 								(product?.prices?.regular_price - product?.prices?.sale_price) /
@@ -32,13 +33,15 @@ export default function CartItemCard({ product }) {
 							)}
 							% OFF
 						</div>
-					)}
-					<div
-						onClick={() => handleReduceCart(product?._id, dispatch)}
-						className='text-red-500 cursor-pointer text-semi_medium'
-					>
-						&times;
 					</div>
+				)}
+
+				{/* remove icon */}
+				<div
+					onClick={() => handleReduceCart(product?._id, dispatch)}
+					id='only_remove_action'
+				>
+					<AiFillMinusCircle />
 				</div>
 				<div className='title_price_amount'>
 					<NextLink href={`/shop/singleProducts/${product?.slug}`} passHref>
