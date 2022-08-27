@@ -1,7 +1,11 @@
 // category image import here
 import { BsClockHistory } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
-import { MdManageSearch, MdOutlineDashboard } from 'react-icons/md';
+import {
+	MdManageSearch,
+	MdOutlineDashboard,
+	MdOutlineShareLocation,
+} from 'react-icons/md';
 
 // header navigation menus fake data here
 export const header_navigation = [
@@ -43,6 +47,25 @@ export const profile_navigation = [
 		menu_name: 'edit details',
 		href: '/verify_user',
 		menu_icon: <FiEdit />,
+	},
+];
+
+// toggle profile nav data
+export const toggle_profile_navigation = [
+	{
+		menu_name: 'dashboard',
+		menu_href: '/dashboard',
+		MenuIcon: <MdOutlineDashboard id='profile_nav_btn_purple_btn' />,
+	},
+	{
+		menu_name: 'my orders',
+		menu_href: '/my_all_orders',
+		MenuIcon: <MdManageSearch id='profile_nav_btn_yellow_btn' />,
+	},
+	{
+		menu_name: 'track orders',
+		menu_href: '/track_orders',
+		MenuIcon: <MdOutlineShareLocation id='profile_nav_btn_green_btn' />,
 	},
 ];
 

@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import { BiUserCircle } from 'react-icons/bi';
-import { MdOutlineAdminPanelSettings } from 'react-icons/md';
+import {
+	MdDownloading,
+	MdOutlineAdminPanelSettings,
+	MdOutlineCancel,
+	MdOutlineDownloadDone,
+	MdOutlinePlaylistAdd,
+} from 'react-icons/md';
 import { month_name } from '../../../fake_data/all_fakedata';
 import Action from '../../../utilities/Action';
 
@@ -296,11 +302,23 @@ export const CategoryTableConfig = (
 export const OrderedTableConfig = (handleDelete, handleModal) => {
 	const orderStatus = (cell) => {
 		if (cell === 'canceled') {
-			return <span id='red_signal_status'>canceled</span>;
+			return (
+				<span id='red_signal_status'>
+					<MdOutlineCancel size={18} /> canceled
+				</span>
+			);
 		} else if (cell === 'shipped') {
-			return <span id='green_signal_status'>shipped</span>;
+			return (
+				<span id='green_signal_status'>
+					<MdOutlineDownloadDone size={18} /> shipped
+				</span>
+			);
 		} else if (cell === 'pendding') {
-			return <span id='warning_signal_status'>pendding</span>;
+			return (
+				<span id='warning_signal_status'>
+					<MdDownloading size={18} /> pending
+				</span>
+			);
 		} else if (cell === 'inprogress') {
 			return <span id='info_signal_status'>inprogress</span>;
 		}
@@ -383,18 +401,6 @@ export const OrderedTableConfig = (handleDelete, handleModal) => {
 
 // shipped ordered products table config and columns here
 export const ShppedOrderedTableConfig = (handleModal) => {
-	const orderStatus = (cell) => {
-		if (cell === 'canceled') {
-			return <span id='red_signal_status'>canceled</span>;
-		} else if (cell === 'shipped') {
-			return <span id='green_signal_status'>shipped</span>;
-		} else if (cell === 'pendding') {
-			return <span id='warning_signal_status'>pendding</span>;
-		} else if (cell === 'inprogress') {
-			return <span id='info_signal_status'>inprogress</span>;
-		}
-	};
-
 	const ShippedOrderedTableColumns = [
 		{
 			name: 'CM Name',
@@ -439,7 +445,11 @@ export const ShppedOrderedTableConfig = (handleModal) => {
 		},
 		{
 			name: 'Status',
-			selector: (row) => orderStatus(row.order_overview.order_status),
+			selector: (row) => (
+				<span id='green_signal_status' style={{ display: 'flex' }}>
+					<MdOutlineDownloadDone size={18} /> shipped
+				</span>
+			),
 		},
 
 		{
@@ -453,4 +463,196 @@ export const ShppedOrderedTableConfig = (handleModal) => {
 	];
 
 	return { ShippedOrderedTableColumns };
+};
+
+// user products table config and columns here
+export const UserProductTableConfig = () => {
+	const UserProductTableColumns = [
+		{
+			name: 'Title',
+			selector: (row) => <div className='capitalize'>{row.title}</div>,
+			sortable: true,
+			sortFunction: productSort,
+		},
+
+		{
+			name: 'Image',
+			selector: (row) => (
+				<div style={{ padding: '5px' }}>
+					{row.thumbnail.src ? (
+						<Image
+							src={row.thumbnail}
+							alt='product pic'
+							className='rounded-full'
+						/>
+					) : (
+						<Image
+							src={row.thumbnail}
+							alt='product pic'
+							width={50}
+							height={50}
+							className='rounded-full'
+						/>
+					)}
+				</div>
+			),
+		},
+		{
+			name: 'Category',
+			selector: (row) => row.category,
+			sortable: true,
+			sortFunction: productSort,
+		},
+		{
+			name: 'Reg Price',
+			selector: (row) => <span>৳ {row.prices.regular_price}</span>,
+			sortable: true,
+			sortFunction: productSort,
+		},
+		{
+			name: 'Sale Price',
+			selector: (row) => <span>৳ {row.prices.sale_price}</span>,
+			sortable: true,
+			sortFunction: productSort,
+		},
+		{
+			name: 'Available',
+			selector: (row) =>
+				row.stock_available > 0 ? (
+					<span id='green_signal_status'>{row.stock_available} kg</span>
+				) : (
+					<span id='green_signal_status'>✖</span>
+				),
+			sortable: true,
+			sortFunction: productSort,
+		},
+		{
+			name: 'Status',
+			selector: (row) =>
+				row.product_status === 'in-stock' ? (
+					<span id='green_signal_status'>{row.product_status}</span>
+				) : (
+					<span id='red_signal_status'>{row.product_status}</span>
+				),
+			sortable: true,
+			sortFunction: productSort,
+		},
+		{
+			name: 'Type',
+			selector: (row) =>
+				row.product_type === 'on-sale' ? (
+					<span id='info_signal_status'>{row.product_type}</span>
+				) : (
+					<span id='warning_signal_status'>{row.product_type}</span>
+				),
+			sortable: true,
+			sortFunction: productSort,
+		},
+	];
+
+	return { UserProductTableColumns };
+};
+// user ordered products table config and columns here
+export const UserOrderedTableConfig = (handleModal) => {
+	const orderStatus = (cell) => {
+		if (cell === 'canceled') {
+			return (
+				<span id='red_signal_status'>
+					<MdOutlineCancel size={18} /> canceled
+				</span>
+			);
+		} else if (cell === 'shipped') {
+			return (
+				<span id='green_signal_status'>
+					<MdOutlineDownloadDone size={18} /> shipped
+				</span>
+			);
+		} else if (cell === 'pendding') {
+			return (
+				<span id='warning_signal_status'>
+					<MdDownloading size={18} /> pending
+				</span>
+			);
+		} else if (cell === 'inprogress') {
+			return <span id='info_signal_status'>inprogress</span>;
+		}
+	};
+
+	const UserOrderedTableColumns = [
+		{
+			name: 'CM Name',
+			selector: (row) => (
+				<div className='!capitalize'>{row.customer_info.customer_name}</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'CM Mobile',
+			selector: (row) => (
+				<div className='!capitalize'>{row.customer_info.customer_mobile}</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Order Date',
+			selector: (row) => (
+				<div>
+					{row.order_overview.order_date.date}{' '}
+					{month_name[row.order_overview.order_date.month]}{' '}
+					{row.order_overview.order_date.year}
+				</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Total Amount',
+			selector: (row) => (
+				<div className='!capitalize font-semibold'>
+					৳ {row.order_overview.total_amount}
+				</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Payment Status',
+			selector: (row) =>
+				row.payment_info.payment_status === 'due' ? (
+					<span id='red_signal_status'>{row.payment_info.payment_status}</span>
+				) : (
+					<span id='green_signal_status'>
+						{row.payment_info.payment_status}
+					</span>
+				),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Status',
+			selector: (row) => orderStatus(row.order_overview.order_status),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+
+		{
+			name: 'Action',
+			selector: (row) => (
+				<button
+					id='action_btn_icon'
+					style={{ background: '#2bd891', color: 'white' }}
+					onClick={() => {
+						handleModal(row.products_data);
+					}}
+				>
+					<MdOutlinePlaylistAdd size={20} />
+					&nbsp;Details
+				</button>
+			),
+		},
+	];
+
+	return { UserOrderedTableColumns };
 };
