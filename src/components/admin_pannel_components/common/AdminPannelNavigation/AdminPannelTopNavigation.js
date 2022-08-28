@@ -47,7 +47,7 @@ export default function AdminPannelTopNavigation({
 				<div className='right_side_action_icon'>
 					<div className='admin_pannel_header_action_icon'>
 						<MdOutlineLanguage /> &nbsp;
-						<span className='text-light text-wider'>English</span>
+						<div className='text-light text-wider'>English</div>
 					</div>
 					<div className='admin_pannel_header_action_icon'>
 						<MdOutlineDarkMode />
@@ -55,7 +55,7 @@ export default function AdminPannelTopNavigation({
 					</div>
 					<div className='admin_pannel_header_action_icon'>
 						<IoMdNotificationsOutline />
-						<span
+						<div
 							className={
 								notification
 									? 'notification_counter green'
@@ -63,11 +63,11 @@ export default function AdminPannelTopNavigation({
 							}
 						>
 							0
-						</span>
+						</div>
 					</div>
 					<div className='admin_pannel_header_action_icon'>
 						<FiMessageSquare />
-						<span
+						<div
 							className={
 								messages
 									? 'notification_counter green !bottom-8'
@@ -75,7 +75,7 @@ export default function AdminPannelTopNavigation({
 							}
 						>
 							0
-						</span>
+						</div>
 					</div>
 					<div className='admin_pannel_header_action_icon'>
 						<AccountLinks

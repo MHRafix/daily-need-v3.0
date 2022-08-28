@@ -25,7 +25,7 @@ export default function AdminPannelLeftNav({ nav_data }) {
 				>
 					{main_nav_link ? (
 						<NextLink
-							href={`/admin_pannel/${userInfo?.user_email}/${main_nav_link}`}
+							href={`/admin_pannel/${userInfo?.user_email}${main_nav_link}`}
 							passHref
 						>
 							<h3
@@ -36,13 +36,13 @@ export default function AdminPannelLeftNav({ nav_data }) {
 								}
 								className='!text-normal'
 							>
-								<span className='text-light_purple text-normal'>
+								<div className='text-light_purple text-normal'>
 									{main_nav_icon}
-								</span>
+								</div>
 								&nbsp;&nbsp;
-								<span className='w-full flex items-center justify-between'>
+								<div className='w-full flex items-center justify-between'>
 									{main_nav}
-								</span>
+								</div>
 							</h3>
 						</NextLink>
 					) : (
@@ -55,16 +55,14 @@ export default function AdminPannelLeftNav({ nav_data }) {
 								}
 								className='!text-normal'
 							>
-								<span className='text-light_purple text-normal'>
+								<div className='text-light_purple text-normal'>
 									{main_nav_icon}
-								</span>
+								</div>
 								&nbsp;&nbsp;
-								<span className='w-full flex items-center justify-between'>
-									<span className='text-left whitespace-nowrap'>
-										{main_nav}{' '}
-									</span>
+								<div className='w-full flex items-center justify-between'>
+									<div className='text-left whitespace-nowrap'>{main_nav} </div>
 									{subNavOn ? <MdKeyboardArrowUp /> : <MdKeyboardArrowRight />}
-								</span>
+								</div>
 							</h3>
 						</>
 					)}
@@ -100,7 +98,7 @@ export const SubNav = ({ sub_nav }) => {
 				href={
 					sub_nav_name === 'admin login' || sub_nav_name === 'forgot password'
 						? `/admin_pannel/authentication${sub_nav_link}`
-						: `/admin_pannel${userInfo?.user_email}${sub_nav_link}`
+						: `/admin_pannel/${userInfo?.user_email}${sub_nav_link}`
 				}
 				passHref
 			>

@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import { BiUserCircle } from 'react-icons/bi';
+import { FiLoader } from 'react-icons/fi';
 import {
-	MdDownloading,
+	MdOfflinePin,
 	MdOutlineAdminPanelSettings,
 	MdOutlineCancel,
-	MdOutlineDownloadDone,
+	MdOutlineMoneyOff,
+	MdOutlinePaid,
 	MdOutlinePlaylistAdd,
 } from 'react-icons/md';
+import { VscServerProcess } from 'react-icons/vsc';
 import { month_name } from '../../../fake_data/all_fakedata';
 import Action from '../../../utilities/Action';
 
@@ -110,19 +113,19 @@ export const UserTableConfig = (handleDelete) => {
 			name: 'User Role',
 			selector: (row) =>
 				row.user_admin ? (
-					<span
+					<div
 						className='flex items-center justify-between'
 						id='green_signal_status'
 					>
 						Admin <MdOutlineAdminPanelSettings size={15} />
-					</span>
+					</div>
 				) : (
-					<span
+					<div
 						className='flex items-center justify-between'
 						id='warning_signal_status'
 					>
 						Customer <BiUserCircle size={15} />
-					</span>
+					</div>
 				),
 		},
 
@@ -181,13 +184,13 @@ export const ProductTableConfig = (handleDelete) => {
 		},
 		{
 			name: 'Reg Price',
-			selector: (row) => <span>৳ {row.prices.regular_price}</span>,
+			selector: (row) => <div>৳ {row.prices.regular_price}</div>,
 			sortable: true,
 			sortFunction: productSort,
 		},
 		{
 			name: 'Sale Price',
-			selector: (row) => <span>৳ {row.prices.sale_price}</span>,
+			selector: (row) => <div>৳ {row.prices.sale_price}</div>,
 			sortable: true,
 			sortFunction: productSort,
 		},
@@ -195,9 +198,9 @@ export const ProductTableConfig = (handleDelete) => {
 			name: 'Available',
 			selector: (row) =>
 				row.stock_available > 0 ? (
-					<span id='green_signal_status'>{row.stock_available} kg</span>
+					<div id='green_signal_status'>{row.stock_available} kg</div>
 				) : (
-					<span id='green_signal_status'>✖</span>
+					<div id='green_signal_status'>✖</div>
 				),
 			sortable: true,
 			sortFunction: productSort,
@@ -206,9 +209,9 @@ export const ProductTableConfig = (handleDelete) => {
 			name: 'Status',
 			selector: (row) =>
 				row.product_status === 'in-stock' ? (
-					<span id='green_signal_status'>{row.product_status}</span>
+					<div id='green_signal_status'>{row.product_status}</div>
 				) : (
-					<span id='red_signal_status'>{row.product_status}</span>
+					<div id='red_signal_status'>{row.product_status}</div>
 				),
 			sortable: true,
 			sortFunction: productSort,
@@ -217,9 +220,9 @@ export const ProductTableConfig = (handleDelete) => {
 			name: 'Type',
 			selector: (row) =>
 				row.product_type === 'on-sale' ? (
-					<span id='info_signal_status'>{row.product_type}</span>
+					<div id='info_signal_status'>{row.product_type}</div>
 				) : (
-					<span id='warning_signal_status'>{row.product_type}</span>
+					<div id='warning_signal_status'>{row.product_type}</div>
 				),
 			sortable: true,
 			sortFunction: productSort,
@@ -303,24 +306,28 @@ export const OrderedTableConfig = (handleDelete, handleModal) => {
 	const orderStatus = (cell) => {
 		if (cell === 'canceled') {
 			return (
-				<span id='red_signal_status'>
-					<MdOutlineCancel size={18} /> canceled
-				</span>
+				<div id='red_signal_status'>
+					<MdOutlineCancel size={16} /> cancel
+				</div>
 			);
 		} else if (cell === 'shipped') {
 			return (
-				<span id='green_signal_status'>
-					<MdOutlineDownloadDone size={18} /> shipped
-				</span>
+				<div id='green_signal_status'>
+					<MdOfflinePin size={16} /> shiped
+				</div>
 			);
 		} else if (cell === 'pendding') {
 			return (
-				<span id='warning_signal_status'>
-					<MdDownloading size={18} /> pending
-				</span>
+				<div id='warning_signal_status'>
+					<FiLoader size={16} /> pending
+				</div>
 			);
 		} else if (cell === 'inprogress') {
-			return <span id='info_signal_status'>inprogress</span>;
+			return (
+				<div id='info_signal_status'>
+					<VscServerProcess size={16} /> process
+				</div>
+			);
 		}
 	};
 
@@ -367,11 +374,13 @@ export const OrderedTableConfig = (handleDelete, handleModal) => {
 			name: 'Payment Status',
 			selector: (row) =>
 				row.payment_info.payment_status === 'due' ? (
-					<span id='red_signal_status'>{row.payment_info.payment_status}</span>
+					<div id='red_signal_status'>
+						<MdOutlineMoneyOff size='16' /> {row.payment_info.payment_status}
+					</div>
 				) : (
-					<span id='green_signal_status'>
-						{row.payment_info.payment_status}
-					</span>
+					<div id='green_signal_status'>
+						<MdOutlinePaid size='16' /> {row.payment_info.payment_status}
+					</div>
 				),
 			sortable: true,
 			sortFunction: orderSort,
@@ -436,19 +445,21 @@ export const ShppedOrderedTableConfig = (handleModal) => {
 			name: 'Payment Status',
 			selector: (row) =>
 				row.payment_info.payment_status === 'due' ? (
-					<span id='red_signal_status'>{row.payment_info.payment_status}</span>
+					<div id='red_signal_status'>
+						<MdOutlineMoneyOff size='16' /> {row.payment_info.payment_status}
+					</div>
 				) : (
-					<span id='green_signal_status'>
-						{row.payment_info.payment_status}
-					</span>
+					<div id='green_signal_status'>
+						<MdOutlinePaid size='16' /> {row.payment_info.payment_status}
+					</div>
 				),
 		},
 		{
 			name: 'Status',
 			selector: (row) => (
-				<span id='green_signal_status' style={{ display: 'flex' }}>
-					<MdOutlineDownloadDone size={18} /> shipped
-				</span>
+				<div id='green_signal_status'>
+					<MdOfflinePin size={16} /> shiped
+				</div>
 			),
 		},
 
@@ -505,13 +516,13 @@ export const UserProductTableConfig = () => {
 		},
 		{
 			name: 'Reg Price',
-			selector: (row) => <span>৳ {row.prices.regular_price}</span>,
+			selector: (row) => <div>৳ {row.prices.regular_price}</div>,
 			sortable: true,
 			sortFunction: productSort,
 		},
 		{
 			name: 'Sale Price',
-			selector: (row) => <span>৳ {row.prices.sale_price}</span>,
+			selector: (row) => <div>৳ {row.prices.sale_price}</div>,
 			sortable: true,
 			sortFunction: productSort,
 		},
@@ -519,9 +530,9 @@ export const UserProductTableConfig = () => {
 			name: 'Available',
 			selector: (row) =>
 				row.stock_available > 0 ? (
-					<span id='green_signal_status'>{row.stock_available} kg</span>
+					<div id='green_signal_status'>{row.stock_available} kg</div>
 				) : (
-					<span id='green_signal_status'>✖</span>
+					<div id='green_signal_status'>✖</div>
 				),
 			sortable: true,
 			sortFunction: productSort,
@@ -530,9 +541,9 @@ export const UserProductTableConfig = () => {
 			name: 'Status',
 			selector: (row) =>
 				row.product_status === 'in-stock' ? (
-					<span id='green_signal_status'>{row.product_status}</span>
+					<div id='green_signal_status'>{row.product_status}</div>
 				) : (
-					<span id='red_signal_status'>{row.product_status}</span>
+					<div id='red_signal_status'>{row.product_status}</div>
 				),
 			sortable: true,
 			sortFunction: productSort,
@@ -541,9 +552,9 @@ export const UserProductTableConfig = () => {
 			name: 'Type',
 			selector: (row) =>
 				row.product_type === 'on-sale' ? (
-					<span id='info_signal_status'>{row.product_type}</span>
+					<div id='info_signal_status'>{row.product_type}</div>
 				) : (
-					<span id='warning_signal_status'>{row.product_type}</span>
+					<div id='warning_signal_status'>{row.product_type}</div>
 				),
 			sortable: true,
 			sortFunction: productSort,
@@ -552,29 +563,34 @@ export const UserProductTableConfig = () => {
 
 	return { UserProductTableColumns };
 };
+
 // user ordered products table config and columns here
 export const UserOrderedTableConfig = (handleModal) => {
 	const orderStatus = (cell) => {
 		if (cell === 'canceled') {
 			return (
-				<span id='red_signal_status'>
-					<MdOutlineCancel size={18} /> canceled
-				</span>
+				<div id='red_signal_status'>
+					<MdOutlineCancel size={16} /> cancel
+				</div>
 			);
 		} else if (cell === 'shipped') {
 			return (
-				<span id='green_signal_status'>
-					<MdOutlineDownloadDone size={18} /> shipped
-				</span>
+				<div id='green_signal_status'>
+					<MdOfflinePin size={16} /> shiped
+				</div>
 			);
 		} else if (cell === 'pendding') {
 			return (
-				<span id='warning_signal_status'>
-					<MdDownloading size={18} /> pending
-				</span>
+				<div id='warning_signal_status'>
+					<FiLoader size={16} /> pending
+				</div>
 			);
 		} else if (cell === 'inprogress') {
-			return <span id='info_signal_status'>inprogress</span>;
+			return (
+				<div id='info_signal_status'>
+					<VscServerProcess size={16} /> process
+				</div>
+			);
 		}
 	};
 
@@ -621,11 +637,13 @@ export const UserOrderedTableConfig = (handleModal) => {
 			name: 'Payment Status',
 			selector: (row) =>
 				row.payment_info.payment_status === 'due' ? (
-					<span id='red_signal_status'>{row.payment_info.payment_status}</span>
+					<div id='red_signal_status'>
+						<MdOutlineMoneyOff size='16' /> {row.payment_info.payment_status}
+					</div>
 				) : (
-					<span id='green_signal_status'>
-						{row.payment_info.payment_status}
-					</span>
+					<div id='green_signal_status'>
+						<MdOutlinePaid size='16' /> {row.payment_info.payment_status}
+					</div>
 				),
 			sortable: true,
 			sortFunction: orderSort,
