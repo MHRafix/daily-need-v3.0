@@ -1,20 +1,27 @@
-import React, { useEffect } from 'react';
+import Cookie from 'js-cookie';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import AdminPannelLayoutContainer from '../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer';
-import ManageCategoryMain from '../../../../components/admin_pannel_components/components/manage_category/ManageCategoryMain';
-import { storeAllCategories } from '../../../../redux/all_data/action';
+import ErrorPage from '../../../../pages/404';
 import { storeUserData } from '../../../../redux/user_data/action';
-import ErrorPage from '../../../404';
-export default function ManagCategoryProducts({
+
+export default function MyProfileDashboard({
+	all_orders,
+	all_users,
 	all_products,
-	all_categories,
 	this_user,
 }) {
 	// store categories to redux
 	const dispatch = useDispatch();
+	const this_user_email = this_user.user_email;
+	const userInfo =
+		Cookie.get('user_information') &&
+		JSON.parse(Cookie.get('user_information'));
+
 	useEffect(() => {
-		dispatch(storeUserData(this_user));
-		dispatch(storeAllCategories(all_categories));
+		if (this_user_email === userInfo.user_email) {
+			dispatch(storeUserData(this_user));
+		}
 	});
 
 	if (!this_user?.user_role === 'admin') {
@@ -24,15 +31,14 @@ export default function ManagCategoryProducts({
 	return (
 		<>
 			<AdminPannelLayoutContainer
-				title='Manage Category'
-				description="This is manage category of 'Daily Needs Grocery' web application admin pannel."
+				title='Admin Profile Dashboard'
+				description="This is admin profile dashboard of 'Daily Needs Grocery' web application."
 			>
-				{all_categories.length && (
-					<ManageCategoryMain
-						all_products={all_products}
-						all_categories={all_categories}
-					/>
-				)}
+				{/* <AdminDashboardMain
+					all_orders={all_orders}
+					all_users={all_users}
+					all_products={all_products}
+				/> */}
 			</AdminPannelLayoutContainer>
 		</>
 	);
@@ -57,15 +63,23 @@ export async function getStaticProps({ params }) {
 		`https://daily-need.vercel.app/api/admin_pannel_api/manage_users/single_user/${admin_email}`
 	);
 	const this_user = await user.json();
-	const products = await fetch('https://daily-need.vercel.app/api/allproducts');
-	const categories = await fetch(
-		'https://daily-need.vercel.app/api/allcategories'
+
+	// all orders
+	const orders = await fetch(
+		`https://daily-need.vercel.app/api/manage_orders/all_orders`
 	);
+	const all_orders = await orders.json();
+
+	// all products
+	const products = await fetch(`https://daily-need.vercel.app/api/allproducts`);
 	const all_products = await products.json();
-	const all_categories = await categories.json();
+
+	// all users
+	const users = await fetch(`https://daily-need.vercel.app/api/all_users`);
+	const all_users = await users.json();
 
 	return {
-		props: { all_products, all_categories, this_user },
+		props: { all_orders, all_products, all_users, this_user },
 		revalidate: 10,
 	};
 }

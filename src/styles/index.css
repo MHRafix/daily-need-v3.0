@@ -663,19 +663,19 @@
 	}
 
 	#red_signal_status {
-		@apply bg-orangee_red tracking-wider text-white rounded-full p-extra_padding text-thin capitalize !flex items-center justify-between;
+		@apply bg-orangee_red text-white rounded-full py-extra_padding px-1 text-thin capitalize  !flex items-center justify-between;
 	}
 
 	#green_signal_status {
-		@apply bg-emerald-400 tracking-wider text-white rounded-full p-extra_padding text-thin capitalize  !flex items-center justify-between;
+		@apply bg-emerald-400 text-white rounded-full py-extra_padding px-1 text-thin capitalize  !flex items-center justify-between;
 	}
 
 	#warning_signal_status {
-		@apply bg-amber-400 text-white tracking-wider rounded-full p-extra_padding text-thin capitalize !flex items-center justify-between;
+		@apply bg-amber-400 text-white rounded-full py-extra_padding px-1 text-thin capitalize  !flex items-center justify-between;
 	}
 
 	#info_signal_status {
-		@apply bg-indigo-400 text-white tracking-wider rounded-full p-extra_padding text-thin capitalize !flex items-center justify-between;
+		@apply bg-indigo-400 text-white rounded-full py-extra_padding px-1 text-thin capitalize  !flex items-center justify-between;
 	}
 	/* sumury box css here  */
 
@@ -741,11 +741,11 @@
 	}
 
 	#filter_btn {
-		@apply text-black3 tracking-wider lg:!text-light xs:text-thin cursor-pointer mx-3 p-1 duration-500;
+		@apply text-black3 tracking-wider lg:!text-light xs:text-thin cursor-pointer lg:mx-3 lg:!p-1 xs:p-extra_padding duration-500;
 	}
 
 	#filter_btn_active {
-		@apply bg-green rounded-sm font-medium text-light duration-200 p-1;
+		@apply bg-green rounded-sm font-medium text-light duration-200 lg:!p-1 xs:p-extra_padding3;
 	}
 
 	#pagination_content {

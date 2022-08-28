@@ -12,9 +12,10 @@ export default function AllOrders({ all_orders, this_user }) {
 		dispatch(storeUserData(this_user));
 	});
 
-	if (!this_user?.user_admin) {
+	if (!this_user?.user_role === 'admin') {
 		return <ErrorPage />;
 	}
+
 	return (
 		<>
 			<AdminPannelLayoutContainer

@@ -68,7 +68,7 @@ export default function AdminPannelLayoutContainer({
 								<div className='p-1.5 border-t-1 border-t-slate-300'>
 									{/* admin pannel footer is here */}
 									<footer className='text-center'>
-										<div className='text-sm tracking-wider mb-10 md:mb-0'>
+										<div className='text-sm tracking-wider'>
 											Copyright © 2022. &nbsp;
 											<Link href='https://rafix.netlify.app/' passHref>
 												<a target='_blank' className='text-green font-semibold'>

@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import AdminPannelLayoutContainer from '../../../../components/admin_pannel_components/common/layout/AdminPannelLayoutContainer';
 import AdminDashboardMain from '../../../../components/admin_pannel_components/components/admin_dashboard/AdminDashboardMain';
@@ -13,7 +13,6 @@ export default function AdminDashboard({
 	this_user,
 }) {
 	// store categories to redux
-	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
 	const this_user_email = this_user.user_email;
 	const userInfo =
@@ -21,14 +20,12 @@ export default function AdminDashboard({
 		JSON.parse(Cookie.get('user_information'));
 
 	useEffect(() => {
-		if (this_user_email === userInfo.user_email) {
+		if (this_user_email === userInfo?.user_email) {
 			dispatch(storeUserData(this_user));
-		} else {
-			setError(true);
 		}
 	});
 
-	if (error) {
+	if (!this_user?.user_role === 'admin') {
 		return <ErrorPage />;
 	}
 

@@ -9,6 +9,7 @@ import {
 	MdOutlinePaid,
 	MdOutlinePlaylistAdd,
 } from 'react-icons/md';
+import { RiUserSettingsLine } from 'react-icons/ri';
 import { VscServerProcess } from 'react-icons/vsc';
 import { month_name } from '../../../fake_data/all_fakedata';
 import Action from '../../../utilities/Action';
@@ -79,6 +80,28 @@ const catSort = (rowA, rowB) => {
 
 // user table config and columns here
 export const UserTableConfig = (handleDelete) => {
+	const userRole = (cell) => {
+		if (cell === 'customer') {
+			return (
+				<div id='warning_signal_status'>
+					<BiUserCircle size={16} /> Customer
+				</div>
+			);
+		} else if (cell === 'admin') {
+			return (
+				<div id='green_signal_status'>
+					<MdOutlineAdminPanelSettings size={16} /> Admin
+				</div>
+			);
+		} else if (cell === 'moderator') {
+			return (
+				<div id='info_signal_status'>
+					<RiUserSettingsLine size={16} /> Moderator
+				</div>
+			);
+		}
+	};
+
 	const UserTableColumns = [
 		{
 			name: 'User Name',
@@ -111,22 +134,7 @@ export const UserTableConfig = (handleDelete) => {
 		},
 		{
 			name: 'User Role',
-			selector: (row) =>
-				row.user_admin ? (
-					<div
-						className='flex items-center justify-between'
-						id='green_signal_status'
-					>
-						Admin <MdOutlineAdminPanelSettings size={15} />
-					</div>
-				) : (
-					<div
-						className='flex items-center justify-between'
-						id='warning_signal_status'
-					>
-						Customer <BiUserCircle size={15} />
-					</div>
-				),
+			selector: (row) => userRole(row.user_role),
 		},
 
 		{

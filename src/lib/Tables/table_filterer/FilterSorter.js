@@ -89,7 +89,7 @@ export const ProductSorter = ({ dependency, isProduct }) => {
 						id={active === 'on-sale' ? 'filter_btn_active' : 'filter_btn'}
 						onClick={() => handleTypeFilter('on-sale', 'on-sale')}
 					>
-						<button>On</button>
+						<button>Sale</button>
 					</div>
 					<div
 						id={active === 'in-stock' ? 'filter_btn_active' : 'filter_btn'}

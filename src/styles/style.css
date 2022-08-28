@@ -286,7 +286,6 @@ li {
 
 button#action_btn_icon {
 	text-transform: capitalize;
-	letter-spacing: 1px;
 	display: flex;
 	padding: 5px 8px;
 	border-radius: 99999px;
