@@ -1,11 +1,13 @@
 // category image import here
 import { BsClockHistory } from 'react-icons/bs';
+import { FaUserEdit } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
 import {
 	MdManageSearch,
 	MdOutlineDashboard,
 	MdOutlineShareLocation,
 } from 'react-icons/md';
+import { RiProfileLine } from 'react-icons/ri';
 
 // header navigation menus fake data here
 export const header_navigation = [
@@ -67,6 +69,25 @@ export const toggle_profile_navigation = [
 		menu_href: '/track_orders',
 		MenuIcon: <MdOutlineShareLocation id='profile_nav_btn_green_btn' />,
 	},
+];
+
+// toggle profile nav data
+export const toggle_admin_profile_navigation = [
+	{
+		menu_name: 'dashboard',
+		menu_href: '/my_profile_dashboard',
+		MenuIcon: <RiProfileLine id='profile_nav_btn_purple_btn' />,
+	},
+	{
+		menu_name: 'Edit Profile',
+		menu_href: '/edit_profile_details',
+		MenuIcon: <FaUserEdit id='profile_nav_btn_yellow_btn' />,
+	},
+	// {
+	// 	menu_name: 'track orders',
+	// 	menu_href: '/track_orders',
+	// 	MenuIcon: <MdOutlineShareLocation id='profile_nav_btn_green_btn' />,
+	// },
 ];
 
 // stock data here

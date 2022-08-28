@@ -58,6 +58,10 @@
 		@apply flex justify-end items-center text-white  cursor-pointer mx-2;
 	}
 
+	.header_action_profile_icon {
+		@apply flex justify-end items-center text-white  cursor-pointer mx-2 w-13 h-13;
+	}
+
 	.header_action_icon2 {
 		@apply flex justify-end items-center text-white  cursor-pointer mx-2 lg:!hidden xs:block;
 	}
@@ -276,7 +280,7 @@
 
 	/* breadcrumb css here  */
 	.breadcrumb_wrapper {
-		@apply py-1.5 bg-white mb-5 text-black3 text-thin;
+		@apply py-1.5 bg-white mb-5 text-black3 sm:!text-thin xs:text-exthin;
 	}
 
 	.home_nav {

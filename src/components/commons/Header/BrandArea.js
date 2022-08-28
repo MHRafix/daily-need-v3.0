@@ -1,11 +1,11 @@
 import Cookie from 'js-cookie';
 import Image from 'next/image';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { FaBars, FaUserCircle } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { MdShoppingCart } from 'react-icons/md';
 import { useSelector } from 'react-redux';
+import { toggle_profile_navigation } from '../../../fake_data/all_fakedata';
 import Logo from '../../../images/logo/logo.webp';
 import MiniCart from '../MiniCartArea/MiniCart/MiniCart';
 import AccountLinks from './AccountLinks';
@@ -62,7 +62,9 @@ export default function BrandArea({ setNavbarToggle, navbarToggle }) {
 						</div>
 
 						{/* // account link component */}
-						<AccountLinks />
+						<AccountLinks
+							toggle_menu={{ menus: toggle_profile_navigation, dep: true }}
+						/>
 						<div className='header_action_icon2'>
 							{navbarToggle ? (
 								<button

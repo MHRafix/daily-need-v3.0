@@ -3,11 +3,11 @@ import NextLink from 'next/link';
 import React from 'react';
 import { MdLogout } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { toggle_profile_navigation } from '../../../fake_data/all_fakedata';
 import useAnimation from '../../../hooks/animation/useAnimation';
 import { useHandleLogout } from '../../../hooks/othersHooks/useHandleLogout';
 
-export default function ToggleProfileMenu() {
+export default function ToggleProfileMenu({ toggle_menu }) {
+	const { menus, dep } = toggle_menu;
 	const { fadePop } = useAnimation();
 	const { handleLogout } = useHandleLogout();
 	return (
@@ -18,11 +18,15 @@ export default function ToggleProfileMenu() {
 			exit={fadePop.exit}
 			variants={fadePop}
 		>
-			<div id='profile_action_menus'>
-				{toggle_profile_navigation.map((menu, i) => (
-					<MenuBtn key={i} nav_data={menu} />
+			<div id={dep ? 'profile_action_menus' : 'action_plate_three_admin'}>
+				{menus.map((menu, i) => (
+					<MenuBtn key={i} nav_data={menu} dep={dep} />
 				))}
-				<button id='action_btn_icon' onClick={handleLogout}>
+				<button
+					id='action_btn_icon'
+					onClick={handleLogout}
+					className='text-black2'
+				>
 					<MdLogout id='profile_nav_btn_red_btn' />
 					&nbsp;Sign Out
 				</button>
@@ -31,15 +35,19 @@ export default function ToggleProfileMenu() {
 	);
 }
 
-export const MenuBtn = ({ nav_data }) => {
+export const MenuBtn = ({ nav_data, dep }) => {
 	const { menu_name, MenuIcon, menu_href } = nav_data;
 	const userInfo = useSelector((state) => state.users.loggedin_user);
 	return (
 		<NextLink
-			href={`/my_account/${userInfo?.user_email}/my_profile${menu_href}`}
+			href={
+				dep
+					? `/my_account/${userInfo?.user_email}/my_profile${menu_href}`
+					: `/admin_pannel/${userInfo?.user_email}/my_profile${menu_href}`
+			}
 			passHref
 		>
-			<button id='action_btn_icon'>
+			<button id='action_btn_icon' className='text-black2'>
 				{MenuIcon}
 				&nbsp;{menu_name}
 			</button>
