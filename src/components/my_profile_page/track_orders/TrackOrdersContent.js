@@ -1,0 +1,12 @@
+import React from 'react';
+import ProfileContentLayout from '../../../utilities/ProfileContentLayout';
+
+export default function TrackOrdersContent() {
+	return (
+		<>
+			<ProfileContentLayout content_title='Track Orders'>
+				Track Orders
+			</ProfileContentLayout>
+		</>
+	);
+}

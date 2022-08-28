@@ -13,7 +13,7 @@ export default function CartDataFetch() {
 
 	useEffect(() => {
 		dispatch(storeUserData(userInfo));
-	});
+	}, [userInfo?._id]);
 
 	// set cart product to the redu
 	const cart_cookie_products =

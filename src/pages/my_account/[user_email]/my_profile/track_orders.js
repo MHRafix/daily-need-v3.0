@@ -1,18 +1,16 @@
 import Cookie from 'js-cookie';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import LayoutContainer from '../../../../components/commons/layout/LayoutContainer';
-import EditAccountDetailsMain from '../../../../components/my_profile_page/edit_account_details_page/EditAccountDetailsMain';
+import TrackOrdersMain from '../../../../components/my_profile_page/track_orders/TrackOrdersMain';
 import { storeUserData } from '../../../../redux/user_data/action';
 import ErrorPage from '../../../404';
 
-export default function EditAccountDetails({ loggedin_user }) {
+export default function TrackOrder({ my_orders, loggedin_user }) {
 	// store user_data to redux
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
 	const user_email = loggedin_user.user_email;
-
-	// loogedin user cookie
 	const userInfo =
 		Cookie.get('user_information') &&
 		JSON.parse(Cookie.get('user_information'));
@@ -32,10 +30,10 @@ export default function EditAccountDetails({ loggedin_user }) {
 	return (
 		<>
 			<LayoutContainer
-				title='Edit Account Details'
-				description="This is edit account details page of 'Daily Needs Grocery' web application!"
+				title='Track Order'
+				description="This is Track Order page of 'Daily Needs Grocery' application!"
 			>
-				<EditAccountDetailsMain />
+				<TrackOrdersMain my_orders={my_orders} />
 			</LayoutContainer>
 		</>
 	);
@@ -58,11 +56,21 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const { user_email } = params;
 
-	// requested user data
 	const user = await fetch(
 		`https://daily-need.vercel.app/api/admin_pannel_api/manage_users/single_user/${user_email}`
 	);
 	const loggedin_user = await user.json();
 
-	return { props: { loggedin_user } };
+	// user orders
+	const orders = await fetch(
+		'https:daily-need.vercel.app/api/manage_orders/all_orders'
+	);
+	const all_orders = await orders.json();
+
+	// find my orders
+	const my_orders = all_orders.filter(
+		(order) => order.user_email === user_email
+	);
+
+	return { props: { my_orders, loggedin_user } };
 }

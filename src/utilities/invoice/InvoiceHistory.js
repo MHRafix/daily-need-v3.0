@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import Table from '../../lib/Tables/table/Table';
-import { ShppedOrderedTableConfig } from '../../lib/Tables/table_config/TableColumns';
+import { UserProductTableConfig } from '../../lib/Tables/table_config/TableColumns';
 
 export default function InvoiceHistory({ modal_data }) {
 	const userInfo =
@@ -13,7 +13,7 @@ export default function InvoiceHistory({ modal_data }) {
 	const componentRef = useRef();
 
 	// table columns and config
-	const { ShippedOrderedTableColumns } = ShppedOrderedTableConfig();
+	const { UserProductTableColumns } = UserProductTableConfig();
 
 	return (
 		<div className='invoice_wrapper'>
@@ -76,15 +76,10 @@ export default function InvoiceHistory({ modal_data }) {
 					</div>
 				</div>
 				<div className='ordered_products_table' style={{ marginTop: '30px' }}>
-					{/* <OrderedProductsTable
-            PRODUCTS_DATA={modal_data?.products_data}
-            PRODUCTS_TABLE_COLUMNS={ORDERED_PRODUCTS_TABLE_COLUMNS}
-          /> */}
 					<Table
-						table_columns={ShippedOrderedTableColumns}
+						table_columns={UserProductTableColumns}
 						table_data={modal_data?.products_data}
 						sorter={false}
-						// handleModal={handleModal}
 					/>
 				</div>
 			</div>

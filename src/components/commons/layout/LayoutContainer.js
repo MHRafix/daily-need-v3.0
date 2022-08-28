@@ -14,12 +14,9 @@ export default function LayoutContainer({ children, title, description }) {
 			initial={{ opacity: 0.7 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0.7 }}
-			// transition={{ duration: 0.3 }}
 		>
 			<Head>
-				<title>
-					{title ? `Daily Needs - ${title.toUpperCase()}` : 'Daily Needs'}
-				</title>
+				<title>{title ? `Daily Needs - ${title}` : 'Daily Needs'}</title>
 				<meta name='description' content={description} />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>

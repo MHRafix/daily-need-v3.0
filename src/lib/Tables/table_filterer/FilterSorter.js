@@ -19,7 +19,7 @@ export const UserSorter = ({ dependency }) => {
 					id={active === 'reset' ? 'filter_btn_active' : 'filter_btn'}
 					onClick={() => handleResetFilter('reset')}
 				>
-					<button>All Users</button>
+					<button>All</button>
 				</div>
 				<div
 					id={active === 'customer' ? 'filter_btn_active' : 'filter_btn'}
@@ -77,19 +77,19 @@ export const ProductSorter = ({ dependency, isProduct }) => {
 						id={active === 'reset' ? 'filter_btn_active' : 'filter_btn'}
 						onClick={() => handleResetFilter('reset')}
 					>
-						<button>All Products</button>
+						<button>All</button>
 					</div>
 					<div
 						id={active === 'fixed-sale' ? 'filter_btn_active' : 'filter_btn'}
 						onClick={() => handleTypeFilter('fixed-sale', 'fixed-sale')}
 					>
-						<button>Fixed Sale</button>
+						<button>Fixed</button>
 					</div>
 					<div
 						id={active === 'on-sale' ? 'filter_btn_active' : 'filter_btn'}
 						onClick={() => handleTypeFilter('on-sale', 'on-sale')}
 					>
-						<button>On Sale</button>
+						<button>On</button>
 					</div>
 					<div
 						id={active === 'in-stock' ? 'filter_btn_active' : 'filter_btn'}
@@ -122,13 +122,13 @@ export const ProductSorter = ({ dependency, isProduct }) => {
 						id={active === 'canceled' ? 'filter_btn_active' : 'filter_btn'}
 						onClick={() => handleStatusFilter('canceled', 'canceled')}
 					>
-						<button>Canceled</button>
+						<button>Cancel</button>
 					</div>
 					<div
 						id={active === 'pendding' ? 'filter_btn_active' : 'filter_btn'}
 						onClick={() => handleStatusFilter('pendding', 'pendding')}
 					>
-						<button>Pendding</button>
+						<button>Pending</button>
 					</div>
 					<div
 						id={active === 'inprogress' ? 'filter_btn_active' : 'filter_btn'}

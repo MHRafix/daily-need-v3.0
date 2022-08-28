@@ -50,6 +50,12 @@ export const profile_navigation = [
 		href: '/verify_user',
 		menu_icon: <FiEdit />,
 	},
+	{
+		_id: 5,
+		menu_name: 'track orders',
+		href: '/track_orders',
+		menu_icon: <MdOutlineShareLocation />,
+	},
 ];
 
 // toggle profile nav data
@@ -83,11 +89,6 @@ export const toggle_admin_profile_navigation = [
 		menu_href: '/edit_profile_details',
 		MenuIcon: <FaUserEdit id='profile_nav_btn_yellow_btn' />,
 	},
-	// {
-	// 	menu_name: 'track orders',
-	// 	menu_href: '/track_orders',
-	// 	MenuIcon: <MdOutlineShareLocation id='profile_nav_btn_green_btn' />,
-	// },
 ];
 
 // stock data here

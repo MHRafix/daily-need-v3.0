@@ -20,7 +20,7 @@ export default function Dashboard({ my_orders, loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	});
+	}, [loggedin_user._id]);
 
 	if (error) {
 		return <ErrorPage />;

@@ -10,14 +10,14 @@ export default function Table({
 	sorter,
 	isProduct,
 }) {
+	// set loader for prevent hydration error
 	const [pending, setPending] = useState(true);
 	const [data, setData] = useState([]);
-
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setData(table_data);
 			setPending(false);
-		}, 2000);
+		}, 300);
 		return () => clearTimeout(timeout);
 	}, [table_data?.length]);
 
@@ -70,7 +70,7 @@ export default function Table({
 				subHeaderAlign='right'
 				subHeaderWrap
 				columns={table_columns}
-				data={data}
+				data={data.length ? table_data : data}
 				sortFunction={customSort}
 				customStyles={customStyles}
 				progressPending={pending}

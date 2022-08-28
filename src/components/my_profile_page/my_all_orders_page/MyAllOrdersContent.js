@@ -29,6 +29,7 @@ export default function MyAllOrdersContent({ my_orders }) {
 	// table columns and config
 	const { UserOrderedTableColumns } = UserOrderedTableConfig(handleModal);
 	const { UserProductTableColumns } = UserProductTableConfig();
+
 	return (
 		<>
 			<ProfileContentLayout content_title='manage all orders'>
