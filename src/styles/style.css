@@ -338,3 +338,11 @@ html::-webkit-scrollbar-track {
 .dBbhDz div:first-child {
 	overflow: initial !important;
 }
+
+.StepperContainer-0-2-1 {
+	display: flex !important;
+	padding: 24px 0px !important;
+	align-items: center !important;
+	font-family: 'Poppins' !important;
+	flex-direction: row !important;
+}
