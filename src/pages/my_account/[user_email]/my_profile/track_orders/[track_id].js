@@ -74,3 +74,10 @@
 
 // 	return { props: { my_orders, loggedin_user } };
 // }
+import React from 'react'
+
+export default function TrackOrderResult() {
+  return (
+    <div>Track order result...!</div>
+  )
+}
