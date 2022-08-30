@@ -1,3 +1,4 @@
+import { month_name } from '../../../fake_data/all_fakedata';
 import CardData from '../../../utilities/CardData';
 import DataChart from '../../../utilities/GraphChart/DataChart';
 import ProfileContentLayout from '../../../utilities/ProfileContentLayout';
@@ -9,21 +10,6 @@ export default function ProfileDashboardContent({ my_orders }) {
 	my_orders.filter((order) =>
 		purchased_bdt.push(order?.order_overview?.total_amount)
 	);
-
-	const month_name = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec',
-	];
 
 	// purchased date summury
 	const purchased_date = [];
@@ -151,11 +137,23 @@ export default function ProfileDashboardContent({ my_orders }) {
 						</div>
 						<div className='purchased_data_table_wrapper'>
 							<h1 className='dashboard_content_title'>Payment Card</h1>
-							<div id='card_data_table' className='overflow-y-scroll h-per_86'>
-								{card_data.map((card, i) => (
-									<CardData key={i} card_data={card} />
-								))}
-							</div>
+							{card_data.length ? (
+								<div
+									id='card_data_table'
+									className='overflow-y-scroll h-per_86'
+								>
+									{card_data.map((card, i) => (
+										<CardData key={i} card_data={card} />
+									))}
+								</div>
+							) : (
+								<h1
+									className='text-normal font-normal p-1'
+									style={{ color: 'red' }}
+								>
+									No card payment history found!
+								</h1>
+							)}
 						</div>
 					</div>
 				</div>
