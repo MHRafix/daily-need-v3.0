@@ -21,10 +21,10 @@ export const myActiveOrders = async (req, res) => {
 			res.status(200).json(active_orders);
 		} else {
 			// send error response
-			res.status(404).json({ error: 'Opps, no result found!' });
+			res.status(404).send([]);
 		}
 	} else {
 		// send error response
-		res.status(404).json({ error: 'Opps, something went wrong!' });
+		res.status(404).send([]);
 	}
 };

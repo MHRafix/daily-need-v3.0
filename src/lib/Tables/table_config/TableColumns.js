@@ -694,7 +694,7 @@ export const UserActiveOrdersTableConfig = () => {
 			name: 'Order Id',
 			selector: (row) => (
 				<div className='!capitalize text-normal font-bold'>
-					#{row._id.slice(0, 10)}
+					#{row?._id?.slice(0, 10)}
 				</div>
 			),
 			sortable: true,
