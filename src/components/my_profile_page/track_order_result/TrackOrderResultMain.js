@@ -4,7 +4,7 @@ import Breadcrumb from '../../commons/Breadcrumb/Breadcrumb';
 import ProfileContentContainer from '../my_profile_dashboard/ProfileContentContainer';
 import TrackOrderResultContent from './TrackOrderResultContent';
 
-export default function TrackOrdersMain({ active_orders }) {
+export default function TrackOrdersResultMain({ track_result }) {
 	// loggedin user data
 	const userInfo = useSelector((state) => state.users.loggedin_user);
 
@@ -26,7 +26,7 @@ export default function TrackOrdersMain({ active_orders }) {
 		<>
 			<Breadcrumb bread_nav={bread_string} />
 			<ProfileContentContainer>
-				<TrackOrderResultContent active_orders={active_orders} />
+				<TrackOrderResultContent track_result={track_result} />
 			</ProfileContentContainer>
 		</>
 	);

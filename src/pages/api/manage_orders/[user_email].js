@@ -6,7 +6,7 @@ import db from '../../../utilities/database';
 const handler = nc();
 
 handler.get(async (req, res) => {
-	const user_email = req.query;
+	const { user_email } = req.query;
 	await db.connect();
 	const all_orders = await Order.find({ user_email });
 	await db.disconnect();

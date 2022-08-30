@@ -4,7 +4,8 @@ import { AiOutlineBarChart, AiOutlineHome } from 'react-icons/ai';
 import { BiLoaderCircle } from 'react-icons/bi';
 import { FaShippingFast } from 'react-icons/fa';
 
-export default function TrackingStepper() {
+export default function TrackingStepper({ track_result }) {
+	console.log(track_result.order_overview.order_status);
 	const status = { pendding: 1, inprogress: 2, deliver: 3, shipped: 4 };
 	return (
 		<>

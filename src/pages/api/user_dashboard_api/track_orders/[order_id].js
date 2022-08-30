@@ -6,7 +6,7 @@ import db from '../../../../utilities/database';
 const handler = nc();
 
 handler.get(async (req, res) => {
-	const order_id = req.query;
+	const { order_id } = req.query;
 	await db.connect(); // database connect here
 	const result = await Order.findById({ _id: order_id });
 	await db.disconnect(); // database disconnect here
