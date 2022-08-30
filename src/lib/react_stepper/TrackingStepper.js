@@ -11,7 +11,7 @@ export default function TrackingStepper() {
 	const [notice, setNotice] = useState(
 		'Your order is pending. We will confirm as soon as possible!'
 	);
-	const status = track_result.order_overview.order_status;
+	const status = track_result?.order_overview?.order_status;
 
 	useEffect(() => {
 		if (status === 'inprogress') {
@@ -33,7 +33,7 @@ export default function TrackingStepper() {
 		<>
 			<div className='order_id text-center'>
 				<h3 className='text-medium tracking-wider font-bold text-black2'>
-					{`#${track_result._id}`.toUpperCase()}
+					{`#${track_result?._id}`.toUpperCase()}
 				</h3>
 
 				<p className='tracking-wider text-green text-normal font-semibold lg:!w-2/4 xs:w-full mx-auto my-5'>
