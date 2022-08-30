@@ -30,7 +30,7 @@ export default function TrackOrder({ my_orders, loggedin_user }) {
 	return (
 		<>
 			<LayoutContainer
-				title='Track Order'
+				title='Track Orders'
 				description="This is Track Order page of 'Daily Needs Grocery' application!"
 			>
 				<TrackOrdersMain my_orders={my_orders} />

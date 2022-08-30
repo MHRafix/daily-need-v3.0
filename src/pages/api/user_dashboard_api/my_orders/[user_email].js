@@ -1,6 +1,6 @@
 import nc from 'next-connect';
-import Order from '../../../../models/AllOrders';
-import db from '../../../utilities/database';
+import Order from '../../../../../models/AllOrders';
+import db from '../../../../utilities/database';
 
 // products getting function here
 const handler = nc();

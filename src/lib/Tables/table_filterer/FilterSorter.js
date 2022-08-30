@@ -23,28 +23,28 @@ export const UserSorter = ({ dependency }) => {
 				</div>
 				<div
 					id={active === 'customer' ? 'filter_btn_active' : 'filter_btn'}
-					onClick={() => handleUserFilter(false, 'customer')}
+					onClick={() => handleUserFilter('customer', 'customer')}
 				>
-					<button>Customers</button>
+					<button>Customer</button>
 				</div>
 				<div
 					id={active === 'admin' ? 'filter_btn_active' : 'filter_btn'}
-					onClick={() => handleUserFilter(true, 'admin')}
+					onClick={() => handleUserFilter('admin', 'admin')}
 				>
-					<button>Admins</button>
+					<button>Admin</button>
 				</div>
 				<div
 					id={active === 'moderator' ? 'filter_btn_active' : 'filter_btn'}
 					onClick={() => handleUserFilter('moderator', 'moderator')}
 				>
-					<button>Moderators</button>
+					<button>Moderator</button>
 				</div>
-				<div
+				{/* <div
 					id={active === 'vendor' ? 'filter_btn_active' : 'filter_btn'}
 					onClick={() => handleUserFilter('vendor', 'vendor')}
 				>
 					<button>Vendor</button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

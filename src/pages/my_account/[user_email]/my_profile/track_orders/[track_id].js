@@ -6,7 +6,7 @@
 // import { storeUserData } from '../../../../../redux/user_data/action';
 // import ErrorPage from '../../../../404';
 
-// export default function TrackOrderResult() {
+// export default function TrackOrderResult({ loggedin_user }) {
 // 	// store user_data to redux
 // 	const [error, setError] = useState(false);
 // 	const dispatch = useDispatch();
@@ -41,25 +41,24 @@
 
 // // find the exact user
 // export async function getStaticPaths() {
-// 	const users = await fetch('https://daily-need.vercel.app/api/all_users');
-// 	const all_users = await users.json();
-// 	const user = all_users.map((user) => ({
-// 		params: { user_email: user.user_email },
+// 	const orders = await fetch(
+// 		'https://daily-need.vercel.app/api/manage_orders/all_orders'
+// 	);
+// 	const all_orders = await orders.json();
+
+// 	const order = all_orders.map((order) => ({
+// 		params: { order_id: order._id },
 // 	}));
+
 // 	return {
-// 		paths: user,
+// 		paths: order,
 // 		fallback: false,
 // 	};
 // }
 
 // // filter user orders from all orders
 // export async function getStaticProps({ params }) {
-// 	const { user_email } = params;
-
-// 	const user = await fetch(
-// 		`https://daily-need.vercel.app/api/admin_pannel_api/manage_users/single_user/${user_email}`
-// 	);
-// 	const loggedin_user = await user.json();
+// 	const { order_id } = params;
 
 // 	// user orders
 // 	const orders = await fetch(
@@ -74,10 +73,9 @@
 
 // 	return { props: { my_orders, loggedin_user } };
 // }
-import React from 'react'
+
+import React from 'react';
 
 export default function TrackOrderResult() {
-  return (
-    <div>Track order result...!</div>
-  )
+	return <div>TrackOrderResult</div>;
 }

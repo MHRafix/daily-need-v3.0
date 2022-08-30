@@ -6,7 +6,7 @@ export default function TrackOrdersContent() {
 	return (
 		<>
 			<ProfileContentLayout content_title='Track Orders'>
-				<TrackingStepper />
+				{/* <TrackingStepper /> */}
 			</ProfileContentLayout>
 		</>
 	);
