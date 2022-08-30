@@ -23,7 +23,7 @@ export default function MyAllOrders({ my_orders, loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	});
+	}, [user_email, userInfo.user_email, dispatch, loggedin_user]);
 
 	if (error) {
 		return <ErrorPage />;

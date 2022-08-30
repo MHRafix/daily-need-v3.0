@@ -23,7 +23,7 @@ export default function TrackOrderResult({ track_result, loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	}, [loggedin_user._id]);
+	}, [dispatch, loggedin_user, track_result, userInfo.user_email, user_email]);
 
 	if (error) {
 		return <ErrorPage />;

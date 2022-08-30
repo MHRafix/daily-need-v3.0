@@ -23,7 +23,7 @@ export default function HistoryDownload({ my_orders, loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	}, [userInfo?.user_email]);
+	}, [userInfo?.user_email, loggedin_user, user_email]);
 
 	if (error) {
 		return <ErrorPage />;
