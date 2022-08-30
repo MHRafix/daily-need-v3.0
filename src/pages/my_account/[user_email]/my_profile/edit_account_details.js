@@ -43,7 +43,9 @@ export default function EditAccountDetails({ loggedin_user }) {
 
 // find the exact user
 export async function getStaticPaths() {
-	const users = await fetch('https://daily-need.vercel.app/api/all_users');
+	const users = await fetch(
+		'https://daily-need.vercel.app/api/admin_pannel_api/manage_users/all_users'
+	);
 	const all_users = await users.json();
 	const user = all_users.map((user) => ({
 		params: { user_email: user.user_email },
@@ -60,7 +62,7 @@ export async function getStaticProps({ params }) {
 
 	// requested user data
 	const user = await fetch(
-		`https://daily-need.vercel.app/api/admin_pannel_api/manage_users/single_user/${user_email}`
+		`https://daily-need.vercel.app/api/user_dashboard_api/manage_users/single_user/${user_email}`
 	);
 	const loggedin_user = await user.json();
 

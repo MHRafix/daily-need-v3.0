@@ -7,7 +7,7 @@ import { storeTrackOrder } from '../../../../../redux/all_data/action';
 import { storeUserData } from '../../../../../redux/user_data/action';
 import ErrorPage from '../../../../404';
 
-export default function TrackOrderResult({ track_order, loggedin_user }) {
+export default function TrackOrderResult({ track_result, loggedin_user }) {
 	// store user_data to redux
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function TrackOrderResult({ track_order, loggedin_user }) {
 	useEffect(() => {
 		if (user_email === userInfo.user_email) {
 			dispatch(storeUserData(loggedin_user));
-			dispatch(storeTrackOrder(track_order));
+			dispatch(storeTrackOrder(track_result));
 		} else {
 			setError(true);
 		}
@@ -35,7 +35,7 @@ export default function TrackOrderResult({ track_order, loggedin_user }) {
 				title='Track Order'
 				description="This is Track Order page of 'Daily Needs Grocery' application!"
 			>
-				<TrackOrdersResultMain track_result={track_order} />
+				<TrackOrdersResultMain />
 			</LayoutContainer>
 		</>
 	);
@@ -50,10 +50,10 @@ export async function getServerSideProps({ params }) {
 	);
 	const loggedin_user = await user.json();
 
-	const track_result = await fetch(
+	const track_order = await fetch(
 		`https://daily-need.vercel.app/api/user_dashboard_api/track_orders/${track_id}`
 	);
-	const track_order = await track_result.json();
+	const track_result = await track_order.json();
 
-	return { props: { track_order, loggedin_user } };
+	return { props: { track_result, loggedin_user } };
 }

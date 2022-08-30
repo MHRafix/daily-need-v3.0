@@ -5,7 +5,7 @@ import ProfileContentLayout from '../../../utilities/ProfileContentLayout';
 
 export default function TrackOrdersContent({ active_orders }) {
 	const { UserActiveOrdersTableColumns } = UserActiveOrdersTableConfig();
-	console.log(active_orders);
+
 	return (
 		<>
 			<ProfileContentLayout content_title='Track Orders'>
