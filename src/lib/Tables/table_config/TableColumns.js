@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import NextLink from 'next/link';
 import { BiUserCircle } from 'react-icons/bi';
 import { FiLoader } from 'react-icons/fi';
 import {
@@ -8,9 +9,11 @@ import {
 	MdOutlineMoneyOff,
 	MdOutlinePaid,
 	MdOutlinePlaylistAdd,
+	MdOutlineShareLocation,
 } from 'react-icons/md';
 import { RiUserSettingsLine } from 'react-icons/ri';
 import { VscServerProcess } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
 import { month_name } from '../../../fake_data/all_fakedata';
 import Action from '../../../utilities/Action';
 
@@ -681,4 +684,78 @@ export const UserOrderedTableConfig = (handleModal) => {
 	];
 
 	return { UserOrderedTableColumns };
+};
+
+// user active orders
+export const UserActiveOrdersTableConfig = () => {
+	const userInfo = useSelector((state) => state.users.loggedin_user);
+	const UserActiveOrdersTableColumns = [
+		{
+			name: 'Order Id',
+			selector: (row) => (
+				<div className='!capitalize text-normal font-bold'>
+					OT {row._id.slice(0, 8)}
+				</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Order Date',
+			selector: (row) => (
+				<div>
+					{row.order_overview.order_date.date}{' '}
+					{month_name[row.order_overview.order_date.month]}{' '}
+					{row.order_overview.order_date.year}
+				</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Total Amount',
+			selector: (row) => (
+				<div className='!capitalize font-semibold'>
+					৳ {row.order_overview.total_amount}
+				</div>
+			),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+		{
+			name: 'Payment Status',
+			selector: (row) =>
+				row.payment_info.payment_status === 'due' ? (
+					<div id='red_signal_status'>
+						<MdOutlineMoneyOff size='16' /> {row.payment_info.payment_status}
+					</div>
+				) : (
+					<div id='green_signal_status'>
+						<MdOutlinePaid size='16' /> {row.payment_info.payment_status}
+					</div>
+				),
+			sortable: true,
+			sortFunction: orderSort,
+		},
+
+		{
+			name: 'Action',
+			selector: (row) => (
+				<NextLink
+					href={`/my_account/${userInfo.user_email}/my_profile/track_order_result/${row._id}`}
+					passHref
+				>
+					<button
+						id='action_btn_icon'
+						style={{ background: '#2bd891', color: 'white' }}
+					>
+						<MdOutlineShareLocation size={20} />
+						&nbsp; Track Order
+					</button>
+				</NextLink>
+			),
+		},
+	];
+
+	return { UserActiveOrdersTableColumns };
 };

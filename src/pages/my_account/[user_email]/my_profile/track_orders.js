@@ -6,7 +6,7 @@ import TrackOrdersMain from '../../../../components/my_profile_page/track_orders
 import { storeUserData } from '../../../../redux/user_data/action';
 import ErrorPage from '../../../404';
 
-export default function TrackOrder({ my_orders, loggedin_user }) {
+export default function TrackOrder({ active_orders, loggedin_user }) {
 	// store user_data to redux
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function TrackOrder({ my_orders, loggedin_user }) {
 				title='Track Orders'
 				description="This is Track Order page of 'Daily Needs Grocery' application!"
 			>
-				<TrackOrdersMain my_orders={my_orders} />
+				<TrackOrdersMain active_orders={active_orders} />
 			</LayoutContainer>
 		</>
 	);
@@ -63,14 +63,9 @@ export async function getStaticProps({ params }) {
 
 	// user orders
 	const orders = await fetch(
-		'https:daily-need.vercel.app/api/manage_orders/all_orders'
+		'https:daily-need.vercel.app/api/user_dashboard_api/active_orders'
 	);
-	const all_orders = await orders.json();
+	const active_orders = await orders.json();
 
-	// find my orders
-	const my_orders = all_orders.filter(
-		(order) => order.user_email === user_email
-	);
-
-	return { props: { my_orders, loggedin_user } };
+	return { props: { active_orders, loggedin_user } };
 }
