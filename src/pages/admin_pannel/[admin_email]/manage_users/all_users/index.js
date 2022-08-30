@@ -50,7 +50,9 @@ export async function getStaticProps({ params }) {
 	const this_user = await user.json();
 
 	// all users
-	const users = await fetch(`https://daily-need.vercel.app/api/all_users`);
+	const users = await fetch(
+		`https://daily-need.vercel.app/api/admin_pannel_api/manage_users/all_users`
+	);
 	const all_users = await users.json();
 
 	return { props: { all_users, this_user }, revalidate: 10 };

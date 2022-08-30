@@ -50,7 +50,7 @@ export async function getStaticProps({ params }) {
 
 	// all orders
 	const orders = await fetch(
-		`https://daily-need.vercel.app/api/manage_orders/all_orders`
+		`https://daily-need.vercel.app/api/admin_pannel_api/manage_orders/all_orders`
 	);
 	const all_orders = await orders.json();
 

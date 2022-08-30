@@ -3,8 +3,11 @@ import { Step, Stepper } from 'react-form-stepper';
 import { AiOutlineBarChart, AiOutlineHome } from 'react-icons/ai';
 import { BiLoaderCircle } from 'react-icons/bi';
 import { FaShippingFast } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 export default function TrackingStepper({ track_result }) {
+	const track = useSelector((state) => state);
+	console.log(track);
 	const [step, setStep] = useState(1);
 	const [notice, setNotice] = useState(
 		'Your order is pending. We will confirm as soon as possible!'
