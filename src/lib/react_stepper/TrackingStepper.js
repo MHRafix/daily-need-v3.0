@@ -1,22 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Step, Stepper } from 'react-form-stepper';
 import { AiOutlineBarChart, AiOutlineHome } from 'react-icons/ai';
 import { BiLoaderCircle } from 'react-icons/bi';
 import { FaShippingFast } from 'react-icons/fa';
 
 export default function TrackingStepper({ track_result }) {
-	console.log(track_result.order_overview.order_status);
-	const status = { pendding: 1, inprogress: 2, deliver: 3, shipped: 4 };
+	const [step, setStep] = useState(1);
+	const [notice, setNotice] = useState(
+		'Your order is pending. We will confirm as soon as possible!'
+	);
+	const status = track_result.order_overview.order_status;
+
+	useEffect(() => {
+		if (status === 'inprogress') {
+			setStep((step) => step + 1);
+			setNotice(
+				'Your order confirm successfully! We are working with your it.'
+			);
+		} else if (status === 'deliver') {
+			setStep((step) => step + 2);
+			setNotice('Your order deliver to your address. Please wait for it!');
+		} else if (status === 'shipped') {
+			setStep((step) => step + 3);
+			setNotice(
+				'Your order successfully shipped. Thank you for being with us!'
+			);
+		}
+	}, [status]);
 	return (
 		<>
 			<div className='order_id text-center'>
 				<h3 className='text-medium tracking-wider font-bold text-black2'>
-					{'px01254754241'.toUpperCase()}
+					{`#${track_result._id}`.toUpperCase()}
 				</h3>
+
+				<p className='tracking-wider text-green text-normal font-semibold lg:!w-2/4 xs:w-full mx-auto my-5'>
+					{notice}
+				</p>
 			</div>
 
 			<Stepper
-				activeStep={status.deliver}
+				activeStep={step}
 				connectorStateColors
 				connectorStyleConfig={{
 					size: 3,
