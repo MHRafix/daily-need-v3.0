@@ -23,7 +23,7 @@ export default function EditAccountDetails({ loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	}, [loggedin_user._id]);
+	});
 
 	if (error) {
 		return <ErrorPage />;

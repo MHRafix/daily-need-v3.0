@@ -23,7 +23,7 @@ export default function Verifyuser({ loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	}, [loggedin_user._id]);
+	});
 
 	if (error) {
 		return <ErrorPage />;

@@ -6,6 +6,7 @@ export const trackOrder = async (req, res) => {
 	await db.connect();
 	const result = await Order.findById({ _id: order_id });
 	await db.disconnect();
+
 	// send response
 	if (result) {
 		// data response

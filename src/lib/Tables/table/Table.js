@@ -19,7 +19,7 @@ export default function Table({
 			setPending(false);
 		}, 300);
 		return () => clearTimeout(timeout);
-	}, [table_data?.length]);
+	});
 
 	const customSort = (rows, selector, direction) => {
 		return orderBy(rows, selector, direction);
