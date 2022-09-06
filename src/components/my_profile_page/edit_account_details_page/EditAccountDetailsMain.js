@@ -2,7 +2,6 @@ import Cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { MyProfileErrMssg } from '../../../utilities/AlertMessage';
 import Breadcrumb from '../../commons/Breadcrumb/Breadcrumb';
 import ProfileContentContainer from '../my_profile_dashboard/ProfileContentContainer';
 import EditAccountContent from './EditAccountContent';
@@ -26,18 +25,6 @@ export default function EditAccountDetailsMain() {
 
 	// breadcrumb
 	const bread_string = `${userInfo?.user_name} / my profile / edit account details`;
-
-	// prevent fake user
-	if (!userInfo?.user_email) {
-		const bread_string = 'fake user';
-
-		return (
-			<MyProfileErrMssg
-				bread_string={bread_string}
-				message='You are not logged in. Please login to explore more!'
-			/>
-		);
-	}
 
 	return (
 		<>

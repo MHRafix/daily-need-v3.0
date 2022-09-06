@@ -36,7 +36,7 @@ export default function ProfileNavigation() {
 					id='cart_btn'
 					onClick={handleLogout}
 				>
-					Logout Now &nbsp; <MdLogout className='!text-normal' />
+					Sign Out &nbsp; <MdLogout className='!text-normal' />
 				</button>
 			</div>
 			<div className='profile_navigation_wrapper'>
@@ -44,7 +44,7 @@ export default function ProfileNavigation() {
 					<ProfileNav key={i} menu_data={nav} />
 				))}
 
-				{userInfo?.user_role === "admin" && (
+				{userInfo?.user_role === 'admin' && (
 					<NextLink
 						href={`/admin_pannel/${userInfo?.user_email}/admin_dashboard`}
 						passHref

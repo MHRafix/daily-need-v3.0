@@ -23,7 +23,7 @@ export default function TrackOrderResult({ track_result, loggedin_user }) {
 		} else {
 			setError(true);
 		}
-	}, [dispatch, loggedin_user, track_result, userInfo.user_email, user_email]);
+	}, [dispatch, loggedin_user, track_result, userInfo?.user_email, user_email]);
 
 	if (error) {
 		return <ErrorPage />;
@@ -33,7 +33,7 @@ export default function TrackOrderResult({ track_result, loggedin_user }) {
 		<>
 			<LayoutContainer
 				title='Track Order'
-				description="This is Track Order page of 'Daily Needs Grocery' application!"
+				description="This is track order result page of 'Daily Needs Grocery' application!"
 			>
 				<TrackOrdersResultMain />
 			</LayoutContainer>

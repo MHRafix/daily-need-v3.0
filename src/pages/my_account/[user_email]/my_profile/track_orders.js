@@ -10,18 +10,18 @@ export default function TrackOrder({ active_orders, loggedin_user }) {
 	// store user_data to redux
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
-	const user_email = loggedin_user.user_email;
+	const user_email = loggedin_user?.user_email;
 	const userInfo =
 		Cookie.get('user_information') &&
 		JSON.parse(Cookie.get('user_information'));
 
 	useEffect(() => {
-		if (user_email === userInfo.user_email) {
+		if (user_email === userInfo?.user_email) {
 			dispatch(storeUserData(loggedin_user));
 		} else {
 			setError(true);
 		}
-	}, [user_email, userInfo.user_email, dispatch, loggedin_user]);
+	}, [user_email, userInfo?.user_email, dispatch, loggedin_user]);
 
 	if (error) {
 		return <ErrorPage />;

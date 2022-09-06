@@ -8,19 +8,7 @@ export default function TrackOrdersResultMain() {
 	// loggedin user data
 	const userInfo = useSelector((state) => state.users.loggedin_user);
 
-	const bread_string = `${userInfo?.user_name} / my profile/ track order result`;
-
-	// prevent fake user
-	if (!userInfo?.user_email) {
-		const bread_string = 'fake user';
-
-		return (
-			<MyProfileErrMssg
-				bread_string={bread_string}
-				message='You are not logged in. Please login to explore more!'
-			/>
-		);
-	}
+	const bread_string = `${userInfo?.user_name} / my profile / track order result`;
 
 	return (
 		<>

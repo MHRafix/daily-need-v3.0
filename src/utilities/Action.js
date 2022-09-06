@@ -23,7 +23,7 @@ export default function Action({
 			<div className='action_three-dots'>
 				<button
 					id='action_btn'
-					onClick={() => setVisible(visible ? false : true)}
+					onClick={() => setVisible((state) => (state ? false : true))}
 				>
 					<BsThreeDotsVertical size={20} />
 				</button>

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import NextLink from 'next/link';
 import { BiUserCircle } from 'react-icons/bi';
 import { FiLoader } from 'react-icons/fi';
 import {
@@ -9,13 +8,12 @@ import {
 	MdOutlineMoneyOff,
 	MdOutlinePaid,
 	MdOutlinePlaylistAdd,
-	MdOutlineShareLocation,
 } from 'react-icons/md';
 import { RiUserSettingsLine } from 'react-icons/ri';
 import { VscServerProcess } from 'react-icons/vsc';
-import { useSelector } from 'react-redux';
 import { month_name } from '../../../fake_data/all_fakedata';
 import Action from '../../../utilities/Action';
+import ActionToUser from '../../../utilities/ActionToUSer';
 
 // table row sorter here
 const userSort = (rowA, rowB) => {
@@ -687,8 +685,7 @@ export const UserOrderedTableConfig = (handleModal) => {
 };
 
 // user active orders
-export const UserActiveOrdersTableConfig = () => {
-	const userInfo = useSelector((state) => state.users.loggedin_user);
+export const UserActiveOrdersTableConfig = (handleCancelOrder, handleModal) => {
 	const UserActiveOrdersTableColumns = [
 		{
 			name: 'Order Id',
@@ -705,7 +702,7 @@ export const UserActiveOrdersTableConfig = () => {
 			selector: (row) => (
 				<div>
 					{row.order_overview.order_date.date}{' '}
-					{month_name[row.order_overview.order_date.month]}{' '}
+					{month_name[row.order_overview.order_date.month - 1]}{' '}
 					{row.order_overview.order_date.year}
 				</div>
 			),
@@ -741,18 +738,14 @@ export const UserActiveOrdersTableConfig = () => {
 		{
 			name: 'Action',
 			selector: (row) => (
-				<NextLink
-					href={`/my_account/${userInfo.user_email}/my_profile/track_order_result/${row._id}`}
-					passHref
-				>
-					<button
-						id='action_btn_icon'
-						style={{ background: '#2bd891', color: 'white' }}
-					>
-						<MdOutlineShareLocation size={20} />
-						&nbsp; Track Order
-					</button>
-				</NextLink>
+				<ActionToUser
+					api_url={`user_dashboard_api/manage_orders/cancel_order/${row._id}`}
+					id={row._id}
+					status={row.payment_info.payment_status}
+					handleCancel={handleCancelOrder}
+					handleModal={handleModal}
+					net_total={row.order_overview.total_amount}
+				/>
 			),
 		},
 	];

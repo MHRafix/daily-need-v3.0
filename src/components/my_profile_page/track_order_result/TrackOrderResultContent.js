@@ -5,7 +5,7 @@ import ProfileContentLayout from '../../../utilities/ProfileContentLayout';
 export default function TrackOrderResultContent() {
 	return (
 		<>
-			<ProfileContentLayout content_title='Track Orders'>
+			<ProfileContentLayout content_title='Track Order Result'>
 				<TrackingStepper />
 			</ProfileContentLayout>
 		</>
