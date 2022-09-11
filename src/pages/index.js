@@ -1,5 +1,6 @@
 import LayoutContainer from '../components/commons/layout/LayoutContainer';
 import HomeMain from '../components/home_page/HomeMain';
+import { fetcher } from '../hooks/http_req/DataFetch';
 
 export default function Home({
 	all_products,
@@ -25,16 +26,10 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-	const products = await fetch('https://daily-need.vercel.app/api/allproducts');
-	const categories = await fetch(
-		'https://daily-need.vercel.app/api/allcategories'
-	);
-	const sliders = await fetch('https://daily-need.vercel.app/api/allsliders');
-	const brands = await fetch('https://daily-need.vercel.app/api/allbrands');
-	const all_products = await products.json();
-	const all_categories = await categories.json();
-	const all_sliders = await sliders.json();
-	const all_brands = await brands.json();
+	const all_products = await fetcher('allproducts');
+	const all_categories = await fetcher('allcategories');
+	const all_sliders = await fetcher('allsliders');
+	const all_brands = await fetcher('allbrands');
 
 	return {
 		props: { all_products, all_categories, all_sliders, all_brands },

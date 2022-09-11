@@ -2,18 +2,17 @@ import Cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import Order from "../../../../models/AllOrders";
-// import AllProducts from "../../../../models/AllProducts";
-// import Reviews from "../../../../models/Reviews";
 import LayoutContainer from '../../../components/commons/layout/LayoutContainer';
 import SignleProductMain from '../../../components/single_product/SignleProductMain';
+import { fetcher } from '../../../hooks/http_req/DataFetch';
 import {
+	addAllProducts,
 	addCutomerAccess,
 	storeAllReviews,
 } from '../../../redux/all_data/action';
-// import db from "../../../utilities/database";
 
 export default function SingleProduct({
+	all_products,
 	single_product,
 	all_reviews,
 	all_orders,
@@ -42,6 +41,7 @@ export default function SingleProduct({
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(storeAllReviews(all_reviews));
+		dispatch(addAllProducts(all_products));
 		if (access) {
 			dispatch(addCutomerAccess(true));
 		} else {
@@ -68,8 +68,7 @@ export default function SingleProduct({
 
 // find the path
 export async function getStaticPaths() {
-	const products = await fetch('https://daily-need.vercel.app/api/allproducts');
-	const all_products = await products.json();
+	const all_products = await fetcher('allproducts');
 	const slug = all_products.map((product) => ({
 		params: { slug: product.slug },
 	}));
@@ -82,18 +81,12 @@ export async function getStaticPaths() {
 // find single product
 export async function getStaticProps({ params }) {
 	const { slug } = params;
-	console.log(params);
-	const products = await fetch('https://daily-need.vercel.app/api/allproducts');
-	const all_products = await products.json();
+	const all_products = await fetcher('allproducts');
 	// find single product here
 	const single_product = all_products.find((product) => product.slug === slug);
 
 	// get all reviews here
-	const reviews = await fetch(
-		'https://daily-need.vercel.app/api/manage_reviews/all_reviews'
-	);
-	const all_reviews = await reviews.json();
-
+	const all_reviews = await fetcher('manage_reviews/all_reviews');
 	// find this product reviews only
 	const this_reviews = all_reviews.filter(
 		(review) =>
@@ -101,14 +94,11 @@ export async function getStaticProps({ params }) {
 	);
 
 	// get all orders
-	const orders = await fetch(
-		'https://daily-need.vercel.app/api/manage_orders/all_orders'
-	);
-	const all_orders = await orders.json();
-
+	const all_orders = await fetcher('manage_orders/all_orders');
 	// return the all data as props
 	return {
 		props: {
+			all_products,
 			single_product,
 			all_reviews: this_reviews,
 			all_orders,

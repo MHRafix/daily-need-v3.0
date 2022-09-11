@@ -1,13 +1,8 @@
-import axios from "axios";
-import { useState } from "react";
+export const fetcher = async (end_point) => {
+	const products = await fetch(
+		`https://daily-need.vercel.app/api/${end_point}`
+	);
+	const all_products = await products.json();
 
-export default function DataFetcher(end_point) {
-  const [data, setData] = useState({});
-  const url = `https://daily-need.vercel.app/api/${end_point}`;
-  const resp = axios
-    .get(url)
-    .then((res) => res.json())
-    .then((data) => setData(data));
-
-  return { data };
-}
+	return all_products;
+};
