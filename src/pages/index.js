@@ -33,6 +33,6 @@ export async function getStaticProps() {
 
 	return {
 		props: { all_products, all_categories, all_sliders, all_brands },
-		revalidate: 10,
+		revalidate: 30,
 	};
 }

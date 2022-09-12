@@ -15,8 +15,5 @@ export const myOrders = async (req, res) => {
 	if (all_orders.length) {
 		// data response
 		res.status(200).json(all_orders);
-	} else {
-		// error response
-		res.status(404).json({ error: 'Opps, no result found!' });
 	}
 };

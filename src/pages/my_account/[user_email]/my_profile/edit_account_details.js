@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import LayoutContainer from '../../../../components/commons/layout/LayoutContainer';
 import EditAccountDetailsMain from '../../../../components/my_profile_page/edit_account_details_page/EditAccountDetailsMain';
+import { fetcher } from '../../../../hooks/http_req/DataFetch';
 import { storeUserData } from '../../../../redux/user_data/action';
 import ErrorPage from '../../../404';
 
@@ -43,10 +44,8 @@ export default function EditAccountDetails({ loggedin_user }) {
 
 // find the exact user
 export async function getStaticPaths() {
-	const users = await fetch(
-		'https://daily-need.vercel.app/api/admin_pannel_api/manage_users/all_users'
-	);
-	const all_users = await users.json();
+	const all_users = await fetcher('admin_pannel_api/manage_users/all_users');
+
 	const user = all_users.map((user) => ({
 		params: { user_email: user.user_email },
 	}));
@@ -61,8 +60,8 @@ export async function getStaticProps({ params }) {
 	const { user_email } = params;
 
 	// requested user data
-	const user = await fetch(
-		`https://daily-need.vercel.app/api/user_dashboard_api/manage_users/single_user/${user_email}`
+	const user = await fetcher(
+		`user_dashboard_api/manage_users/single_user/${user_email}`
 	);
 	const loggedin_user = await user.json();
 
