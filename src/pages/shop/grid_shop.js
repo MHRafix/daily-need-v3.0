@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import LayoutContainer from '../../components/commons/layout/LayoutContainer';
 import ShopPageMain from '../../components/shop_page/ShopPageMain';
+import { fetcher } from '../../hooks/http_req/DataFetch';
 import {
 	addAllProducts,
 	storeAllCategories,
