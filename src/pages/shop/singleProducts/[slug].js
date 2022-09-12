@@ -81,26 +81,21 @@ export async function getStaticPaths() {
 // find single product
 export async function getStaticProps({ params }) {
 	const { slug } = params;
-
-	// all products
 	const all_products = await fetcher('allproducts');
-
 	// find single product here
-	const single_product = await fetcher(`single_product/${slug}`);
+	const single_product = all_products.find((product) => product.slug === slug);
 
-	// all reviews
+	// get all reviews here
 	const all_reviews = await fetcher('manage_reviews/all_reviews');
-
 	// find this product reviews only
 	const this_reviews = all_reviews.filter(
 		(review) =>
 			review.product_id === single_product?._id && review.product_slug === slug
 	);
 
-	// all orders
+	// get all orders
 	const all_orders = await fetcher('manage_orders/all_orders');
-
-	// return all data as props
+	// return the all data as props
 	return {
 		props: {
 			all_products,
