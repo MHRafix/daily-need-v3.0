@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import LayoutContainer from '../../components/commons/layout/LayoutContainer';
 import SaleProductsShopMain from '../../components/sale_shop_page/SaleProductsShopMain';
+import { fetcher } from '../../hooks/http_req/DataFetch';
 import { storeAllCategories } from '../../redux/all_data/action';
 
 export default function SaleProductsShop({ sale_products, all_categories }) {
@@ -23,17 +24,14 @@ export default function SaleProductsShop({ sale_products, all_categories }) {
 	);
 }
 
-// get shop products from the server
+// get all data from server
 export async function getStaticProps() {
-	// prodcut fetch here
-	const products = await fetch('https://daily-need.vercel.app/api/allproducts');
-	const sale_products = await products.json();
+	// sale products
+	const sale_products = await fetcher('sale_products');
 
-	// categories fetch here
-	const categories = await fetch(
-		'https://daily-need.vercel.app/api/allcategories'
-	);
-	const all_categories = await categories.json();
-	// Pass data to the page via props
-	return { props: { sale_products, all_categories }, revalidate: 10 };
+	// all categories
+	const all_categories = await fetcher('allcategories');
+
+	// props send
+	return { props: { sale_products, all_categories }, revalidate: 30 };
 }
