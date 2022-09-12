@@ -59,11 +59,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const { user_email } = params;
 
-	// requested user data
-	const user = await fetcher(
+	const loggedin_user = await fetcher(
 		`user_dashboard_api/manage_users/single_user/${user_email}`
 	);
-	const loggedin_user = await user.json();
 
 	return { props: { loggedin_user } };
 }
