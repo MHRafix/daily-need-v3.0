@@ -26,11 +26,10 @@ export default function SaleProductsShop({ sale_products, all_categories }) {
 // get shop products from the server
 export async function getStaticProps() {
 	// prodcut fetch here
-	const products = await fetch('https://daily-need.vercel.app/api/allproducts');
-	const all_products = await products.json();
-	const sale_products = all_products.filter(
-		(product) => product.prices.sale_price !== 0
+	const products = await fetch(
+		'https://daily-need.vercel.app/api/sale_products'
 	);
+	const sale_products = await products.json();
 
 	// categories fetch here
 	const categories = await fetch(
