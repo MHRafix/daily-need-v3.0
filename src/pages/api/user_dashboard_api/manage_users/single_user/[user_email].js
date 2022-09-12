@@ -4,4 +4,5 @@ import { singleUser } from '../../../../../controllers/user_dashboard_api/single
 const handler = nc();
 
 handler.get(singleUser);
+
 export default handler;

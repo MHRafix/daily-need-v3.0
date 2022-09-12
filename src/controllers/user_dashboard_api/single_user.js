@@ -1,3 +1,7 @@
+/**
+ * single user api controller
+ */
+
 import User from '../../../models/Users';
 import db from '../../utilities/database';
 

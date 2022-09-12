@@ -81,6 +81,7 @@ export async function getStaticPaths() {
 // find single product
 export async function getStaticProps({ params }) {
 	const { slug } = params;
+
 	const all_products = await fetcher('allproducts');
 	// find single product here
 	const single_product = all_products.find((product) => product.slug === slug);
