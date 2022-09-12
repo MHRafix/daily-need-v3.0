@@ -59,7 +59,7 @@ export async function getStaticProps({ params }) {
 	const loggedin_user = await fetcher(`manage_users/single_user/${user_email}`);
 
 	// user orders
-	const active_orders = await fetch(
+	const active_orders = await fetcher(
 		`user_dashboard_api/my_active_orders/${user_email}`
 	);
 
