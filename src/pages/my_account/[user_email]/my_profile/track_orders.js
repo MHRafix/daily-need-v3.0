@@ -40,9 +40,9 @@ export default function TrackOrder({ active_orders, loggedin_user }) {
 	);
 }
 
-// find the exact user
 export async function getStaticPaths() {
 	const all_users = await fetcher('admin_pannel_api/manage_users/all_users');
+
 	const user = all_users.map((user) => ({
 		params: { user_email: user.user_email },
 	}));
@@ -52,13 +52,13 @@ export async function getStaticPaths() {
 	};
 }
 
-// filter user orders from all orders
 export async function getStaticProps({ params }) {
 	const { user_email } = params;
 
-	const loggedin_user = await fetcher(`manage_users/single_user/${user_email}`);
+	const loggedin_user = await fetcher(
+		`user_dashboard_api/manage_users/single_user/${user_email}`
+	);
 
-	// user orders
 	const active_orders = await fetcher(
 		`user_dashboard_api/my_active_orders/${user_email}`
 	);
